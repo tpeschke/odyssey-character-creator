@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import Home from './components/Home'
@@ -11,22 +11,25 @@ import Step5 from './components/steps/Step5'
 import Step6 from './components/steps/Step6'
 import Step7 from './components/steps/Step7'
 
-export default function Routes () {
-    return (
-        <div>
-            <Switch>
-                <Route component= {LogIn} exact path='/' />
-                <Route component= {Home} exact path='/Home' />
-                <Route component= {Step1} path='/step1' />
-                <Route component= {Step2} path='/step2' />
-                <Route component= {Step3} path='/step3' />
-                <Route component= {Step4} path='/step4' />
-                <Route component= {Step5} path='/step5' />
-                <Route component= {Step6} path='/step6' />
-                <Route component= {Step7} path='/step7' />
-
-                <Redirect to='/' />
-            </Switch>
-        </div>
-    )
+export default class Routes extends Component {
+    
+    render() {
+        return (
+            <div>
+                <Switch>
+                    <Route render= {_=><LogIn />} exact path='/' />
+                    <Route render= {_=><Home />} exact path='/Home' />
+                    <Route render= {_=><Step1 />} path='/step1' />
+                    <Route render= {_=><Step2 />} path='/step2' />
+                    <Route render= {_=><Step3 />} path='/step3' />
+                    <Route render= {_=><Step4 />} path='/step4' />
+                    <Route render= {_=><Step5 />} path='/step5' />
+                    <Route render= {_=><Step6 />} path='/step6' />
+                    <Route render= {_=><Step7 />} path='/step7' />
+    
+                    <Redirect to='/' />
+                </Switch>
+            </div>
+        )
+    }
 }

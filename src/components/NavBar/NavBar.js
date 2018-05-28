@@ -18,7 +18,7 @@ class NavBar extends Component {
                 <nav className="App-header">
                     <div id="menu" onClick={_=>this.setState({show: !this.state.show})}/>
                     <h1 className="App-title">Nav Bar</h1>
-                    <BpTracker />
+                    <BpTracker bp={this.props.bp}/>
                 </nav>
 
                 <div className={this.state.show ? 'navBarDrawer navBarDrawerReveal' : 'navBarDrawer'}>
