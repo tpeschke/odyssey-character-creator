@@ -22,6 +22,7 @@ class Step3 extends Component {
 
 //ALSO DO IF STATEMENT FOR xx.100
 //SHOPKEEP
+//AND 
 
     componentDidMount() {
         this.setState({ str: rollScore(3,6).reduce((t,n)=> t+n) + '.' + rollPercent(),
