@@ -56,7 +56,8 @@ const AlienType = new GObject({
     name: "Alien",
     fields: ()=> ({
         id: {type: GID},
-        species: {type: GString}
+        species: {type: GString},
+        description: {type: GString}
     })
 })
 

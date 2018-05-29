@@ -51,3 +51,11 @@
   width: 150px;
   left: 0px;
 }
+
+.dropDownBoxOutside {
+  border: 3px solid grey
+}
+
+.dropDownBoxOutside:hover {
+  background: lightgray
+}
