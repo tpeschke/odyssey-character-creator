@@ -1,0 +1,8 @@
+type Query {
+    aliens: [Alien!]! 
+}
+
+type Alien {
+    id: ID!,
+    species: String!
+}
