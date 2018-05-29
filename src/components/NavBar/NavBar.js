@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 
+import {connect} from 'react-redux'
+
 import BpTracker from './BpTracker'
 
 class NavBar extends Component {
@@ -38,4 +40,15 @@ class NavBar extends Component {
     }
 }
 
-export default withRouter(NavBar)
+const decoratedNavBar = withRouter(NavBar)
+
+function mapStateToProps(state) {
+    var { bp } = state
+
+    return {
+        bp
+    }
+}
+
+
+export default connect(mapStateToProps)(decoratedNavBar)

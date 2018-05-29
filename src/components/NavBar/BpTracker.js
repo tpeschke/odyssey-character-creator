@@ -1,8 +1,11 @@
 import React from 'react'
 
-export default function BpTracker () {
-    return props => 
+function BpTracker (props) {
+    return (
         <div>
             {props.bp}
         </div>
+    )
 }
+
+export default BpTracker

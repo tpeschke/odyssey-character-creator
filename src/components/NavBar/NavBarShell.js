@@ -1,10 +1,10 @@
 import React from 'react'
 import NavBar from './NavBar'
 
-export default function NavBarShell (Page, bp) {
+export default function NavBarShell (Page) {
     return props => 
         <div>
-            <NavBar bp={props.bp}/>
+            <NavBar />
             <Page {...props}/>    
         </div>
 }

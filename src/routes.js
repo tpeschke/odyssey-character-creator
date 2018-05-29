@@ -17,15 +17,15 @@ export default class Routes extends Component {
         return (
             <div>
                 <Switch>
-                    <Route render= {_=><LogIn />} exact path='/' />
-                    <Route render= {_=><Home />} exact path='/Home' />
-                    <Route render= {_=><Step1 />} path='/step1' />
-                    <Route render= {_=><Step2 />} path='/step2' />
-                    <Route render= {_=><Step3 />} path='/step3' />
-                    <Route render= {_=><Step4 />} path='/step4' />
-                    <Route render= {_=><Step5 />} path='/step5' />
-                    <Route render= {_=><Step6 />} path='/step6' />
-                    <Route render= {_=><Step7 />} path='/step7' />
+                    <Route component = {LogIn} exact path='/' />
+                    <Route component = {Home}  path='/Home' />
+                    <Route component = {Step1} path='/step1' />
+                    <Route component = {Step2} path='/step2' />
+                    <Route component = {Step3} path='/step3' />
+                    <Route component = {Step4} path='/step4' />
+                    <Route component = {Step5} path='/step5' />
+                    <Route component = {Step6} path='/step6' />
+                    <Route component = {Step7} path='/step7' />
     
                     <Redirect to='/' />
                 </Switch>
