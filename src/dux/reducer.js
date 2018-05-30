@@ -7,16 +7,24 @@ const initialState = {
         int:"14.4",
         lks:"14.10",
         str:"8.46",
-        wis:"6.60"}
+        wis:"6.60"},
+    background: null
 }
 
-const SET_BP = "SET_BP"
+const SET_BACKGROUND = 'SET_BACKGROUND'
+    , SET_BP = "SET_BP"
     , SET_SPECIES = "SET_SPECIES"
     , SET_SCORES = 'SET_SCORES'
-    , DEDUCT_BP = "DEDUCT_BP"
     , ADD_BP = "ADD_BP"
+    , DEDUCT_BP = "DEDUCT_BP"
 
-
+export function SETBACKGROUND (background) {
+        return {
+            type: SET_BACKGROUND,
+            payload: background
+        }
+    }
+    
 export function SETBP (amount) {
     return {
         type: SET_BP,
@@ -41,19 +49,21 @@ export function SETSCORES (scores) {
 export function DEDUCTBP (amount) {
     return {
         type: DEDUCT_BP,
-        paylod: amount
+        payload: amount
     }
 }
 
 export function ADDBP (amount) {
     return {
         type: ADD_BP,
-        paylod: amount
+        payload: amount
     }
 }
 
 export default function reducer (state = initialState, action) {
     switch (action.type) {
+        case SET_BACKGROUND:
+            return Object.assign({}, state, {background: action.payload})
         case SET_BP: 
             return Object.assign({}, state, {bp: action.payload})
         case SET_SPECIES:

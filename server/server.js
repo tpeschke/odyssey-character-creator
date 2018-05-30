@@ -61,6 +61,17 @@ const AlienType = new GObject({
     })
 })
 
+const BackgroundType = new GObject({
+    name: "Background",
+    fields: () => ({
+        id: {type: GID},
+        category: {type: GString},
+        name: {type: GString},
+        price: {type: GInt},
+        description: {type: GString}
+    })
+})
+
 const RootQuery = new GObject({
     name: 'RootQueryType',
     fields: {
@@ -68,6 +79,13 @@ const RootQuery = new GObject({
             type: new GList(AlienType),
             resolve(parent, args) {
                 return db().aliens.find()
+            }
+        },
+        backgrounds: {
+            type: new GList(BackgroundType),
+            args: { search: { type: GString} },
+            resolve(parent, args) {
+                return db().searchBackgrounds([args.search.toUpperCase()])
             }
         }
     }
