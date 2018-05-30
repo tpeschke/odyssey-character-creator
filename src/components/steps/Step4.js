@@ -1,17 +1,28 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
 
 import { connect } from 'react-redux'
-import { SETSCORES } from '../../dux/reducer'
+import { SETBP, SETSCORES } from '../../dux/reducer'
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 class Step4 extends Component{
-    constructor(props){
-        super(props)
+    constructor(){
+        super()
 
         this.state = {
-            scores: [{id: 1, title: 'STR', score: props.scores.str}, {id: 2, title: 'INT', score: props.scores.int},{id: 3, title: 'WIS', score: props.scores.wis},{id: 4, title: 'DEX', score: props.scores.dex},{id: 5, title: 'CON', score: props.scores.con},{id: 6, title: 'CHA', score: props.scores.cha}, {id: 7, title: 'LKS', score: props.scores.lks}]
+            scores: [],
+            history: []
         }
+    }
+
+    componentDidMount() {
+        this.props.SETBP(90)
+        this.setState({scores: this.formatProps(), history: [this.formatProps()]})
+    }
+
+    formatProps = () =>{
+        return [{id: 1, title: 'STR', score: this.props.scores.str}, {id: 2, title: 'INT', score: this.props.scores.int},{id: 3, title: 'WIS', score: this.props.scores.wis},{id: 4, title: 'DEX', score: this.props.scores.dex},{id: 5, title: 'CON', score: this.props.scores.con},{id: 6, title: 'CHA', score: this.props.scores.cha}, {id: 7, title: 'LKS', score: this.props.scores.lks}]
     }
 
     onDragEnd = result => {
@@ -22,24 +33,38 @@ class Step4 extends Component{
         }
 
         if (source.droppableId !== destination.droppableId) {
-            let tempScores = this.state.scores.slice()
-            let hold1, hold2;
+            let tempScores = _.cloneDeep(this.state.scores)
+            let tempHistory = _.cloneDeep(this.state.history)
+            
+            let hold = tempScores[+source.droppableId].score
+            
+            tempScores[+source.droppableId].score = tempScores[+destination.droppableId].score
+            tempScores[+destination.droppableId].score = hold
+            
+            tempHistory.push(tempScores)
 
-            tempScores.forEach(v=> {
-                if (v.title === source.droppableId) hold1 = v
-                if (v.title === destination.droppableId) hold2 = v
-            })
+            tempHistory.length === 1 ? this.props.SETBP(90) : tempHistory.length === 2 ? this.props.SETBP(65) : this.props.SETBP(40);
 
-            hold1.title = destination.droppableId
-            hold2.title = source.droppableId
-
-            let temp = tempScores[source.index]
-            tempScores[source.index] = tempScores[destination.index]
-            tempScores[destination.index] = temp
-
-            console.log(source.index)
-            this.setState({scores: tempScores})
+            this.setState({scores: tempScores, history: tempHistory})
         }
+    }
+
+    undoChange = () => {
+            let tempHistory = _.cloneDeep(this.state.history)
+            tempHistory.length <= 1 ? this.props.SETBP(90) : tempHistory.length <= 2 ? this.props.SETBP(65) : this.props.SETBP(40);
+            this.state.history[this.state.history.length-1] === this.state.scores ? tempHistory.pop() : null;
+            let newScores = tempHistory.pop()
+            if (tempHistory.length === 0) {
+                newScores = this.formatProps()
+                tempHistory = [this.formatProps()]
+            }
+            this.setState({scores: newScores, history: tempHistory})
+    }
+
+    saveScores = () => {
+        let {scores} = this.state
+        this.props.SETSCORES({str: scores[0].score, int: scores[1].score, wis: scores[2].score, dex: scores[3].score, con: scores[4].score, cha: scores[5].score, lks: scores[6].score})
+        this.props.history.push('/step5')
     }
 
     render() {
@@ -53,7 +78,7 @@ class Step4 extends Component{
                 return (
                     <div key={a.id}>
                         <h2>{a.title}</h2>
-                        <Droppable droppableId={a.title}>
+                        <Droppable droppableId={`${i}`}>
                 {(provided, snapshot) => (
                     <div className="item">
                     <div ref={provided.innerRef}
@@ -82,6 +107,11 @@ class Step4 extends Component{
                 )
             })}
                 </DragDropContext>
+
+                <button onClick={this.undoChange}>Undo Change</button>
+                <br/>
+                <br/>
+                <button onClick={this.saveScores}>Save Scores</button>
             </div>
         )
     }
@@ -112,4 +142,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,{SETSCORES})(Step4)
+export default connect(mapStateToProps,{SETBP, SETSCORES})(Step4)

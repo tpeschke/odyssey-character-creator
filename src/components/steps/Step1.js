@@ -5,7 +5,7 @@ import { SETBP } from '../../dux/reducer'
 
 class Step1 extends Component {
     componentDidMount() {
-        this.props.SETBP()
+        this.props.SETBP(40)
     }
 
     render() {
