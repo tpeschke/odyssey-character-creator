@@ -18,11 +18,7 @@ class Step4 extends Component{
 
     componentDidMount() {
         this.props.SETBP(90)
-        this.setState({scores: this.formatProps(), history: [this.formatProps()]})
-    }
-
-    formatProps = () =>{
-        return [{id: 1, title: 'STR', score: this.props.scores.str}, {id: 2, title: 'INT', score: this.props.scores.int},{id: 3, title: 'WIS', score: this.props.scores.wis},{id: 4, title: 'DEX', score: this.props.scores.dex},{id: 5, title: 'CON', score: this.props.scores.con},{id: 6, title: 'CHA', score: this.props.scores.cha}, {id: 7, title: 'LKS', score: this.props.scores.lks}]
+        this.setState({scores: this.props.scores, history: [this.props.scores]})
     }
 
     onDragEnd = result => {
@@ -63,7 +59,7 @@ class Step4 extends Component{
 
     saveScores = () => {
         let {scores} = this.state
-        this.props.SETSCORES({str: scores[0].score, int: scores[1].score, wis: scores[2].score, dex: scores[3].score, con: scores[4].score, cha: scores[5].score, lks: scores[6].score})
+        this.props.SETSCORES(scores)
         this.props.history.push('/step5')
     }
 

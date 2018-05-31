@@ -1,13 +1,7 @@
 const initialState = {
     bp: 40,
     species: null,
-    scores: {cha:"16.1",
-        con:"17.77",
-        dex:"8.66",
-        int:"14.4",
-        lks:"14.10",
-        str:"8.46",
-        wis:"6.60"},
+    scores: [{id: 1, title: 'STR', score: '13.4'}, {id: 2, title: 'INT', score: '8.56'},{id: 3, title: 'WIS', score: '10.05'},{id: 4, title: 'DEX', score: '13.6'},{id: 5, title: 'CON', score: '6.75'},{id: 6, title: 'CHA', score: '6.76'}, {id: 7, title: 'LKS', score: '18.89'}],
     background: null
 }
 
