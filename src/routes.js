@@ -8,7 +8,7 @@ import Step2 from './components/steps/step2/Step2'
 import Step3 from './components/steps/step3/Step3'
 import Step4 from './components/steps/Step4'
 import Step5State from './components/steps/step5/Step5State'
-import Step6 from './components/steps/Step6'
+import Step6 from './components/steps/step6/Step6'
 import Step7 from './components/steps/Step7'
 
 export default class Routes extends Component {

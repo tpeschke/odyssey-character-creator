@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './reset.css'
 import './App.css';
 
 import NavBarShell from './components/NavBar/NavBarShell'

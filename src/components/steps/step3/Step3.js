@@ -36,14 +36,13 @@ class Step3 extends Component {
     }
 
     render() {
-        let {str, int, wis, dex, con, cha, lks} = this.state
         return (
             <div>
                 <h1>Step3</h1>
                 
                 {this.state.scores.map(val => {
                     return (
-                        <div>
+                        <div key={val.id}>
                             <h2>{val.title}</h2>
                             <p>{val.score}</p>
                         </div>
