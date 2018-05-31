@@ -63,7 +63,6 @@ export default function reducer (state = initialState, action) {
         case SET_SPECIES:
             return Object.assign({}, state, {species: action.payload})
         case SET_SCORES:
-            console.log(action.payload)
             return Object.assign({}, state, {scores: action.payload})
         case DEDUCT_BP:
             return Object.assign({}, state, {bp: state.bp - action.payload})

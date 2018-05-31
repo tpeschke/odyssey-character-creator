@@ -28,7 +28,6 @@ create table backgrounds (
     description TEXT
 );
 
-
 insert into backgrounds (category, name, price, description)
 values ('Warrior', 'Solider', 20, 'The soldier is the rank and file member of any army. There he learns discipline, teamwork, and gun training. And at the end of it, you’ll get a solid gun and a solid set of armor to take home with you. Well, not REALLY, but at least, you get a snazzy uniform to show off./ Actually, what you end up with is up to you- Soldiers have the greatest range of things they can buy for a discounted price.'),
 ('Warrior', 'Captain', 25, 'The officers and higher ups of an army. They’re trained in bigger picture things and thus are a little weak when it comes to military training, but gain the skills needed to be effective leading men.'),
@@ -50,3 +49,22 @@ values ('Warrior', 'Solider', 20, 'The soldier is the rank and file member of an
 ('Diplomat', 'Priest', 35, 'The champion of the gods, the priest combines the bearing and command of the noble with more practical skills making a valuable ally to have at your side, whether or not his god is truly with him.'),
 ('Diplomat', 'Charlatan', 25, 'The confidence men of the Void, they survive by the skin of their wit. Charlatans vary widely in their skill set, simply mastering any skills they need on the fly.'),
 ('Diplomat', 'Escort', 30, 'Who needs a gun when you’ve got charm? Who needs armor when you’ve disarmed your enemy? The escort may do dirty deeds, but he does it with grace.')
+
+create table talents (
+    id serial Primary KEY,
+    name VARCHAR(50),
+    price Int,
+    selected Int DEFAULT 0,
+    multi BOOLEAN default false,
+    description TEXT
+);
+
+insert into talents (name, price)
+values ('Ambidextrous', 15), ('Animal Magnetism', 15), ('Astute Observation', 20), ('Black-Thumb', 20), ('Blind-Fighting', 40), ('Blind-Shooting', 40),('Brutal', 15), ('Bulking', 10),('Chem Adept', 15), 
+('Combat Reflexes', 20), ('Courage', 20), ('Damage Bonus', 10), ('Deadeye', 35), ('Endurance', 15), ('Fan Firing', 15), ('Fast Healing', 10), ('Favored Firearm', 15), ('Fleet-Footed', 20), 
+('Forgettable Face', 20), ('Greased Lightning', 10), ('Guardian Angel', 20), ('Grounded Mind', 35), ('Heavy Lifter', 15), ('Heightened Immunity', 10), ('Hip Shooting', 20), ('Hit Point Bonus', 20),
+('Improved Acceleration', 10), ('Improved Arc of Fire', 25), ('Improved Defense', 15), ('Improved Reach', 15), ('Inheritance', 5), ('Inoculation', 3), ('Knack', 25), ('Lead Hide', 40), ('Less Sleep', 24),
+('Long Distance Running', 10), ('Military Training', 20), ('Notoriety', 5), ('One-Upmanship', 10), ('Opportunist [Attack]', 30), ('Opportunist [Defense]', 30), ('Pain Tolerant', 20), ('Parvenu', 25),
+('Precision Shot', 25), ('Poison Resistant', 4), ('Polygot', 10), ('Point Black Shot', 25), ('Precision Aiming', 10), ('Precision Combatant', 12), ('Prodigy', 10), ('Photographic Memory', 20), ('Quick Aim', 15),
+('Rapid Reload', 20), ('Resolute', 20), ('Shoot on the Run', 5), ('Skill Savant', 30), ('Spry', 10), ('Stout', 20), ('Terran Windage', 15), ('Tough as Nails', 20), ('Tough Hide', 40), ('Tumbler', 10), 
+('True Grit', 25), ('Vehicular Combatant', 5), ('Vetern Gunfighter', 5), ('Voidborn', 25), ('Weight Control', 10)

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-export default function Step14 () {
-    return (
-        <div>
-            Step14    
-        </div>
-    )
+export default class Step14 extends Component {
+
+    render(){
+        return(
+            <div>
+                <h1>Step14</h1>
+            </div>
+        )
+    }
 }

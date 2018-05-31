@@ -33,6 +33,13 @@ class NavBar extends Component {
                         <Link to="/step5"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 5</ul></Link>
                         <Link to="/step6"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 6</ul></Link>
                         <Link to="/step7"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 7</ul></Link>                        
+                        <Link to="/step8"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 8</ul></Link>                        
+                        <Link to="/step9"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 9</ul></Link>                        
+                        <Link to="/step10"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 10</ul></Link>                        
+                        <Link to="/step11"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 11</ul></Link>                        
+                        <Link to="/step12"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 12</ul></Link>                        
+                        <Link to="/step13"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 13</ul></Link>                        
+                        <Link to="/step14"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 14</ul></Link>                        
                     </list>
                 </div>
             </div>

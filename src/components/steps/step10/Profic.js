@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 
-export default class Step11 extends Component {
+export default class Proficiencies extends Component {
 
-    render(){
+    render() {
         return(
             <div>
-                <h1>Step11</h1>
+                <h2>Proficiencies</h2>
             </div>
         )
     }
