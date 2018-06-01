@@ -14,32 +14,37 @@ class Step11 extends Component {
     }
 
     componentDidMount() {
-        let i = this.props.scores.map(val => val.title).indexOf('CON')
-        let conScore = +this.props.scores[i].score.split('.')[0]
-
-        switch(this.props.species.species) {
-            case "Akhelarian":
-                this.setState({hp: "I'll GET AROUND TO IT"})
-                break
-            case "Clone":
-                this.setState({hp: rollScore(1,6) + 10 + conScore})
-                break
-            case "Droid":
-                this.setState({hp: "I'll GET AROUND TO IT"})
-                break
-            case "Ghost":
-                this.setState({hp: rollScore(1,4) + 10 + conScore})
-                break
-            case "Human":
-                this.setState({hp: +rollScore(1,6) + 10 + conScore})
-                break
-            case "Hiven":
-                this.setState({hp: "I'll GET AROUND TO IT"})
-                break
+        console.log(this.props.hp)
+        if(this.props.hp){
+            this.setState({hp: this.props.hp})
+        }else {
+            let i = this.props.scores.map(val => val.title).indexOf('CON')
+            let conScore = +this.props.scores[i].score.split('.')[0]
+            
+            switch(this.props.species.species) {
+                case "Akhelarian":
+                    this.setState({hp: "I'll GET AROUND TO IT"})
+                    break
+                case "Clone":
+                    this.setState({hp: rollScore(1,6) + 10 + conScore})
+                    break
+                case "Droid":
+                    this.setState({hp: "I'll GET AROUND TO IT"})
+                    break
+                case "Ghost":
+                    this.setState({hp: rollScore(1,4) + 10 + conScore})
+                    break
+                case "Human":
+                    this.setState({hp: +rollScore(1,6) + 10 + conScore})
+                    break
+                case "Hiven":
+                    this.setState({hp: "I'll GET AROUND TO IT"})
+                    break
+            }
         }
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         this.props.SETHP(this.state.hp)
     }
 
@@ -57,11 +62,12 @@ class Step11 extends Component {
 }
 
 function mapStateToProps(state) {
-    let {species, scores} = state
+    let {species, scores, hp} = state
 
     return {
         species,
-        scores
+        scores,
+        hp
     }
 }
 

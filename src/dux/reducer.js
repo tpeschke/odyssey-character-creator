@@ -7,11 +7,13 @@ const initialState = {
     talents: null,
     profics: null,
     special: [],
-    hp: null
+    hp: null,
+    credits: null
 }
 
 const SET_BACKGROUND = 'SET_BACKGROUND'
     , SET_BP = "SET_BP"
+    , SET_CREDIT = "SET_CREDIT"
     , SET_PROFICS = "SET_PROFICS"
     , SET_HP = "SET_HP"
     , SET_SCORES = 'SET_SCORES'
@@ -31,6 +33,13 @@ export function SETBP (amount) {
     return {
         type: SET_BP,
         payload: amount
+    }
+}
+
+export function SETCREDIT (credits) {
+    return {
+        type: SET_CREDIT,
+        payload: credits
     }
 }
 
@@ -89,6 +98,8 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {background: action.payload})
         case SET_BP: 
             return Object.assign({}, state, {bp: action.payload})
+        case SET_CREDIT:
+            return Object.assign({}, state, {credits: action.payload})
         case SET_PROFICS:
             return Object.assign({}, state, {profics: action.payload})
         case SET_HP:
