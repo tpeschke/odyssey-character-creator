@@ -68,3 +68,28 @@ values ('Ambidextrous', 15), ('Animal Magnetism', 15), ('Astute Observation', 20
 ('Precision Shot', 25), ('Poison Resistant', 4), ('Polygot', 10), ('Point Black Shot', 25), ('Precision Aiming', 10), ('Precision Combatant', 12), ('Prodigy', 10), ('Photographic Memory', 20), ('Quick Aim', 15),
 ('Rapid Reload', 20), ('Resolute', 20), ('Shoot on the Run', 5), ('Skill Savant', 30), ('Spry', 10), ('Stout', 20), ('Terran Windage', 15), ('Tough as Nails', 20), ('Tough Hide', 40), ('Tumbler', 10), 
 ('True Grit', 25), ('Vehicular Combatant', 5), ('Vetern Gunfighter', 5), ('Voidborn', 25), ('Weight Control', 10)
+
+create table proficiencies (
+    id serial Primary KEY,
+    name VARCHAR(50),
+    price Int,
+    selected Int DEFAULT 0,
+    description TEXT,
+);
+
+insert into proficiencies (name, price)
+values ('Armor', 6), ('Bilingual', 5), ('Butcher', 3), ('Etiquette/Manners [Specific Culture]', 5), ('Hiking/Road Marching', 4), ('Labourer', 1), ('Maintance/Upkeep', 5), ('Mason', 8), ('Pygmalion', 10),
+('Radio Operation', 3), ('Shield', 6), ('Skinning/Tanning', 2), ('Style Sense', 2), ('Taxidermy', 4)
+
+create table proficReq (
+    id serial Primary KEY,
+    name VARCHAR(50),
+    score Int,
+    proficId Int,
+    type VARCHAR(20),
+    FOREIGN key (proficId) references proficiencies(id)
+)
+
+insert into proficReq (name, score, proficId, type)
+values ('CON', 11, 5, 'score'), ('Mining', 25, 8, 'skill'), ('Etiquette/Manners', 0, 9, 'profic'), ('Skinning/Tanning', 0, 14, 'profic'), ('Carpentry', 25, 14, 'skill'), 
+('Leatherworking', 50, 14, 'skill')

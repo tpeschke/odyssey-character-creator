@@ -83,6 +83,32 @@ const TalentType = new GObject({
     })
 })
 
+const ProficType = new GObject({
+    name: "Proficiencies",
+    fields: () => ({
+        id: {type: GID},
+        name: {type: GString},
+        price: {type: GInt},
+        description: {type: GString},
+        preReq: {
+            type: new GList(ProficReq),
+            resolve(parent, args) {
+                return db().getProficPreReqs([parent.id]) 
+            }
+        }
+    })
+})
+
+const ProficReq = new GObject({
+    name: "ProficReq",
+    fields: () => ({
+        id: {type: GID},
+        name: {type: GString},
+        score: {type: GInt},
+        type: {type: GString}
+    })
+})
+
 const RootQuery = new GObject({
     name: 'RootQueryType',
     fields: {
@@ -103,6 +129,12 @@ const RootQuery = new GObject({
             type: new GList(TalentType),
             resolve(parent, args) {
                 return db().talents.find()
+            }
+        },
+        proficiencies: {
+            type: new GList(ProficType),
+            resolve(parent, args) {
+                return db().proficiencies.find()
             }
         }
     }

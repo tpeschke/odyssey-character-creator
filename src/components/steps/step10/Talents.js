@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import _ from 'lodash'
 
 import {connect} from 'react-redux'
-import {ADDBP, DEDUCTBP} from '../../../dux/reducer'
+import {ADDBP, DEDUCTBP, SETTALENTS} from '../../../dux/reducer'
 
 class Talents extends Component {
     constructor(){
@@ -13,19 +13,17 @@ class Talents extends Component {
 
         this.state = {
             selected: [],
-            list: []
+            list: null
         }
     }
 
     componentWillMount() {
         let tempArr = _.cloneDeep(this.props.talentList.talents)
-        if (this.props.talents) {
-            for(let i = tempArr.length-1; i > 0; i--) {
-                for (let x = 0; x < this.props.talents.length; x++) {
-                        if (tempArr[i].id !== this.props.talents[x].id) {
-                            tempArr.splice(i,1)
-                        }
-                }
+        if (this.props.talents && tempArr.length) {
+            for(let i = tempArr.length-1; i >= 0; i--) {
+                this.props.talents.forEach(val => {
+                    val.id === tempArr[i].id ? tempArr.splice(i,1) : null
+                })
             }
             this.setState({selected: this.props.talents, list: tempArr})
         } else {
@@ -34,18 +32,22 @@ class Talents extends Component {
     }
 
     componentWillReceiveProps(next) {
+        if(!this.state.list){
         let tempArr = _.cloneDeep(next.talentList.talents)
-        this.setState({list: tempArr})
+        this.setState({list: tempArr})}
     }
 
     componentWillUnmount() {
-        this.props.setTalents(this.state.selected)
+        this.props.SETTALENTS(this.state.selected)
     }
 
     selectTalent = (id) => {
         let tempArr = _.cloneDeep(this.state.list)
         let i = tempArr.map(v => v.id).indexOf(id)
 
+        
+        if(this.props.bp - tempArr[i].price >= 0){
+            this.props.DEDUCTBP(tempArr[i].price)
         if (tempArr[i].multi === 'false') {
             let hold = tempArr.splice(i,1)
             let tempSelected = _.cloneDeep(this.state.selected)
@@ -53,13 +55,17 @@ class Talents extends Component {
             tempSelected = _.sortBy(tempSelected, [p => p.name])
             this.setState({selected: tempSelected, list: tempArr})
         } else {
-            console.log('hello')
-        }
+            let tempSelected = _.cloneDeep(this.state.selected)
+            tempSelected.push(this.state.list[i])
+            tempSelected = _.sortBy(tempSelected, [p => p.name])
+            this.setState({selected: tempSelected, list: tempArr})
+        }}
     }
 
     deselectTalent = (id) => {
         let tempArr = _.cloneDeep(this.state.selected)
         let i = tempArr.map(v => v.id).indexOf(id)
+        this.props.ADDBP(tempArr[i].price)
 
         if (tempArr[i].multi === 'false') {
             let hold = tempArr.splice(i,1)
@@ -68,7 +74,8 @@ class Talents extends Component {
             tempDeselected = _.sortBy(tempDeselected, [p => p.name])
             this.setState({list: tempDeselected, selected: tempArr})
         } else {
-            console.log('hello')
+            tempArr.splice(i,1)
+            this.setState({selected: tempArr})
         }
     }
 
@@ -105,8 +112,8 @@ class Talents extends Component {
             <div>
                 <h2>Talents</h2>
                 <h3>Selected</h3>
-                {this.state.selected.map(talent => {
-                    return (<div   key={talent.id}
+                {this.state.selected.map((talent, i) => {
+                    return (<div   key={talent.id + i}
                                     className='dropDownBoxOutside'
                                     onClick={_=>this.deselectTalent(talent.id)}>
                                 <h2>{talent.name}</h2>
@@ -134,6 +141,14 @@ const GET_TALENT_QUERY = gql`
         }
     }`
 
-const decoratedTalents = connect(function(){}, {ADDBP, DEDUCTBP})(Talents)
+function mapStateToProps(state) {
+    var {talents, bp} = state
+    return {
+        talents,
+        bp
+    }
+}
+
+const decoratedTalents = connect(mapStateToProps, {ADDBP, DEDUCTBP, SETTALENTS})(Talents)
 
 export default graphql(GET_TALENT_QUERY, {name: 'talentList'})(decoratedTalents)
