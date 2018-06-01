@@ -1,14 +1,19 @@
 const initialState = {
-    bp: 40,
-    species: {id: 5, species: 'Human'},
-    scores: [{id: 1, title: 'STR', score: '13.4'}, {id: 2, title: 'INT', score: '8.56'},{id: 3, title: 'WIS', score: '10.05'},{id: 4, title: 'DEX', score: '13.6'},{id: 5, title: 'CON', score: '9.75'},{id: 6, title: 'CHA', score: '6.76'}, {id: 7, title: 'LKS', score: '18.89'}],
+    bp: null,
+    species: null,
+    scores: null,
+    rep: null,
     background: null,
-    skills: [],
+    skills: null,
     talents: null,
     profics: null,
-    special: [],
+    special: null,
     hp: null,
-    credits: null
+    credits: null,
+    equipment: null,
+    priors: null,
+    qf: null,
+    record: null,
 }
 
 const SET_BACKGROUND = 'SET_BACKGROUND'

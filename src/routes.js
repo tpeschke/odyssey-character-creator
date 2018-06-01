@@ -17,6 +17,7 @@ import Step11 from './components/steps/Step11'
 import Step12 from './components/steps/Step12'
 import Step13 from './components/steps/Step13'
 import Step14 from './components/steps/Step14'
+import ReviewChar from './components/steps/reviewChar'
 
 export default class Routes extends Component {
     
@@ -40,6 +41,7 @@ export default class Routes extends Component {
                     <Route component = {Step12} path='/step12' />
                     <Route component = {Step13} path='/step13' />
                     <Route component = {Step14} path='/step14' />
+                    <Route component = {ReviewChar} path='/review' />
 
                     <Redirect to='/' />
                 </Switch>

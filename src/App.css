@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  height: 84.7vh;
+  background: lightgrey
 }
 
 .App-logo {
@@ -14,21 +16,21 @@
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-
 /* ==================================================== */
+a {
+  text-decoration: none;
+  color: #C4bbaf
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 5px
+}
+
+h2 {
+  font-size: 25px;
+  margin-bottom: 5px;
+}
 
 #menu {
   width: 50px;
@@ -38,17 +40,18 @@
 
 .navBarDrawer {
   position: absolute;
-  top: 75px;
-  left: -150px;
+  display: flex;
+  justify-content: space-around;
+  left: -175px;
+  top: 0;
   width: 0px;
-  height: 90%;
-  background: lightblue;
+  height: 100%;
   overflow: hidden;
   transition: .6s
 }
 
 .navBarDrawerReveal {
-  width: 150px;
+  width: 175px;
   left: 0px;
 }
 
@@ -57,7 +60,50 @@
 }
 
 .dropDownBoxOutside:hover {
-  background: lightgray
+  background: gray
+}
+
+ul {
+  background: #57514f
+}
+
+#navFirstItem {
+  background: #2d2d2a
+}
+
+#navOverlay {
+  background: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: .6s
+}
+
+.overlayHide {
+  width: 0
+}
+
+li {
+  height: 50px;
+  width: 175px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+li:hover, #navFirstItem:hover {
+  background: #9f795f
+}
+
+.navLocked{
+  height: 50px;
+  width: 175px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
 }
 
 .item {

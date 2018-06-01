@@ -10,11 +10,44 @@ class NavBar extends Component {
         super()
 
         this.state = {
-            show: false
+            show: false,
+            links: [{title: 'Species', props: 'bp'},{title: 'Ability Scores', props: 'species'},{title: 'Arrange Scores', props: 'scores'},{title: 'Background', props: 'scores'},{title: 'Finalize Scores', props: 'background'},{title: 'Reputation', props: 'background'},{title: 'Priors & Particulars', props: 'rep'},{title: 'Quirks & Flaws', props: 'priors'},{title: 'STPs', props: 'qf'},{title: 'HPs', props: 'skills'},{title: 'Record', props: 'hp'},{title: 'Receive Credit', props: 'record'},{title: 'Goods & Equipment', props: 'credits'}],
+            height: 0,
+            width: 0
         }
     }
 
+    componentDidMount() {
+        this.setState({width: document.getElementById('root').clientWidth, height: document.getElementById('root').clientHeight})
+    }
+
     render() {
+        let navBarRender;
+
+        if (!this.props.bp) {
+            navBarRender = (<div className={this.state.show ? 'navBarDrawer navBarDrawerReveal' : 'navBarDrawer'}>
+                                <ul>
+                                    <Link to="/"><li id="navFirstItem" onClick={_=>this.setState({show: !this.state.show})}>Home</li></Link>
+                                    <Link to="/step1"><li onClick={_=>this.setState({show: !this.state.show})}>New Character</li></Link>
+                                </ul>
+                            </div>)
+        } else {
+
+            navBarRender = (<div className={this.state.show ? 'navBarDrawer navBarDrawerReveal' : 'navBarDrawer'}>
+                <ul>
+                    <Link to="/"><li id="navFirstItem" onClick={_=>this.setState({show: !this.state.show})}>Home</li></Link>
+                    <Link to="/step1"><li onClick={_=>this.setState({show: !this.state.show})}>Step 1: Recieve BP</li></Link>
+                    {this.state.links.map((v, i)=> {
+                        if ( this.props[v.props]){ 
+                           return <Link to={`/step${i+2}`}><li onClick={_=>this.setState({show: !this.state.show})}>{`Step ${i+2}: ${v.title}`}</li></Link> 
+                        } else {
+                           return <div className="navLocked">{`Step ${i+2}: ${v.title}`}</div>
+                        } 
+                    })}
+            </ul>
+        </div>)
+        }
+
         return(
             <div>
                 <nav className="App-header">
@@ -22,26 +55,8 @@ class NavBar extends Component {
                     <h1 className="App-title">Nav Bar</h1>
                     <BpTracker bp={this.props.bp}/>
                 </nav>
-
-                <div className={this.state.show ? 'navBarDrawer navBarDrawerReveal' : 'navBarDrawer'}>
-                    <list>
-                        <Link to="/"><ul onClick={_=>this.setState({show: !this.state.show})}>Home</ul></Link>
-                        <Link to="/step1"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 1</ul></Link>
-                        <Link to="/step2"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 2</ul></Link>                        
-                        <Link to="/step3"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 3</ul></Link>
-                        <Link to="/step4"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 4</ul></Link>
-                        <Link to="/step5"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 5</ul></Link>
-                        <Link to="/step6"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 6</ul></Link>
-                        <Link to="/step7"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 7</ul></Link>                        
-                        <Link to="/step8"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 8</ul></Link>                        
-                        <Link to="/step9"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 9</ul></Link>                        
-                        <Link to="/step10"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 10</ul></Link>                        
-                        <Link to="/step11"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 11</ul></Link>                        
-                        <Link to="/step12"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 12</ul></Link>                        
-                        <Link to="/step13"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 13</ul></Link>                        
-                        <Link to="/step14"><ul onClick={_=>this.setState({show: !this.state.show})}>Step 14</ul></Link>                        
-                    </list>
-                </div>
+                <div id='navOverlay' style={this.state.show ? {width: this.state.width} : {width: 0}} onClick={_=>this.setState({show: !this.state.show})}></div>
+                {navBarRender}                
             </div>
         )
     }
@@ -50,11 +65,8 @@ class NavBar extends Component {
 const decoratedNavBar = withRouter(NavBar)
 
 function mapStateToProps(state) {
-    var { bp } = state
 
-    return {
-        bp
-    }
+    return state
 }
 
 

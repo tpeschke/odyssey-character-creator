@@ -26,13 +26,13 @@ class Step11 extends Component {
                     this.setState({hp: "I'll GET AROUND TO IT"})
                     break
                 case "Clone":
-                    this.setState({hp: rollScore(1,6) + 10 + conScore})
+                    this.setState({hp: +rollScore(1,6) + 10 + conScore})
                     break
                 case "Droid":
                     this.setState({hp: "I'll GET AROUND TO IT"})
                     break
                 case "Ghost":
-                    this.setState({hp: rollScore(1,4) + 10 + conScore})
+                    this.setState({hp: +rollScore(1,4) + 10 + conScore})
                     break
                 case "Human":
                     this.setState({hp: +rollScore(1,6) + 10 + conScore})
