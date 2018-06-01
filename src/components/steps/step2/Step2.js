@@ -33,7 +33,7 @@ class Step2 extends Component {
             <div>
                 <h1>Step 2</h1> 
                 {alienList.aliens.map(alien => {
-                    let paragraph = alien.description.split('/').map(para => <p>{para}</p>)
+                    let paragraph = alien.description.split('/').map((para, i)=> <p key={i}>{para}</p>)
                     return      <div    key={alien.id} 
                                         className='dropDownBoxOutside'
                                         onClick={_=>this.selectSpecies({id: alien.id, species: alien.species})}>
@@ -54,6 +54,6 @@ const GET_ALIENS_QUERY = gql`
         }
     }`
 
-const decoratedStep2 = connect(function(){},{SETSPECIES})(Step2)
+const decoratedStep2 = connect(function(){return{}},{SETSPECIES})(Step2)
 
 export default graphql(GET_ALIENS_QUERY, {name: 'alienList'})(decoratedStep2)

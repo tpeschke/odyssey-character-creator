@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 
-export default class Step9 extends Component {
+import {connect} from 'react-redux'
+import {SETQFS} from '../../dux/reducer'
+
+class Step9 extends Component {
 
     //DATABASE CALL
 
     saveQuirks = () => {
-        //REDUCER CALL
+        this.props.SETQFS([])
         this.props.history.push('/step10')
     }
 
@@ -20,3 +23,5 @@ export default class Step9 extends Component {
         )
     }
 }
+
+export default connect(function(){return {}}, {SETQFS})(Step9)

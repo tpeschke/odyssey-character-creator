@@ -14,7 +14,6 @@ class Step11 extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.hp)
         if(this.props.hp){
             this.setState({hp: this.props.hp})
         }else {

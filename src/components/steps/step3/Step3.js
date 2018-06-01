@@ -55,4 +55,4 @@ class Step3 extends Component {
     }
 }
 
-export default connect(function(){},{SETSCORES})(Step3)
+export default connect(function(){return{}},{SETSCORES})(Step3)

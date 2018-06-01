@@ -50,7 +50,7 @@ class Step5 extends Component {
         return (
             <div>
                 {list.map(val => {
-                    let paragraph = val.description.split('/').map(para => <p>{para}</p>)
+                    let paragraph = val.description.split('/').map((para, i) => <p key={i}>{para}</p>)
                     return (<div key={val.id}
                         className='dropDownBoxOutside'
                         onClick={_ => this.saveBackground({id: val.id, price: val.price, name: val.name})}>

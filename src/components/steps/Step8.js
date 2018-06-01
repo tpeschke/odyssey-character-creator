@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 
-export default class Step8 extends Component {
+import {connect} from 'react-redux'
+import {SETPRIORS} from '../../dux/reducer'
+
+class Step8 extends Component {
 
     savePriors = () => {
-        //REDUCER CALL
+        this.props.SETPRIORS([])
         this.props.history.push('/step9')
     }
 
@@ -17,3 +20,5 @@ export default class Step8 extends Component {
         )
     }
 }
+
+export default connect(function(){return{}},{SETPRIORS})(Step8)

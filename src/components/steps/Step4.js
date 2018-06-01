@@ -51,8 +51,8 @@ class Step4 extends Component{
             this.state.history[this.state.history.length-1] === this.state.scores ? tempHistory.pop() : null;
             let newScores = tempHistory.pop()
             if (tempHistory.length === 0) {
-                newScores = this.formatProps()
-                tempHistory = [this.formatProps()]
+                newScores = this.props.scores
+                tempHistory = [this.props.scores]
             }
             this.setState({scores: newScores, history: tempHistory})
     }

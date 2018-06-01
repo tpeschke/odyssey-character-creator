@@ -37,6 +37,7 @@ export default class Step6Swap extends Component {
     render() {
         return (
             <div>
+                <button onClick={_=>this.props.saveScores(this.state.scores)}>Save</button>
                 <h2>Extra BP Gained</h2>
                 <h2>{this.state.bp}</h2>
                 
@@ -53,7 +54,6 @@ export default class Step6Swap extends Component {
                 )
             })}  
 
-            <button onClick={_=>this.props.saveScores(this.state.scores)}>Save</button>
             </div>
         )
     }

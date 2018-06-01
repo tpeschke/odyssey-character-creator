@@ -41,7 +41,7 @@ export default class Routes extends Component {
                     <Route component = {Step12} path='/step12' />
                     <Route component = {Step13} path='/step13' />
                     <Route component = {Step14} path='/step14' />
-                    <Route component = {ReviewChar} path='/review' />
+                    <Route component = {ReviewChar} path='/step15' />
 
                     <Redirect to='/' />
                 </Switch>

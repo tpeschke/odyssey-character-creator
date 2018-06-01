@@ -30,8 +30,7 @@ class Step6 extends Component {
             let {fullScore, percent, id, title} = val
             return {id, title, score: fullScore + '.' + percent}
         })
-        // [{id: 1, title: 'STR', score: '13.4'}, {id: 2, title: 'INT', score: '8.56'},{id: 3, title: 'WIS', score: '10.05'},{id: 4, title: 'DEX', score: '13.6'},{id: 5, title: 'CON', score: '6.75'},{id: 6, title: 'CHA', score: '6.76'}, {id: 7, title: 'LKS', score: '18.89'}]
-        this.props.SETSCORES(finalScores)
+        this.props.SETSCORES(finalScores, 'finalize')
         this.props.history.push('/step7')
     }
 

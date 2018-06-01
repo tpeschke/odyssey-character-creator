@@ -94,7 +94,7 @@ li {
 }
 
 li:hover, #navFirstItem:hover {
-  background: #9f795f
+  background: #9f795f;
 }
 
 .navLocked{

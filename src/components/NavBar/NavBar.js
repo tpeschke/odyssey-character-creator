@@ -11,8 +11,7 @@ class NavBar extends Component {
 
         this.state = {
             show: false,
-            links: [{title: 'Species', props: 'bp'},{title: 'Ability Scores', props: 'species'},{title: 'Arrange Scores', props: 'scores'},{title: 'Background', props: 'scores'},{title: 'Finalize Scores', props: 'background'},{title: 'Reputation', props: 'background'},{title: 'Priors & Particulars', props: 'rep'},{title: 'Quirks & Flaws', props: 'priors'},{title: 'STPs', props: 'qf'},{title: 'HPs', props: 'skills'},{title: 'Record', props: 'hp'},{title: 'Receive Credit', props: 'record'},{title: 'Goods & Equipment', props: 'credits'}],
-            height: 0,
+            links: [{title: 'Species', props: 'bp'},{title: 'Ability Scores', props: 'species'},{title: 'Arrange Scores', props: 'species'},{title: 'Background', props: 'scores'},{title: 'Finalize Scores', props: 'background'},{title: 'Reputation', props: 'finalize'},{title: 'Priors & Particulars', props: 'rep'},{title: 'Quirks & Flaws', props: 'priors'},{title: 'STPs', props: 'qf'},{title: 'HPs', props: 'talents'},{title: 'Record', props: 'hp'},{title: 'Receive Credit', props: 'record'},{title: 'Goods & Equipment', props: 'credits'},{title: 'Review', props: 'equipment'}],
             width: 0
         }
     }
@@ -35,13 +34,13 @@ class NavBar extends Component {
 
             navBarRender = (<div className={this.state.show ? 'navBarDrawer navBarDrawerReveal' : 'navBarDrawer'}>
                 <ul>
-                    <Link to="/"><li id="navFirstItem" onClick={_=>this.setState({show: !this.state.show})}>Home</li></Link>
+                    <Link to="/"><li id='navFirstItem' onClick={_=>this.setState({show: !this.state.show})}>Home</li></Link>
                     <Link to="/step1"><li onClick={_=>this.setState({show: !this.state.show})}>Step 1: Recieve BP</li></Link>
                     {this.state.links.map((v, i)=> {
                         if ( this.props[v.props]){ 
-                           return <Link to={`/step${i+2}`}><li onClick={_=>this.setState({show: !this.state.show})}>{`Step ${i+2}: ${v.title}`}</li></Link> 
+                           return <Link key={`${v.title}${i}`} to={`/step${i+2}`}><li id={this.props.location.pathname === `/step${i+2}` ? 'active' : ''} onClick={_=>this.setState({show: !this.state.show})}>{`Step ${i+2}: ${v.title}`}</li></Link> 
                         } else {
-                           return <div className="navLocked">{`Step ${i+2}: ${v.title}`}</div>
+                           return <div key={`${v.title}${i}`} className="navLocked">{`Step ${i+2}: ${v.title}`}</div>
                         } 
                     })}
             </ul>
@@ -68,6 +67,5 @@ function mapStateToProps(state) {
 
     return state
 }
-
 
 export default connect(mapStateToProps)(decoratedNavBar)
