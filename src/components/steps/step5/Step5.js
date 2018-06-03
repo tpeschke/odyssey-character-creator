@@ -19,7 +19,6 @@ class Step5 extends Component {
     }
 
     render() {
-        console.log(this.props.species)
         const { backgroundList, search, filter, price } = this.props
         let list = [];
 

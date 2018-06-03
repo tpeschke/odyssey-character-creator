@@ -16,7 +16,8 @@ const initialState = {
     record: null,
 }
 
-const SET_BACKGROUND = 'SET_BACKGROUND'
+const RESET_CHARACTER = "RESET_CHARACTER"
+    , SET_BACKGROUND = 'SET_BACKGROUND'
     , SET_BP = "SET_BP"
     , SET_CREDIT = "SET_CREDIT"
     , SET_PROFICS = "SET_PROFICS"
@@ -31,6 +32,12 @@ const SET_BACKGROUND = 'SET_BACKGROUND'
     , ADD_QUIRK = "ADD_QUIRK"
     , DEDUCT_BP = "DEDUCT_BP"
     , SET_PRIORS = 'SET_PRIORS'
+
+export function RESETCHARACTER () {
+    return {
+        type: RESET_CHARACTER
+    }
+}
 
 export function SETBACKGROUND (background) {
         return {
@@ -138,10 +145,12 @@ export function ADDQUIRK (quirk) {
 
 export default function reducer (state = initialState, action) {
     switch (action.type) {
+        case RESET_CHARACTER:
+            return Object.assign({}, initialState)
         case SET_BACKGROUND:
             return Object.assign({}, state, {background: action.payload})
         case SET_BP: 
-            return Object.assign({}, state, {...initialState}, {bp: action.payload})
+            return Object.assign({}, state, {bp: action.payload})
         case SET_CREDIT:
             return Object.assign({}, state, {credits: action.payload})
         case SET_EQUIPMENTS:
@@ -155,7 +164,6 @@ export default function reducer (state = initialState, action) {
         case SET_QF:
             return Object.assign({}, state, {qf: []})
         case SET_SPECIES:
-        console.log(action.payload)
             return Object.assign({}, state, {species: action.payload})
         case SET_SCORES:
             let newObj;

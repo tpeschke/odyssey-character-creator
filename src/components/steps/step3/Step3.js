@@ -28,9 +28,6 @@ class Step3 extends Component {
                         {id: 7, title: 'LKS', score: rollScore(3,6).reduce((t,n)=> t+n) + '.' + rollPercent()}]
         })
     }
-
-    componentWillUnmount() {
-    }
     
     saveScores = () => {
         this.props.SETSCORES(this.state.scores)
