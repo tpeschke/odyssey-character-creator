@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { SETSCORES } from '../../../dux/reducer'
 
-import {rollScore, rollPercent} from './roll'
+import {rollScore, rollPercent} from './../../roll'
 
 class Step3 extends Component {
     constructor() {

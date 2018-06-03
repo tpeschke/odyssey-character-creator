@@ -1,5 +1,5 @@
 const initialState = {
-    bp: null,
+    bp: 40,
     species: null,
     scores: null,
     rep: null,

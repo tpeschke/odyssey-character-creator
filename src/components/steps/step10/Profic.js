@@ -48,10 +48,11 @@ class Proficiencies extends Component {
     selectProfic = (id) => {
         let tempArr = _.cloneDeep(this.state.list)
         let i = tempArr.map(v => v.id).indexOf(id)
-
+        
         if (this.checkReq(tempArr, i) && this.props.bp - tempArr[i].price >= 0) {
             this.props.DEDUCTBP(tempArr[i].price)
-            if (tempArr[i].name !== 'Etiquette/Manners [Specific Culture]') {
+
+            if (tempArr[i].multi === 'false') {
                 let hold = tempArr.splice(i,1)
                 let tempSelected = _.cloneDeep(this.state.selected)
                 tempSelected.push(...hold)
@@ -87,7 +88,6 @@ class Proficiencies extends Component {
 
     checkReq = (list, index) => {
         let pass = false
-
         if(list[index].preReq.length > 0){ 
             list[index].preReq.forEach(v => {
                 if (v.type === 'score') {
@@ -111,7 +111,7 @@ class Proficiencies extends Component {
 
     render() {
         const {proficList} = this.props
-
+        console.log(this.state)
         if (proficList && proficList.loading) {
             return (<div>
                     <p>Loading</p>
@@ -134,8 +134,8 @@ class Proficiencies extends Component {
                             <h2>{profic.name}</h2>
                             <p>{profic.price}</p>
                             <br/>
-                            {profic.preReq.map(req => {
-                                return (<div key={req.id}>
+                            {profic.preReq.map((req, i) => {
+                                return (<div key={`${req.id} + ${i}`}>
                                             <p>{req.name}</p>
                                             <p>{req.score > 0 ? req.score : null}</p>
                                         </div>)
@@ -174,6 +174,7 @@ const GET_PROFICIENCIES_QUERY = gql`
             id,
             name,
             price,
+            multi,
             preReq {
                 name,
                 score,

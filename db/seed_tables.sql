@@ -74,12 +74,9 @@ create table proficiencies (
     name VARCHAR(50),
     price Int,
     selected Int DEFAULT 0,
-    description TEXT,
+    multi BOOLEAN,
+    description TEXT
 );
-
-insert into proficiencies (name, price)
-values ('Armor', 6), ('Bilingual', 5), ('Butcher', 3), ('Etiquette/Manners [Specific Culture]', 5), ('Hiking/Road Marching', 4), ('Labourer', 1), ('Maintance/Upkeep', 5), ('Mason', 8), ('Pygmalion', 10),
-('Radio Operation', 3), ('Shield', 6), ('Skinning/Tanning', 2), ('Style Sense', 2), ('Taxidermy', 4)
 
 create table proficReq (
     id serial Primary KEY,
@@ -90,6 +87,22 @@ create table proficReq (
     FOREIGN key (proficId) references proficiencies(id)
 )
 
+insert into proficiencies (name, price, multi)
+values ('Armor', 6, false), ('Bilingual', 5, true), ('Butcher', 3, false), ('Etiquette/Manners [Specific Culture]', 5, true), 
+('Hiking/Road Marching', 4, false), ('Labourer', 1, false), ('Maintance/Upkeep', 5, false), ('Mason', 8, false), 
+('Pygmalion', 10, false), ('Radio Operation', 3, false), ('Shield', 6, false), ('Skinning/Tanning', 2, false), 
+('Style Sense', 2, false), ('Taxidermy', 4, false)
+
 insert into proficReq (name, score, proficId, type)
 values ('CON', 11, 5, 'score'), ('Mining', 25, 8, 'skill'), ('Etiquette/Manners', 0, 9, 'profic'), ('Skinning/Tanning', 0, 14, 'profic'), ('Carpentry', 25, 14, 'skill'), 
 ('Leatherworking', 50, 14, 'skill')
+
+create table qftables (
+    id serial primary key,
+    name VARCHAR(40),
+    rangeStart int,
+    rangeEnd int
+)
+
+insert into qftables (name, rangeStart, rangeEnd)
+values ('Mental Quirks', 1, 6), ('Behavioral Quirks', 7, 14), ('Physical Flaws', 15, 20)

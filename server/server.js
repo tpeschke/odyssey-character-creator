@@ -89,6 +89,7 @@ const ProficType = new GObject({
         id: {type: GID},
         name: {type: GString},
         price: {type: GInt},
+        multi: {type: GString},
         description: {type: GString},
         preReq: {
             type: new GList(ProficReq),
@@ -106,6 +107,16 @@ const ProficReq = new GObject({
         name: {type: GString},
         score: {type: GInt},
         type: {type: GString}
+    })
+})
+
+const QfTypes = new GObject({
+    name: "QuirksNFlaws",
+    fields: () => ({
+        id: {type: GID},
+        name: {type: GString},
+        rangestart: {type: GInt},
+        rangeend: {type: GInt}
     })
 })
 
@@ -135,6 +146,12 @@ const RootQuery = new GObject({
             type: new GList(ProficType),
             resolve(parent, args) {
                 return db().proficiencies.find()
+            }
+        },
+        QuirksNFlaws: {
+            type: new GList(QfTypes),
+            resolve(parents, args) {
+                return db().qftables.find()
             }
         }
     }
