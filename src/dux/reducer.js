@@ -155,6 +155,7 @@ export default function reducer (state = initialState, action) {
         case SET_QF:
             return Object.assign({}, state, {qf: []})
         case SET_SPECIES:
+        console.log(action.payload)
             return Object.assign({}, state, {species: action.payload})
         case SET_SCORES:
             let newObj;

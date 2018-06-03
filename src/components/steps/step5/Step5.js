@@ -19,6 +19,7 @@ class Step5 extends Component {
     }
 
     render() {
+        console.log(this.props.species)
         const { backgroundList, search, filter, price } = this.props
         let list = [];
 
@@ -75,7 +76,14 @@ const GET_BACKGROUNDS_QUERY = gql`
         }
     }`
 
-const decoratedStep5 = connect(function(state){ return {selected: state.background}}, {SETBACKGROUND, DEDUCTBP, ADDBP})(Step5)
+function mapStateToMap(state) {
+    return {
+        selected: state.background,
+        species: state.species
+    }
+}
+
+const decoratedStep5 = connect(mapStateToMap, {SETBACKGROUND, DEDUCTBP, ADDBP})(Step5)
 
 export default graphql(GET_BACKGROUNDS_QUERY, {
     name: 'backgroundList', options: props => {

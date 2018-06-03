@@ -4,8 +4,6 @@ import {rollScore} from './../../../roll'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-//this.props.QUERY.refetch
-
 class RollQuirk extends Component {
     rerollQuirk = () => {
         if(this.props.bp > 0){

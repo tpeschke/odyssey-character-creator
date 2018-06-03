@@ -16,7 +16,6 @@ class Step3 extends Component {
 
 //ALSO DO IF STATEMENT FOR xx.100
 //SHOPKEEP
-//AND 
 
     componentDidMount() {
         this.setState({
@@ -30,6 +29,9 @@ class Step3 extends Component {
         })
     }
 
+    componentWillUnmount() {
+    }
+    
     saveScores = () => {
         this.props.SETSCORES(this.state.scores)
         this.props.history.push('/step4')
