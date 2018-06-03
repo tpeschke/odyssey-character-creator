@@ -111,12 +111,21 @@ const ProficReq = new GObject({
 })
 
 const QfTypes = new GObject({
-    name: "QuirksNFlaws",
+    name: "quirksNFlaws",
     fields: () => ({
         id: {type: GID},
         name: {type: GString},
         rangestart: {type: GInt},
         rangeend: {type: GInt}
+    })
+})
+
+const QuirkType = new GObject({
+    name: 'getQuirk',
+    fields: () => ({
+        id: {type: GID},
+        name: {type: GString},
+        bp: {type: GInt}
     })
 })
 
@@ -148,10 +157,19 @@ const RootQuery = new GObject({
                 return db().proficiencies.find()
             }
         },
-        QuirksNFlaws: {
+        quirksNFlaws: {
             type: new GList(QfTypes),
             resolve(parents, args) {
                 return db().qftables.find()
+            }
+        },
+        getQuirk: {
+            type: new GList(QuirkType),
+            args: { roll: {type: GString}, table: {type: GString} },
+            resolve(parents, args) {
+                if (+args.table === 1) {
+                    return db().getMentalQuirk([+args.roll])
+                }
             }
         }
     }

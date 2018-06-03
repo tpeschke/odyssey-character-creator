@@ -1,5 +1,5 @@
 const initialState = {
-    bp: 40,
+    bp: null,
     species: null,
     scores: null,
     rep: null,
@@ -22,12 +22,13 @@ const SET_BACKGROUND = 'SET_BACKGROUND'
     , SET_PROFICS = "SET_PROFICS"
     , SET_EQUIPMENTS = 'SET_EQUIPMENTS'
     , SET_HP = "SET_HP"
-    , SET_QFS = 'SET_QFS'
+    , SET_QF = "SET_QF"
     , SET_SCORES = 'SET_SCORES'
     , SET_SPECIES = "SET_SPECIES"
     , SET_TALENTS = "SET_TALENTS"
     , SET_RECORD = "SET_RECORD"
     , ADD_BP = "ADD_BP"
+    , ADD_QUIRK = "ADD_QUIRK"
     , DEDUCT_BP = "DEDUCT_BP"
     , SET_PRIORS = 'SET_PRIORS'
 
@@ -80,10 +81,9 @@ export function SETHP (hp) {
     }
 }
 
-export function SETQFS (qf) {
+export function SETQF () {
     return {
-        type: SET_QFS,
-        payload: qf
+        type: SET_QF
     }
 }
 
@@ -129,6 +129,13 @@ export function ADDBP (amount) {
     }
 }
 
+export function ADDQUIRK (quirk) {
+    return {
+        type: ADD_QUIRK,
+        payload: quirk
+    }
+}
+
 export default function reducer (state = initialState, action) {
     switch (action.type) {
         case SET_BACKGROUND:
@@ -143,10 +150,10 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {priors: action.payload})
         case SET_PROFICS:
             return Object.assign({}, state, {profics: action.payload})
-        case SET_QFS:
-            return Object.assign({}, state, {qf: action.payload})
         case SET_HP:
             return Object.assign({}, state, {hp: action.payload})
+        case SET_QF:
+            return Object.assign({}, state, {qf: []})
         case SET_SPECIES:
             return Object.assign({}, state, {species: action.payload})
         case SET_SCORES:
@@ -165,6 +172,8 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {bp: state.bp - +action.payload})
         case ADD_BP:
             return Object.assign({}, state, {bp: state.bp + +action.payload})
+        case ADD_QUIRK:
+            return Object.assign({}, state, {qf: [...state.qf, action.payload]})
         default: return state
     }
 }

@@ -12,24 +12,24 @@ class RollQuirks extends Component {
 
         this.state = {
             roll: 0,
-            table: null
+            table: null,
+            show: false,
+            quirkRoll: 0
         }
     }
     
     componentDidMount() {
-        this.setState({roll: rollScore(1,20)[0]}, this.showWhichTable)
+        this.setState({roll: rollScore(1,20)[0]})
     }
 
     componentWillReceiveProps(next) {
-        this.showWhichTable()
+        this.showWhichTable(next.QFTable.quirksNFlaws)
     }
 
-    showWhichTable = () => {
+    showWhichTable = (param) => {
         let { roll } = this.state
-        let { QuirksNFlaws: tables } = this.props.QFTable
-
-        if (tables) {
-            tables.forEach(v => {
+        if (param) {
+            param.forEach(v => {
                 if (roll > v.rangestart && roll < v.rangeend) {
                     this.setState({table: v})
                 }
@@ -39,12 +39,21 @@ class RollQuirks extends Component {
 
     rerollTable = () => {
         this.props.DEDUCTBP(1)
-        this.setState({roll: rollScore(1,20)[0]}, this.showWhichTable)
+        this.setState({roll: rollScore(1,20)[0]}, _=> {
+            this.showWhichTable(this.props.QFTable.quirksNFlaws)
+        })
+    }
+
+    rollForQuirk = () => {
+        this.setState({quirkRoll: rollScore(1,1000)[0], show: true})
+    }
+
+    hideQuirk = () => {
+        this.setState({show: false, roll: rollScore(1,20)[0]})
     }
 
     render() {
         let {QFTable} = this.props
-
         if (QFTable && QFTable.loading) {
             return (<div>
                         <p>Loading</p>
@@ -57,17 +66,31 @@ class RollQuirks extends Component {
                     </div>)
         }
 
+        const showButton = !this.state.show ? ( <div><button onClick={this.rerollTable}>Reroll</button>
+                                                    <button onClick={this.rollForQuirk}>Roll on Table</button></div>
+                                                    ) : <div></div>
+
         return (
             <div>
                 {this.state.roll}
                 <br/>
-                {this.state.table ? this.state.table.name : <div></div>}
-                <br/>                
-                <button onClick={this.rerollTable}>Reroll</button>
-                <button>Roll on Table</button>
-                <br/> 
-                <br/> 
-                <RollQuirk />
+                {QFTable.quirksNFlaws.map(v => {
+                    if (this.state.roll > v.rangestart && this.state.roll < v.rangeend) {
+                        return v.name
+                    }
+                })}
+                <br/>        
+                {showButton}
+                <br/>
+
+                {this.state.show ? <RollQuirk 
+                                        roll={this.state.quirkRoll}
+                                        table={this.state.table}
+                                        rollForQuirk={this.rollForQuirk}
+                                        DEDUCTBP={this.props.DEDUCTBP}
+                                        ADDQUIRK={this.props.ADDQUIRK}
+                                        hideQuirk={this.hideQuirk}/> : <div></div>}
+            
             </div>
         )
     }
@@ -75,7 +98,7 @@ class RollQuirks extends Component {
 
 const GET_QF_TABLE_QUERY = gql`
     query GFTableQuery{
-        QuirksNFlaws {
+        quirksNFlaws {
             id,
             name,
             rangestart,

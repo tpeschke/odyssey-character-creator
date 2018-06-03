@@ -106,3 +106,47 @@ create table qftables (
 
 insert into qftables (name, rangeStart, rangeEnd)
 values ('Mental Quirks', 1, 6), ('Behavioral Quirks', 7, 14), ('Physical Flaws', 15, 20)
+
+create table mentalQuirks (
+    id serial primary key,
+    name VARCHAR(40),
+    rangeStart Int,
+    rangeEnd Int,
+    selected Int DEFAULT 0,
+    description Text,
+    bp Int
+)
+
+insert into mentalQuirks (name, rangestart, rangeend, bp)
+values ('Ambivalent', 1,31,5), ('Inappropriate Sense of Humor', 32,62, 5), ('Depression (minor)', 63,91,10), ('Hardcase', 92,120,10),
+('Quirk-Tempered', 121, 149,10), ('Kleptomaniac', 150,178,13),('Agoraphobia', 179,206,15), ('Gynophobia', 207,234,15),
+('Chauvinist',235,262,15), ('Nagging Conscience',263,290,15), ('Superstitious',291,318,15), ('Touchy', 319,346, 15),
+('Chronic Nightmares', 347,374, 18), ('Chivalrous', 375,400, 20),('Claustrophobia (minor)', 401,426, 20), ('Clingy', 427,452,20),
+('Delusional (minor)', 453, 478, 20),('Depression (major)',479,503,20),('Junkie',504,528,20), ('Ornery', 529,553,20), 
+('Lusty',554,578,20),('Short Term Memory Loss', 579,603,20), ('Space Case', 604,628,20),('Spendthrift',629,653,20), 
+('Overconfident',654,676,21),('HackLust',677,699,22), ('HackFrenzy',700,722,24), ('Aversion to Alien Species', 723,745,25),
+('Aversion to Profession', 746,768,25), ('Hoarder', 769,791,25), ('Paranoid', 792,814,25), ('Sadistic', 815,837,25), 
+('Acrophobia', 838,859,30),('Professionist', 860,881,30), ('Claustrophobia (major)', 882,899,35),('Obessive Complusive', 900,917,25), 
+('Delusional (major)', 918,934,40),('Fanatic', 935,951, 40), ('Pyromaniac', 952,968,40), ('Xenophobia', 969,985,40), 
+('Neurotic', 986, 1000,45);
+
+create table physicalQuirks (
+    id serial primary key,
+    name VARCHAR(40),
+    rangeStart Int,
+    rangeEnd Int,
+    selected Int DEFAULT 0,
+    description Text,
+    bp Int
+)
+
+create table behavioralQuirks (
+    id serial primary key,
+    name VARCHAR(40),
+    rangeStart Int,
+    rangeEnd Int,
+    selected Int DEFAULT 0,
+    description Text,
+    bp Int
+)
+
