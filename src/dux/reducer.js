@@ -141,7 +141,7 @@ export default function reducer (state = initialState, action) {
         case SET_BACKGROUND:
             return Object.assign({}, state, {background: action.payload})
         case SET_BP: 
-            return Object.assign({}, state, {bp: action.payload})
+            return Object.assign({}, state, {...initialState}, {bp: action.payload})
         case SET_CREDIT:
             return Object.assign({}, state, {credits: action.payload})
         case SET_EQUIPMENTS:

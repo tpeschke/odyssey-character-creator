@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {rollScore} from './../../roll'
+import {rollScore} from './../../../roll'
 
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -8,8 +8,10 @@ import gql from 'graphql-tag'
 
 class RollQuirk extends Component {
     rerollQuirk = () => {
+        if(this.props.bp > 0){
         this.props.DEDUCTBP(1)
         this.props.rollForQuirk()
+        }
     }
 
     keepQuirk = (quirk) => {
@@ -18,16 +20,28 @@ class RollQuirk extends Component {
     }
 
     render() {
-        this.props.QF.getQuirk ? console.log(this.props.QF.getQuirk[0]) : null
+        let {QF, roll} = this.props
+
+        if (QF && QF.loading) {
+            return (<div>
+                        <p>Loading</p>
+                    </div>)
+        }
+
+        if (QF && QF.error) {
+            return (<div>
+                        <p>Error</p>
+                    </div>)
+        }
         return(
             <div>
-                {this.props.roll}
+                {roll}
                 <br/>
-                {this.props.QF.getQuirk ? this.props.QF.getQuirk[0].name : <div></div>}
+                {QF.getQuirk ? QF.getQuirk[0].name : <div></div>}
                 <br/>
-                {this.props.QF.getQuirk ? this.props.QF.getQuirk[0].bp : <div></div>}
+                {QF.getQuirk ? QF.getQuirk[0].bp : <div></div>}
                 <br/>
-                <button onClick={_=>this.keepQuirk(this.props.QF.getQuirk[0])}>Keep Quirk</button>
+                <button onClick={_=>this.keepQuirk(QF.getQuirk[0])}>Keep Quirk</button>
                 <button onClick={this.rerollQuirk}>Reroll</button>
             </div>
         )
@@ -46,7 +60,7 @@ const GET_QUIRK = gql`
 export default graphql(GET_QUIRK, {
     name: 'QF', options: props => {
         return { 
-            variables: { roll: `${props.roll}`, table: `${props.table.id}` } }
+            variables: { roll: `${props.roll}`, table: `${props.id}` } }
     }
 }
 )(RollQuirk)

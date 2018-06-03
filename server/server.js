@@ -159,8 +159,9 @@ const RootQuery = new GObject({
         },
         quirksNFlaws: {
             type: new GList(QfTypes),
+            args: { roll: {type: GString} },
             resolve(parents, args) {
-                return db().qftables.find()
+                return db().getQuirkTable([+args.roll])
             }
         },
         getQuirk: {

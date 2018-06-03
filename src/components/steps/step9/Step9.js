@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 
 import {connect} from 'react-redux'
-import {DEDUCTBP, ADDQUIRK, SETQF} from '../../../dux/reducer'
+import {DEDUCTBP, ADDQUIRK, SETQF, ADDBP} from '../../../dux/reducer'
 
-import RollQuirkTable from './RollQuirkTable'
+import RollQuirkTable from './randomRoll/RollQuirkTable'
 
 class Step9 extends Component {
     componentDidMount() {
@@ -11,6 +11,9 @@ class Step9 extends Component {
     }
 
     saveQuirks = () => {
+        this.props.qf.forEach((v, i)=> {
+            this.props.ADDBP(v.bp - (i * 5))
+        })
         this.props.history.push('/step10')
     }
 
@@ -38,16 +41,18 @@ class Step9 extends Component {
 
                 <RollQuirkTable 
                     DEDUCTBP={this.props.DEDUCTBP}
-                    ADDQUIRK={this.props.ADDQUIRK}/>                
+                    ADDQUIRK={this.props.ADDQUIRK}
+                    bp={this.props.bp}/>                
             </div>
         )
     }
 }
 
 function mapStateToProps (state){
-    let {qf} = state
+    let {qf, bp} = state
     return {
-        qf
+        qf,
+        bp
     }
 }
-export default connect(mapStateToProps, {DEDUCTBP, ADDQUIRK, SETQF})(Step9)
+export default connect(mapStateToProps, {DEDUCTBP, ADDQUIRK, SETQF, ADDBP})(Step9)
