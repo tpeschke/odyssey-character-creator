@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import { SETSCORES } from '../../../dux/reducer'
 
 import {rollScore, rollPercent} from './../../roll'
+import Step3Ghost from './step3Ghost'
 
 class Step3 extends Component {
     constructor() {
         super()
 
         this.state = {
-            scores: []
+            scores: [],
+            choice: null
         }
     }
 
@@ -34,6 +36,10 @@ class Step3 extends Component {
         this.props.history.push('/step4')
     }
 
+    setChoice = (param) => {
+        this.setState({choice: param})
+    }
+
     render() {
         return (
             <div className='StepOuter'>
@@ -47,7 +53,7 @@ class Step3 extends Component {
                     <div className='scoreDisplay'>
                     {this.state.scores.map(val => {
                         return (
-                            <div key={val.id}>
+                            <div key={val.id} className="adjustment">
                                 <h2>{val.title}</h2>
                                 <div className="scoreUnderscore"/>
                                 <p className="scoreScore">{val.score}</p>
@@ -55,6 +61,8 @@ class Step3 extends Component {
                         )
                     })}
                     </div>
+
+                    {this.props.species === 'Ghost' ? <Step3Ghost choice={this.state.choice} setChoice={this.setChoice}/> : <div></div>}
 
                     <button onClick={this.saveScores}>Save Scores</button>
                 </div> 
@@ -64,4 +72,4 @@ class Step3 extends Component {
     }
 }
 
-export default connect(function(){return{}},{SETSCORES})(Step3)
+export default connect(function(state){return{species: state.species.species}},{SETSCORES})(Step3)
