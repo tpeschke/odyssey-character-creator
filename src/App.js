@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './reset.css'
-import './App.css';
+import './App.css'
+import './Styles.css';
 
 import NavBarShell from './components/NavBar/NavBarShell'
 import Routes from './routes'

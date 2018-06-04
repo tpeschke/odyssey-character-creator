@@ -1,0 +1,50 @@
+#menu {
+    width: 50px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#menuFirst {
+    height: 2px;
+    width: 50px;
+    margin-top: 6px;
+    background: #a62020
+}
+
+#menuSecond {
+    height: 2px;
+    width: 40px;
+    margin-top: 6px;
+    background: #a62020
+}
+
+#menuThird {
+    height: 2px;
+    width: 30px;
+    margin-top: 6px;
+    background: #a62020
+}
+
+.BPTracker {
+    font-size: 23px;
+    height: 30px;
+}
+
+.BPBucket {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.BPTitle {
+    font-size: 17px;
+    margin-right: 7px
+}
+
+.BPBottomLine {
+    height: 2px;
+    width: 100%;
+    margin-top: 3px;
+    background: #a62020
+}

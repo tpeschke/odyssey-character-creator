@@ -18,7 +18,7 @@ class Step4 extends Component{
 
     componentDidMount() {
         this.props.SETBP(90)
-        this.setState({scores: this.props.scores, history: [this.props.scores]})
+        this.setState({scores: this.props.scores})
     }
 
     onDragEnd = result => {
@@ -47,12 +47,12 @@ class Step4 extends Component{
 
     undoChange = () => {
             let tempHistory = _.cloneDeep(this.state.history)
-            tempHistory.length <= 1 ? this.props.SETBP(90) : tempHistory.length <= 2 ? this.props.SETBP(65) : this.props.SETBP(40);
+            tempHistory.length <= 0 ? this.props.SETBP(90) : tempHistory.length <= 1 ? this.props.SETBP(65) : this.props.SETBP(40);
             this.state.history[this.state.history.length-1] === this.state.scores ? tempHistory.pop() : null;
             let newScores = tempHistory.pop()
             if (tempHistory.length === 0) {
                 newScores = this.props.scores
-                tempHistory = [this.props.scores]
+                tempHistory = []
             }
             this.setState({scores: newScores, history: tempHistory})
     }
@@ -65,8 +65,15 @@ class Step4 extends Component{
 
     render() {
         return (
-            <div>
-                <h1>Step 4</h1>    
+            <div className='StepOuter'>
+
+                <div className='stepBody'> 
+                <div className="stepTitle">
+                    <h1>Step 4: Arrange Ability Scores</h1>
+                </div> 
+
+                <div className="stepInner">
+                <div className='scoreDisplay'>  
             <DragDropContext
                 onDragEnd={this.onDragEnd}>
 
@@ -74,9 +81,10 @@ class Step4 extends Component{
                 return (
                     <div key={a.id}>
                         <h2>{a.title}</h2>
+                        <div className="scoreUnderscore"/>
                         <Droppable droppableId={`${i}`}>
                 {(provided, snapshot) => (
-                    <div className="item">
+                    <div>
                     <div ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}>
                     <Draggable
@@ -91,7 +99,7 @@ class Step4 extends Component{
                                         snapshot.isDragging,
                                         provided.draggableProps.style
                                     )}>
-                                    <p>{a.score}</p>   
+                                    <p className="scoreScore">{a.score}</p>   
                                 </div>
                             )}
                     </Draggable>
@@ -103,19 +111,22 @@ class Step4 extends Component{
                 )
             })}
                 </DragDropContext>
+                </div>
 
                 <button onClick={this.undoChange}>Undo Change</button>
                 <br/>
                 <br/>
                 <button onClick={this.saveScores}>Save Scores</button>
             </div>
+            </div>
+            </div>
         )
     }
 }
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    width: 250
+    background: isDraggingOver ? '#a62020' : 'grey',
+    width: 50
 });
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -123,7 +134,8 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
 
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? '#2d2d2a' : 'grey',
+    color: isDragging ? '#a62020' : '#2d2d2a',
 
     // styles we need to apply on draggables
     ...draggableStyle

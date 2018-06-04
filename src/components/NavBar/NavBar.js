@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
-
 import {connect} from 'react-redux'
-
+import './navBarStyle.css'
 import BpTracker from './BpTracker'
 
 class NavBar extends Component {
@@ -50,8 +49,12 @@ class NavBar extends Component {
         return(
             <div>
                 <nav className="App-header">
-                    <div id="menu" onClick={_=>this.setState({show: !this.state.show})}/>
-                    <h1 className="App-title">Nav Bar</h1>
+                    <div id="menu" onClick={_=>this.setState({show: !this.state.show})}>
+                        <div id="menuFirst"/>
+                        <div id="menuSecond"/>
+                        <div id="menuThird"/>
+                    </div>
+                    <div className="navBanner"/>
                     <BpTracker bp={this.props.bp}/>
                 </nav>
                 <div id='navOverlay' style={this.state.show ? {width: this.state.width} : {width: 0}} onClick={_=>this.setState({show: !this.state.show})}></div>

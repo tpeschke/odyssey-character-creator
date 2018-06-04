@@ -2,8 +2,12 @@ import React from 'react'
 
 function BpTracker (props) {
     return (
-        <div>
-            {props.bp}
+        <div className="BPTracker">
+            <div className="BPBucket">
+                <p className="BPTitle">BP:</p> {props.bp}
+            </div>
+            <div className="BPBottomLine"/>
+            
         </div>
     )
 }

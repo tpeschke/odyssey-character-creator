@@ -10,10 +10,16 @@ class Step1 extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Step 1: Recieve Building Points</h1>
-                <p>Each character gets 40 BPs</p>
-                <button onClick={_=> this.props.history.push('/step2')}>Step 2</button>  
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                    <h1>Step 1: Recieve Building Points</h1>
+                </div>
+                <div className="stepInner">
+                    <p className='stepDescription'>Each character gets 40 BPs</p>
+                    <button onClick={_=> this.props.history.push('/step2')}>Step 2</button> 
+                </div> 
+                </div>
             </div>
         )
     }

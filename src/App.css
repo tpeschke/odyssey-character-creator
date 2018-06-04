@@ -1,112 +1,173 @@
-.App {
-  text-align: center;
-  height: 84.7vh;
-  background: lightgrey
+@font-face {
+    font-family: Militia;
+    src: url('./images/OuterspaceMilitia.ttf') format("truetype");
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+body {
+    background: #57514f
+  }
+
+.stepTitle {
+    font-family: Militia;
+    background: #c4bbaf;
+    padding: 7px;
+    border-radius: 35px;
+    box-shadow: 2px 2px 2px #2d2d2a
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.stepBody {
+    width: 74%;
+    position: absolute;
+    top: -25px;
+    left: 13%;  
 }
 
-/* ==================================================== */
-a {
-  text-decoration: none;
-  color: #C4bbaf
+#loading {
+    height: 75vh;
 }
 
-h1 {
-  font-size: 30px;
-  margin-bottom: 5px
+.stepInner {
+    margin-top: 15%;
+    margin: 5% auto 0 auto;
+    width: 74%;
+    background: #c4bbaf;
+    padding: 17px;
+    border-radius: 35px;
+    box-shadow: 2px 2px 2px #2d2d2a
 }
 
-h2 {
-  font-size: 25px;
-  margin-bottom: 5px;
+.StepOuter {
+    position: relative;
+  }
+
+  .bodySpecies {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .stepDescription {
+    margin-bottom: 10px;
+  }
+
+.speciesBasket {
+    width: 95%;
+    height: 0px;
+    transform: translateY(-23px);
+    overflow: hidden;
+    padding: 7px 5px 15px 5px;
+    border-left: 2px solid #2d2d2a;
+    border-right: 2px solid #2d2d2a;
+    border-bottom: 2px solid #2d2d2a;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: left;
+    margin-bottom: 5px;
+    background: #9f795f;
+    box-shadow: 1px 1px 1px #2d2d2a
 }
 
-#menu {
-  width: 50px;
-  height: 50px;
-  background: lightcoral
+.speciesTitle {
+    width: 100%; 
+    box-shadow: 1px 1px 1px #2d2d2a; 
 }
 
-.navBarDrawer {
-  position: absolute;
-  display: flex;
-  justify-content: space-around;
-  left: -175px;
-  top: 0;
-  width: 0px;
-  height: 100%;
-  overflow: hidden;
-  transition: .6s
+.speciesDropBox {
+    margin-bottom: 15px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.navBarDrawerReveal {
-  width: 175px;
-  left: 0px;
+.para {
+    margin-top: 8px;
 }
 
-.dropDownBoxOutside {
-  border: 3px solid grey
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.dropDownBoxOutside:hover {
-  background: gray
+.backgroundLoader {
+    box-shadow: none;
 }
 
-ul {
-  background: #57514f
+.speciesCard {
+    width: 25%;
+    margin-top: 15px;
 }
 
-#navFirstItem {
-  background: #2d2d2a
+.speciesDesc {
+    margin-top: 15px;
+    border: 2px inset #57514f;
+    width: 65%;
+    height: 0%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+    background: #9f795f
 }
 
-#navOverlay {
-  background: rgba(0, 0, 0, 0.75);
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  transition: .6s
+.scoreDisplay {
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-around;
 }
 
-.overlayHide {
-  width: 0
+.scoreUnderscore {
+    height: 2px;
+    width: 100%;
+    background: #a62020;
+    margin-bottom: 10px;
 }
 
-li {
-  height: 50px;
-  width: 175px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
+.scoreScore {
+    font-size: 20px;
 }
 
-li:hover, #navFirstItem:hover {
-  background: #9f795f;
+.loaderMargin {
+    transform: translateY(150px)
 }
 
-.navLocked{
-  height: 50px;
-  width: 175px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
+.backgroundMain {
+    margin: 25px 5px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.item {
-  margin: 0 auto;
-  width: 250px
+.backgroundBoxOutside {
+    width: 23%;
+    margin: 1%;
+    background: whitesmoke;
+    border-radius: 7px;
+    padding: 15px 5px;
+    box-shadow: 2px 2px 2px #2d2d2a;
+    transition: .6s
+}
+
+.backgroundBoxOutside:hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 5px #2d2d2a
+}
+
+.backgroundInner {
+    width: 90%
+}
+
+.backgroundPrice {
+    margin-bottom: 10px;
+}
+
+input {
+    border: none;
+    padding: 5px;
+    width: 250px;
+    height: 24px;
+    border-radius: 5px;
+    background: lightgray;
+}
+
+input:focus {
+    background: white
 }

@@ -6,6 +6,13 @@ import { connect } from 'react-redux'
 import { SETSPECIES } from '../../../dux/reducer'
 
 class Step2 extends Component {
+    constructor(){
+        super()
+
+        this.state = {
+            description: ''
+        }
+    }
 
     selectSpecies = (obj) => {
         this.props.SETSPECIES(obj)
@@ -16,30 +23,63 @@ class Step2 extends Component {
         const {alienList} = this.props
 
         if (alienList && alienList.loading) {
-            return (<div>
-                        <h1>Step 2</h1>
-                        <p>Loading</p>
+            return (<div className='StepOuter'>
+                        <div className='stepBody'>
+                        <div className="stepTitle">
+                            <h1>Step 2: Choose Species</h1>
+                        </div>
+                        <div className="stepInner" id="loading">
+                        <div className="loader">
+                            <div className="part">
+                                <div className="part">
+                                    <div className="part">
+                                        <div className="part">
+                                            <div className="part"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>)
         }
 
         if (alienList && alienList.error) {
-            return (<div>
-                        <h1>Step 2</h1>
+            return (<div className='StepOuter'>
+                        <div className='stepBody'>
+                        <div className="stepTitle">
+                            <h1>Step 2: Choose Species</h1>
+                        </div>
                         <p>Error</p>
+                        </div>
                     </div>)
         }
         
         return (
-            <div>
-                <h1>Step 2</h1> 
-                {alienList.aliens.map(alien => {
-                    let paragraph = alien.description.split('/').map((para, i)=> <p key={i}>{para}</p>)
-                    return      <div    key={alien.id} 
-                                        className='dropDownBoxOutside'
-                                        onClick={_=>this.selectSpecies({id: alien.id, species: alien.species})}>
-                                    <h2>{alien.species}</h2>
-                                    {paragraph}
-                                </div>})}  
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                    <h1>Step 2: Choose Species</h1>
+                </div>
+
+                <div className="stepInner bodySpecies">
+                    <div className="speciesCard">
+                    {alienList.aliens.map(alien => {
+                            return      <div    key={alien.id} 
+                                            className='speciesDropBox'
+                                            onClick={_=>this.selectSpecies({id: alien.id, species: alien.species})}
+                                            onMouseEnter={_=>this.setState({description: alien.description})}>
+                    
+                                            <button className="speciesTitle">{alien.species}</button>
+                                                
+                                        </div>})}
+                    </div>
+                    <div className='speciesDesc'>
+                        {this.state.description.split('/').map((para, i)=> <p key={i} className="para">{para}</p>)}
+                    </div> 
+                </div>
+                </div> 
             </div>
         )
     }

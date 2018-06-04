@@ -36,19 +36,29 @@ class Step3 extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Step3</h1>
-                
-                {this.state.scores.map(val => {
-                    return (
-                        <div key={val.id}>
-                            <h2>{val.title}</h2>
-                            <p>{val.score}</p>
-                        </div>
-                    )
-                })}
-    
-                <button onClick={this.saveScores}>Save Score</button>    
+            <div className='StepOuter'>
+
+                <div className='stepBody'>
+                <div className="stepTitle">
+                    <h1>Step 3: Roll Ability Scores</h1>
+                </div>
+
+                <div className="stepInner">
+                    <div className='scoreDisplay'>
+                    {this.state.scores.map(val => {
+                        return (
+                            <div key={val.id}>
+                                <h2>{val.title}</h2>
+                                <div className="scoreUnderscore"/>
+                                <p className="scoreScore">{val.score}</p>
+                            </div>
+                        )
+                    })}
+                    </div>
+
+                    <button onClick={this.saveScores}>Save Scores</button>
+                </div> 
+                </div>   
             </div>
         )
     }

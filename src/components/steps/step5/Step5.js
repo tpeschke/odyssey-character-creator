@@ -23,9 +23,21 @@ class Step5 extends Component {
         let list = [];
 
         if (backgroundList && backgroundList.loading) {
-            return (<div>
-                <p>Loading</p>
-            </div>)
+            return (<div className='StepOuter'>
+            <div className="stepInner backgroundLoader" id="loading">
+            <div className="loader">
+                <div className="part">
+                    <div className="part">
+                        <div className="part">
+                            <div className="part">
+                                <div className="part"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>)
         }
 
         if (backgroundList && backgroundList.error) {
@@ -48,14 +60,15 @@ class Step5 extends Component {
         }
 
         return (
-            <div>
+            <div className="backgroundMain">
                 {list.map(val => {
                     let paragraph = val.description.split('/').map((para, i) => <p key={i}>{para}</p>)
                     return (<div key={val.id}
-                        className='dropDownBoxOutside'
+                        className='backgroundBoxOutside'
                         onClick={_ => this.saveBackground({id: val.id, price: val.price, name: val.name})}>
                         <h2>{val.name}</h2>
-                        <p>{val.price}</p>
+                        <p className="backgroundPrice">Price: {val.price} BP</p>
+                        <div className='scoreUnderscore'/>
                         {paragraph}
                     </div>)
                 })}
