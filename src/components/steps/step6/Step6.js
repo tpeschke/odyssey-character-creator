@@ -13,7 +13,7 @@ class Step6 extends Component {
 
         this.state = {
             scores: [],
-            choice: 3
+            choice: 1
         }
     }
 
@@ -43,9 +43,13 @@ class Step6 extends Component {
                 <h1>Step 6: Finalize Scores</h1>
                     </div>
                     <div className="stepInner">
-                <button onClick={_=>this.setState({choice: 1})}>Generate Ability Points</button>
-                <button onClick={_=>this.setState({choice: 2})}>Generate Extra BPs</button>
-                <button onClick={_=>this.setState({choice: 3})}>Spend BPs On Increases</button>
+
+                    <div className="buttonHolder">
+                    {this.state.choice !== 1 ? <button onClick={_=>this.setState({choice: 1})}>Generate Ability Points</button> : <div className="buttonLocked">Generate Ability Points</div>}   
+                    {this.state.choice !== 2 ? <button onClick={_=>this.setState({choice: 2})}>Generate Extra BPs</button> : <div className="buttonLocked">Generate Extra BPs</div>}   
+                    {this.state.choice !== 3 ? <button onClick={_=>this.setState({choice: 3})}>Spend BPs On Increases</button> : <div className="buttonLocked">Spend BPs On Increases</div>}   
+                    </div>
+                <div className="scoreUnderscore step6MainUnderscore"/>
 
                 {this.state.choice === 1 ? <Step6Swap scores={this.state.scores} saveScores={this.saveScores}/> : <div></div>}               
                 {this.state.choice === 2 ? <Step6ExtraBP scores={this.state.scores} saveScores={this.saveScores}/> : <div></div>}               

@@ -32,8 +32,26 @@ class Step3 extends Component {
     }
     
     saveScores = () => {
-        this.props.SETSCORES(this.state.scores)
-        this.props.history.push('/step4')
+        if (this.state.choice && this.props.species === 'Ghost') {
+            let tempScores = this.state.scores.map(val => {
+                if (val.title === 'STR') {
+                    let tempScore = val.score.split('.')
+                    val.score = +tempScore[0] - 4 + '.' + +tempScore[1]
+                } else if (val.title === 'CON') {
+                    let tempScore = val.score.split('.')
+                    val.score = +tempScore[0] - 6 + '.' + +tempScore[1]
+                } else if (val.title === this.state.choice || val.title === 'CHA') {
+                    let tempScore = val.score.split('.')
+                    val.score = +tempScore[0] + 3 + '.' + +tempScore[1]
+                }
+                return val
+            })
+            this.props.SETSCORES(tempScores)
+            this.props.history.push('/step4')
+        } else if (this.props.species !== 'Ghost') {
+            this.props.SETSCORES(this.state.scores)
+            this.props.history.push('/step4')
+        }
     }
 
     setChoice = (param) => {

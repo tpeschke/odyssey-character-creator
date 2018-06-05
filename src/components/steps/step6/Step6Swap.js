@@ -77,21 +77,28 @@ export default class Step6Swap extends Component {
         return (
             <div>
                 <button onClick={_=>this.props.saveScores(this.state.scores)}>Save</button>
-                <h2>Spare Increases Left</h2>
+                <h2  className="finalizeScoreBP">Spare Increases Left</h2>
                 <h2>{this.state.spare}</h2>
+                <div className="scoreUnderscore step6Underscore"/>                
 
+                <div className="statBasket">
             {this.state.scores.map(val => {
                 return (
-                    <div key={val.id}>
-                        <h2>{val.title}</h2>
+                    <div key={val.id} className='statCard'>
+                        <h2 className="statTitle">{val.title}</h2>
+                        <div className="scoreUnderscore"/>
+                        
+                        <div className="statScore">
                         <p>{val.fullScore}</p>
                         <p>.</p>
                         <p>{val.percent}</p>
+                        </div>
+                        
                         {this.checkScore(val.title, val.id)}
                     </div>
                 )
             })}  
-
+            </div>
            
             </div>
         )

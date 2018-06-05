@@ -203,3 +203,63 @@ input:focus {
     background: #2d2d2a;
     color: #a62020
 }
+
+.statCard {
+    width: 22%;
+    background: grey;
+    box-shadow: 1px 1px 1px #2d2d2a;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.statBasket {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.statScore {
+    color: lightgray;
+    border-radius: 5px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.statTitle {
+    color: lightgray
+}
+
+.statIncrease {
+    margin-bottom: 10px
+}
+
+.step6MainUnderscore {
+    background: #2d2d2a;
+    margin: 15px auto;
+    width: 80%
+}
+
+.finalizeScoreBP {
+    margin: 20px 0px 15px 0px;
+    font-size: 25px;
+}
+
+.buttonLocked {
+    margin: 5px;
+    padding: 5px 15px;
+    font-family: 'Exo 2', sans-serif;
+    background: linear-gradient(gray, gray, gray, #2d2d2a);
+    border: 2px outset gray;
+    color: #c4bbaf;
+    font-size: 17px;
+    border-radius: 7px;
+}
+
+.buttonHolder {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px;
+}

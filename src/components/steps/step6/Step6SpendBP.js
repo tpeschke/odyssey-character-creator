@@ -17,7 +17,7 @@ export default class Step6Swap extends Component {
         let tempArr = _.cloneDeep(this.props.scores)
         this.setState({displayScores: tempArr})
     }
-
+    
     componentWillReceiveProps(next) {
         let tempArr = _.cloneDeep(next.scores)
         this.setState({displayScores: tempArr})
@@ -107,19 +107,25 @@ export default class Step6Swap extends Component {
         return (
             <div>
                 <button onClick={_=>this.props.saveScores(this.state.displayScores)}>Save</button>
-                <div className="scoreUnderscore"/>
-                <h2>BP Spent</h2>
+                
+                <h2 className="finalizeScoreBP">BP Spent</h2>
                 <h2>{this.state.bpSpent}</h2>
                 <div className="scoreUnderscore step6Underscore"/>
+
+                <div className="statBasket">
             {this.state.displayScores.map(val => {
                 return (
-                    <div key={val.id}>
-                        <h2>{val.title}</h2>
+                    <div key={val.id} className='statCard'>
+                        <h2 className="statTitle">{val.title}</h2>
+                        <div className="scoreUnderscore"/>
+
+                        <div className="statScore">
                         <p>{val.fullScore}</p>
                         <p>.</p>
                         <p>{val.percent}</p>
-                        <br/>
-                        <p>{`${this.costToIncrease(val.fullScore)} fractional/1 BP`}</p>
+                        </div>
+
+                        <p className="statIncrease">{`${this.costToIncrease(val.fullScore)} fractional/1 BP`}</p>
                         <button onClick={_=>this.addToScore(val.id, this.costToIncrease(val.fullScore))}>+</button>
                         <button onClick={_=>this.deductFromScore(val.id, this.costToIncrease(val.fullScore))}>-</button>
 
@@ -127,7 +133,7 @@ export default class Step6Swap extends Component {
                     </div>
                 )
             })}  
-
+                </div>
 
             </div>
         )
