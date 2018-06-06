@@ -25,6 +25,7 @@ const RESET_CHARACTER = "RESET_CHARACTER"
     , SET_HP = "SET_HP"
     , SET_QF = "SET_QF"
     , SET_SCORES = 'SET_SCORES'
+    , SET_SPECIALS = "SET_SPECIALS"
     , SET_SPECIES = "SET_SPECIES"
     , SET_TALENTS = "SET_TALENTS"
     , SET_RECORD = "SET_RECORD"
@@ -109,6 +110,13 @@ export function SETSCORES (scores, param) {
     }
 } 
 
+export function SETSPECIALS (specials) {
+    return {
+        type: SET_SPECIALS,
+        payload: specials
+    }
+}
+ 
 export function SETTALENTS (talents) {
     return {
         type: SET_TALENTS,
@@ -163,6 +171,8 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {hp: action.payload})
         case SET_QF:
             return Object.assign({}, state, {qf: []})
+        case SET_SPECIALS:
+            return Object.assign({}, state, {special: action.payload})
         case SET_SPECIES:
             return Object.assign({}, state, {species: action.payload})
         case SET_SCORES:

@@ -445,5 +445,20 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 4.5%;
+    margin: 0 4.5% 7px 2.5%;
+}
+
+.inputandbp {
+    justify-content: flex-start;
+}
+
+.weaponNameInput {
+    margin-right: 20px;
+    background: #c4bbaf;
+    border-bottom: 2px solid #a62020;
+    border-radius: 0;
+}
+
+.step10Undescore {
+    margin-top: 25px
 }
