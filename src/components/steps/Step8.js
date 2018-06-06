@@ -12,10 +12,16 @@ class Step8 extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Step 8</h1>
-                <h2>Priors & Particulars</h2>
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                <h1>Step 8: Determine Priors & Particulars</h1>
+                </div>
+
+                <div className="stepInner">
                 <button onClick={this.savePriors}>Save</button>
+                </div>
+                </div>
             </div>
         )
     }

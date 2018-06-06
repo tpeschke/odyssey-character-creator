@@ -3,12 +3,6 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class ShowTable extends Component {
-    componentDidUpdate(next) {
-        if (next.QFTables){
-            this.props.setTable(next.QFTable.quirksNFlaws[0].id)
-        }
-    }
-
     render() {
         let {QFTable} = this.props
 
@@ -24,8 +18,11 @@ class ShowTable extends Component {
                     </div>)
         }
 
+        if (QFTable.quirksNFlaws[0].id !== this.props.table) {
+            this.props.setTable(QFTable.quirksNFlaws[0].id)
+        }
         return(
-            <div>
+            <div className="titleTableDisplay">
                 {QFTable.quirksNFlaws[0].name}
             </div>
         )

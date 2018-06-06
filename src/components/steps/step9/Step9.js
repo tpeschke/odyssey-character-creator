@@ -12,7 +12,7 @@ class Step9 extends Component {
 
     saveQuirks = () => {
         this.props.qf.forEach((v, i)=> {
-            this.props.ADDBP(v.bp - (i * 5))
+            this.props.ADDBP(v.bp - (i * 5) >= 0 ? v.bp - (i * 5) : 0)
         })
         this.props.history.push('/step10')
     }
@@ -23,26 +23,40 @@ class Step9 extends Component {
         if (this.props.qf){
             renderQf = this.props.qf.map((v, i)=> {
                 return (
-                    <div key={v.id}>
-                        <p>{v.name}</p>
-                        <p>{v.bp - (i * 5)}</p>
+                    <div key={v.id} className="quirkTitleBottom selectedQuirks">
+                            <p className="quirkItem quirkName">{v.name}</p>
+                            <p className="quirkItem">{v.bp - (i * 5) >= 0 ? v.bp - (i * 5) : 0}</p>
                     </div>
             )
         })}
 
         return(
-            <div>
-                <h1>Step 9</h1>
-                <h2>Quirks & Flaws</h2>
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                <h1>Step 9: Quirks & Flaws</h1>
+                </div>
 
-                <button onClick={this.saveQuirks}>Continue</button>
+                <div className="stepInner">
+                <button onClick={this.saveQuirks}>Save & Continue</button>
 
+                <div className="scoreUnderscore step6MainUnderscore"/>
+                
+                <div className="quirkTitleCard selectedQuirks">
+                    <p className="quirkItem quirkName">Name</p>
+                    <p className="quirkItem">BP</p>
+                </div>
+
+                <div className="selectQuirkStriping">
                 {renderQf}
+                </div>
 
                 <RollQuirkTable 
                     DEDUCTBP={this.props.DEDUCTBP}
                     ADDQUIRK={this.props.ADDQUIRK}
-                    bp={this.props.bp}/>                
+                    bp={this.props.bp}/> 
+                </div>               
+                </div>               
             </div>
         )
     }

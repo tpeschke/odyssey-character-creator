@@ -140,6 +140,15 @@ create table physicalQuirks (
     bp Int
 )
 
+insert into physicalQuirks (name, rangestart, rangeend, bp)
+values ('Hairy', 1,27,5), ('Limp, Slight', 28,54,5), ('Sterile', 55,81,5),('Tone Deaf', 82,108,5),('Weary', 109,135,8),('Anosmia', 136,160,10),('Colorblind', 161,185,10),('Limp, Moderate',186,209,10),
+('Albino', 210,233,15),('Allergies', 234,257,15), ('Hearing Impaired', 258,281,15), ('Missing Ear', 282,305,15), ('Pestilent', 306,329,15),('Sound Sleeper', 330,353,15),('Glass Jaw', 354,377,15),
+('Asthmatic',378,398,20),('Doppelganger',399,419,20),('Impotent',420,440,20),('Nervous Tic',441,461,20),('Pocking',462,482,20),('Strange Body Odor',483,503,20),('Faulty Prosthetic',504,524,20),
+('Sleepwalker',525,546,20),('Wasting Disease',547,568,20),('Weakling',569,589,20),('Scar, Facial',590,610,0),('Stutterer',611,631,24),('Lisp',632,652,25),('Presbyopic',653,673,25),('Limp, Severe',674,694,25),
+('Mute',695,715,25),('Migraines',716,734,30),('Space Sick',735,753,30),('Trick Knee',754,772,30),('Myopia',773,791,30),('Accident Prone',792,810,30),('Missing Digit',811,827,0),('Unusual Diet',824,844,35),
+('Hemophilic',845,861,35),('No Depth Perception',862,878,35),('Low Pain Tolerance',789,895,35),('Feeble',896,912,35),('Severly Maimed',913,927,0),('Missing Eye',928,940,40),('Blind, One Eye',941,953,40),
+('Deaf',954,966,40),('Epileptic',967,979,40),('Missing Limb',980,990,0),('Blind',991,1000,60)
+
 create table behavioralQuirks (
     id serial primary key,
     name VARCHAR(40),

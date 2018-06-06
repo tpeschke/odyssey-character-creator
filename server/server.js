@@ -170,6 +170,8 @@ const RootQuery = new GObject({
             resolve(parents, args) {
                 if (+args.table === 1) {
                     return db().getMentalQuirk([+args.roll])
+                } else if (+args.table === 3) {
+                    return db().getPhysicalFlaws([+args.roll])
                 }
             }
         }

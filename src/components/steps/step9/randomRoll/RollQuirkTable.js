@@ -44,17 +44,19 @@ class RollQuirks extends Component {
         const showButton = !this.state.show ? ( <div><button onClick={this.rerollTable}>Reroll</button>
                                                     <button onClick={this.rollForQuirk}>Roll on Table</button></div>
                                                     ) : <div></div>
-        
         return (
             <div>
-                {this.state.roll}
-                <br/>
+                <div className="step9TableDisplay">
+                <h2>{this.state.roll}</h2>
+
+                <div className="scoreUnderscore"/>
+            
                 <ShowTable 
                     roll={this.state.roll}
-                    setTable={this.setTable}/>
-                <br/>        
+                    setTable={this.setTable}
+                    table={this.state.table}/>
+                </div>        
                 {showButton}
-                <br/>
 
                 {this.state.show ? <RollQuirk 
                                         roll={this.state.quirkRoll}

@@ -72,12 +72,23 @@ class Step7 extends Component {
 
     render() {
         return(
-            <div>
-                <h1>Step 7</h1>
-                <p>REPUTATION</p>
-                <p>{this.state.total}</p>
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                <h1>Step 7: Calculate Starting Reputation</h1>
+                </div>
+
+                <div className="stepInner">
+                <p className="finalizeScoreBP">REPUTATION</p>
+                <div className="scoreUnderscore step6Underscore"/>
+                
+                <p className="repStatDisplay">{this.state.total}</p>
+
+                <div className="scoreUnderscore step6Underscore"/>                
 
                 <button onClick={this.saveRep}>Save</button>
+                </div>
+                </div>
             </div>
         )
     }

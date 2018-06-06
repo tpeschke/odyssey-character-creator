@@ -263,3 +263,75 @@ input:focus {
     justify-content: space-around;
     margin: 0 20px;
 }
+
+.repStatDisplay {
+    font-size: 25px
+}
+
+.step9Underscore {
+    width: 75%;
+    margin: 15px auto;
+}
+
+.step9TableDisplay {
+    padding: 20px;
+    width: 250px;
+    margin: 0 auto 15px auto;
+    border-radius: 5px;
+    font-size: 25px;
+    color: #a62020;
+}
+
+.tableUnderscore {
+    background: lightgray;
+    margin-top: 15px
+}
+
+.titleTableDisplay {
+    color: #2d2d2d;
+}
+
+.quirkDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quirkTitleCard {
+    background: #2d2d2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    height: 20px;
+    margin: 0 auto;
+    color: lightgrey;
+}
+
+.quirkTitleBottom {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin: 5px auto 35px auto;
+}
+
+.quirkItem {
+    width: 33%;
+    padding: 1px 0;
+}
+
+.selectedQuirks {
+    margin: 0 auto;
+    width: 40%;
+    padding: 5px 3px
+}
+
+.selectQuirkStriping div:nth-child(even) {
+    background: rgba(211, 211, 211, 0.75)
+}
+
+.quirkName {
+    width: 66%;
+    text-align: left;
+    padding-left: 5px
+}
