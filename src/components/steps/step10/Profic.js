@@ -111,11 +111,20 @@ class Proficiencies extends Component {
 
     render() {
         const {proficList} = this.props
-        console.log(this.state)
         if (proficList && proficList.loading) {
-            return (<div>
-                    <p>Loading</p>
-                    </div>)
+            return (<div className="stepInner backgroundLoader" id="loading">
+            <div className="loader">
+                <div className="part">
+                    <div className="part">
+                        <div className="part">
+                            <div className="part">
+                                <div className="part"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>)
         }
 
         if (proficList && proficList.error) {
@@ -129,17 +138,20 @@ class Proficiencies extends Component {
         if (this.state.list) {
             var renderedList = this.state.list.map((profic, i) => {
                 return (<div    key={profic.id + i}
-                                className='dropDownBoxOutside'
+                                className='stpDisplayHolder proficDisplayHolder'
                                 onClick={_=>this.selectProfic(profic.id)}>
-                            <h2>{profic.name}</h2>
-                            <p>{profic.price}</p>
-                            <br/>
+                            <p className="stpChoiceHeader">{profic.name}</p>
+                            <p>Price: {profic.price} BP</p>
+
+                            <div className="preReqBasket">
                             {profic.preReq.map((req, i) => {
-                                return (<div key={`${req.id} + ${i}`}>
+                                return (<div key={`${req.id} + ${i}`} >
+                                            {i > 1 ? <div className="preReqUnderscore"/> : <div />}
                                             <p>{req.name}</p>
                                             <p>{req.score > 0 ? req.score : null}</p>
                                         </div>)
                             })}
+                            </div>
                         </div>
                 )
             })
@@ -147,22 +159,23 @@ class Proficiencies extends Component {
 
         return(
             <div>
-                <h2>Proficiencies</h2>
-                <h3>Selected</h3>
+                <h2 className="stpDisplaySectionHeader">Selected</h2>
+                <div className="stpChoiceBasket">
                 {this.state.selected.map((profic, i) => {
                     return (<div   key={profic.id + i}
-                                    className='dropDownBoxOutside'
+                                    className='stpDisplayHolder'
                                     onClick={_=>this.deselectProfic(profic.id)}>
-                                <h2>{profic.name}</h2>
-                                <p>{profic.price}</p>
+                                <p  className="stpChoiceHeader">{profic.name}</p>
+                                <p>Price: {profic.price} BP</p>
                             </div>
                     )
                 })}
+                </div>
 
-                <br />
-
-                <h3>List</h3>
+                <h2 className="stpDisplaySectionHeader">List</h2>
+                <div className="stpChoiceBasket">
                 {renderedList}
+            </div>
             </div>
         )
     }

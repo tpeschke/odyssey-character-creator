@@ -83,9 +83,19 @@ class Talents extends Component {
         const {talentList} = this.props
 
         if (talentList && talentList.loading) {
-            return (<div>
-                    <p>Loading</p>
-                    </div>)
+            return (<div className="stepInner backgroundLoader" id="loading">
+            <div className="loader">
+                <div className="part">
+                    <div className="part">
+                        <div className="part">
+                            <div className="part">
+                                <div className="part"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>)
         }
 
         if (talentList && talentList.error) {
@@ -99,33 +109,36 @@ class Talents extends Component {
         if (this.state.list) {
             var renderedList = this.state.list.map(talent => {
                 return (<div    key={talent.id}
-                                className='dropDownBoxOutside'
+                                className='stpDisplayHolder'
                                 onClick={_=>this.selectTalent(talent.id)}>
-                            <h2>{talent.name}</h2>
-                            <p>{talent.price}</p>
+                            <p className="stpChoiceHeader">{talent.name}</p>                
+                            <p>Price: {talent.price} BP</p>
                         </div>
                 )
             })
         }
 
         return(
-            <div>
-                <h2>Talents</h2>
-                <h3>Selected</h3>
+            <div>  
+                
+                <h2 className="stpDisplaySectionHeader">Selected</h2>  
+                
+                <div className="stpChoiceBasket">
                 {this.state.selected.map((talent, i) => {
                     return (<div   key={talent.id + i}
-                                    className='dropDownBoxOutside'
+                                    className='stpDisplayHolder'
                                     onClick={_=>this.deselectTalent(talent.id)}>
-                                <h2>{talent.name}</h2>
-                                <p>{talent.price}</p>
+                                <p className="stpChoiceHeader">{talent.name}</p>                
+                                <p>Price: {talent.price} BP</p>
                             </div>
                     )
                 })}
+                </div>  
 
-                <br />
-
-                <h3>List</h3>
+                <h2 className="stpDisplaySectionHeader">List</h2> 
+                <div className="stpChoiceBasket">
                 {renderedList}
+                </div>
             </div>
         )
     }
