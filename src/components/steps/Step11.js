@@ -49,12 +49,20 @@ class Step11 extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Step 11</h1>
-                <p>{this.props.species.species}</p>
-                <p>{this.state.hp}</p>
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                <h1>Step 11: Roll Hit Points</h1>
+                </div>
 
+                <div className="stepInner">
+                <h2>Hit Points</h2>
+                <div className="scoreUnderscore step6Underscore"/>  
+                <p  className="repStatDisplay">{this.state.hp}</p>
+                <div className="scoreUnderscore step6Underscore"/>  
                 <button onClick={_=>this.props.history.push('/step12')}>Save</button>
+                </div>
+                </div>
             </div>
         )
     }

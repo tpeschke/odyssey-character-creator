@@ -44,7 +44,7 @@ button:hover {
   border: 2px inset #a62020;
 }
 .navBarDrawer {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: space-around;
   left: -175px;
@@ -73,11 +73,11 @@ ul {
 }
 #navOverlay {
   background: rgba(0, 0, 0, 0.75);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 80vw;
+  bottom: 0;
+  right: 0;
   transition: .6s;
   z-index: 2;
 }
