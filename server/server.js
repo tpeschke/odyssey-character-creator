@@ -46,7 +46,9 @@ app.use((req, res, next) =>{
 
 // ===========AUTHENTICATION===========\\
 
-app.get('/loginDummy', (req, res)=>res.send('hello'))
+app.get('/loginDummy', (req, res)=> {
+    req.app.set('user', req.session.user.id)
+    res.send('hello')})
 
 // ===========AUTH END POINTS===========\\
 
@@ -129,6 +131,23 @@ const QuirkType = new GObject({
     })
 })
 
+const CharacterType = new GObject({
+    name: "character",
+    fields: () => ({
+        id: {type: GID},
+        bp: {type: GInt},
+        species: {type: GInt},
+        // scores: {type: GObject},
+        background: {type: GInt},
+        // talents: {type: GObject},
+        // profics: {type: GObject},
+        // special: {type: GObject},
+        hp: {type: GInt},
+        credits: {type: GInt},
+        // qf: {type: GObject}
+    })
+})
+
 const RootQuery = new GObject({
     name: 'RootQueryType',
     fields: {
@@ -182,20 +201,21 @@ const Mutation = new GObject({
     name: "Mutation",
     fields : {
         addCharacter: {
+            type: CharacterType,
             args: {
                 bp: {type: new GNonNull(GInt)},
                 species: {type: new GNonNull(GInt)},
-                scores: {type: new GNonNull(GObject)},
+                // scores: {type: new GNonNull(GObject)},
                 background: {type: new GNonNull(GInt)},
-                talents: {type: new GNonNull(GObject)},
-                profics: {type: new GNonNull(GObject)},
-                special: {type: new GNonNull(GObject)},
+                // talents: {type: new GNonNull(GObject)},
+                // profics: {type: new GNonNull(GObject)},
+                // special: {type: new GNonNull(GObject)},
                 hp: {type: new GNonNull(GInt)},
                 credits: {type: new GNonNull(GInt)},
-                qf: {type: new GNonNull(GObject)}
+                // qf: {type: new GNonNull(GObject)}
             },
             resolve(parent, args) {
-                console.log(args)
+                db().main([user(),args.bp, args.species, args.background, args.hp, args.credits])
             } 
         }
     }
@@ -205,6 +225,10 @@ const Mutation = new GObject({
 
 const db = function() {
     return app.get('db')
+}
+
+const user = function() {
+    return app.get('user')
 }
 
 massive(CONNECTION_STRING).then(dbInstance => {

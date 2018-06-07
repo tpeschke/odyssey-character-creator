@@ -159,3 +159,24 @@ create table behavioralQuirks (
     bp Int
 )
 
+
+
+create table characters (
+    id serial primary key,
+    name VARCHAR(40),
+    species Int,
+    stats Int,
+    background Int,
+    bp Int,
+    hp Int,
+    qf Int,
+    skills Int,
+    talents Int,
+    profics Int,
+    special Int,
+    credits Int,
+    equipment Int,
+    priors Int,
+    userId Int,
+    FOREIGN KEY (userId) references users(id)
+)

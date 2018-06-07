@@ -1,13 +1,27 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 
 import WeaponReview from './WeaponReview'
 
 class ReviewChar extends Component {
+    sendCharacterOff = () => {
+        let {AddCharacter, species, scores, background, qf, talents, profics, special, credits, bp, hp} = this.props
+
+        AddCharacter({
+            variables: {
+                bp,
+                species: +species.id,
+                background: +background.id,
+                hp,
+                credits
+            }
+        })
+    }
 
     render() {
-        console.log(this.props)
-        let {species, scores, background, qf, talents, profics, special, credits} = this.props
+        let {species, scores, background, qf, talents, profics, special, credits, hp} = this.props
 
         if (!species) {
             return (<div className='StepOuter'>
@@ -34,7 +48,9 @@ class ReviewChar extends Component {
                 <h1>Review Character</h1>
             </div>
             <div className="stepInner">
-                <button>Looks Good to Me!</button>
+
+                <button onClick={this.sendCharacterOff}>Looks Good to Me!</button>
+
                 <h2>Species:</h2><p>{species.species}</p>
                 <h2>Stats</h2>
                 {scores ? scores.map(val => {
@@ -47,6 +63,7 @@ class ReviewChar extends Component {
                         )
                     }) : <div></div>} 
                 <h2>Background</h2><p>{background.name}</p>
+                <h2>HP</h2><p>{hp}</p>
                 <h2>Quirks & Flaws</h2> 
                 {qf ? qf.map((v, i)=> {
                     return (<div    key={v.id} 
@@ -84,8 +101,21 @@ class ReviewChar extends Component {
     }
 }
 
+const CREATE_CHARACTER = gql`
+    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!){
+        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits) {
+            bp,
+            species,
+            background,
+            hp,
+            credits
+        }
+    }`
+
 function mapStateToProps (state) {
     return state
 }
 
-export default connect(mapStateToProps)(ReviewChar) 
+let decoratedReviewChar = connect(mapStateToProps)(ReviewChar) 
+
+export default graphql(CREATE_CHARACTER, {name: "AddCharacter"})(decoratedReviewChar)
