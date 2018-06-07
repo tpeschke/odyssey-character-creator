@@ -17,7 +17,7 @@ import Step11 from './components/steps/Step11'
 import Step12 from './components/steps/Step12'
 import Step13 from './components/steps/Step13'
 import Step14 from './components/steps/Step14'
-import ReviewChar from './components/steps/reviewChar'
+import ReviewChar from './components/steps/reviewChar/ReviewChar'
 
 export default class Routes extends Component {
     

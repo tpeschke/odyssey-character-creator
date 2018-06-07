@@ -178,6 +178,29 @@ const RootQuery = new GObject({
     }
 }) 
 
+const Mutation = new GObject({
+    name: "Mutation",
+    fields : {
+        addCharacter: {
+            args: {
+                bp: {type: new GNonNull(GInt)},
+                species: {type: new GNonNull(GInt)},
+                scores: {type: new GNonNull(GObject)},
+                background: {type: new GNonNull(GInt)},
+                talents: {type: new GNonNull(GObject)},
+                profics: {type: new GNonNull(GObject)},
+                special: {type: new GNonNull(GObject)},
+                hp: {type: new GNonNull(GInt)},
+                credits: {type: new GNonNull(GInt)},
+                qf: {type: new GNonNull(GObject)}
+            },
+            resolve(parent, args) {
+                console.log(args)
+            } 
+        }
+    }
+})
+
 // ===========CONECTION THINGS============\\
 
 const db = function() {
@@ -188,7 +211,7 @@ massive(CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance)
     
     app.use('/graphql', gqlHTTP({
-        schema: new GSchema({query: RootQuery}),
+        schema: new GSchema({query: RootQuery, mutation: Mutation}),
         graphiql: true
     }))
     
