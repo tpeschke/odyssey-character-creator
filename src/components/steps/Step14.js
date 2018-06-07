@@ -12,9 +12,15 @@ class Step14 extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Step 14</h1>
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                <h1>Step 14: Goods & Equipment</h1>
+            </div>
+            <div className="stepInner">
                 <button onClick={this.saveStuff}>Save</button>
+            </div>
+            </div>
             </div>
         )
     }

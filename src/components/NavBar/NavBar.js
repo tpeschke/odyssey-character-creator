@@ -10,7 +10,7 @@ class NavBar extends Component {
 
         this.state = {
             show: false,
-            links: [{title: 'Species', props: 'bp'},{title: 'Ability Scores', props: 'species'},{title: 'Arrange Scores', props: 'species'},{title: 'Background', props: 'scores'},{title: 'Finalize Scores', props: 'background'},{title: 'Reputation', props: 'finalize'},{title: 'Priors & Particulars', props: 'rep'},{title: 'Quirks & Flaws', props: 'priors'},{title: 'STPs', props: 'qf'},{title: 'HPs', props: 'talents'},{title: 'Record', props: 'hp'},{title: 'Receive Credit', props: 'record'},{title: 'Goods & Equipment', props: 'credits'},{title: 'Review', props: 'equipment'}],
+            links: [{title: 'Species', props: 'bp'},{title: 'Ability Scores', props: 'species'},{title: 'Arrange Scores', props: 'species'},{title: 'Background', props: 'scores'},{title: 'Finalize Scores', props: 'background'},{title: 'Reputation', props: 'finalize'},{title: 'Priors & Particulars', props: 'rep'},{title: 'Quirks & Flaws', props: 'priors'},{title: 'STPs', props: 'qf'},{title: 'HPs', props: 'talents'},{title: 'Record', props: 'hp'},{title: 'Receive Credits', props: 'record'},{title: 'Goods & Equipment', props: 'credits'},{title: 'Review', props: 'equipment'}],
             width: 0
         }
     }
@@ -54,7 +54,7 @@ class NavBar extends Component {
                         <div id="menuSecond"/>
                         <div id="menuThird"/>
                     </div>
-                    <div className="navBanner"/>
+                    <h1 className="navBarTitle">ODYSSEY</h1>
                     <BpTracker bp={this.props.bp}/>
                 </nav>
                 <div id='navOverlay' style={this.state.show ? {width: this.state.width} : {width: 0}} onClick={_=>this.setState({show: !this.state.show})}></div>

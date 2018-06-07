@@ -7,8 +7,23 @@ body {
     background: #57514f
   }
 
-.stepTitle {
+  h1 {
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: 5px;
+  }
+
+.navBarTitle {
     font-family: Militia;
+    font-weight: 200;
+    font-size: 50px;
+}
+
+.stepTitle {
     background: #c4bbaf;
     padding: 7px;
     border-radius: 35px;

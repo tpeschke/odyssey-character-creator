@@ -28,12 +28,19 @@ class Step13 extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Step 13</h1>
+            <div className='StepOuter'>
+                <div className='stepBody'>
+                <div className="stepTitle">
+                <h1>Step 13: Receive Credits</h1>
+                </div>
 
-                <p>{this.state.credits} credits</p>
+                <div className="stepInner">
+                <p className="finalizeScoreBP">{this.state.credits} credits</p>
+                <div className="scoreUnderscore step6Underscore"/>
 
                 <button onClick={_=>this.props.history.push('/step14')}>Save</button>
+            </div>
+            </div>
             </div>
         )
     }
