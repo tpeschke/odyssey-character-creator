@@ -22,16 +22,16 @@ export default class WeaponReview extends Component {
                     </div>
                     <div className="specialColumn">
                         <div className="specialRow">
-                            <p className="specialItem specialTitle">Attack</p> {val.atk.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"} onClick={_=>{alterLevel(val.id,i,'atk')}}/>)}
+                            <p className="specialItem specialTitle">Attack</p> {val.atk.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"}/>)}
                         </div>
                         <div className="specialRow">                                
-                            <p className="specialItem specialTitle">Defence</p>  {val.def.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"} onClick={_=>{alterLevel(val.id,i,'def')}}/>)}
+                            <p className="specialItem specialTitle">Defence</p>  {val.def.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"}/>)}
                         </div>
                         <div className="specialRow">                                
-                            <p className="specialItem specialTitle">Speed</p>  {val.spd.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"} onClick={_=>{alterLevel(val.id,i,'spd')}}/>)}
+                            <p className="specialItem specialTitle">Speed</p>  {val.spd.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"}/>)}
                         </div>
                         <div className="specialRow">                                
-                            <p className="specialItem specialTitle">Damage</p>  {val.dam.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"} onClick={_=>{alterLevel(val.id,i,'dam')}}/>)}
+                            <p className="specialItem specialTitle">Damage</p>  {val.dam.map((v, i)=> <div key={i} className={v ? "specialItem specialBonus specialBonusOn" : "specialItem specialBonus"}/>)}
                         </div>
                    </div>
                 </div>

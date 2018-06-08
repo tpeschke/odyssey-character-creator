@@ -139,12 +139,12 @@ const CharacterType = new GObject({
         species: {type: GInt},
         scores: {type: GString},
         background: {type: GInt},
-        // talents: {type: GObject},
+        talents: {type: GString},
         // profics: {type: GObject},
-        // special: {type: GObject},
+        special: {type: GString},
         hp: {type: GInt},
         credits: {type: GInt},
-        // qf: {type: GObject}
+        qf: {type: GString}
     })
 })
 
@@ -208,18 +208,35 @@ const Mutation = new GObject({
                 species: {type: new GNonNull(GInt)},
                 scores: {type: new GNonNull(GString)},
                 background: {type: new GNonNull(GInt)},
-                // talents: {type: new GNonNull(GObject)},
+                talents: {type: new GNonNull(GString)},
                 // profics: {type: new GNonNull(GObject)},
-                // special: {type: new GNonNull(GObject)},
+                special: {type: new GNonNull(GString)},
                 hp: {type: new GNonNull(GInt)},
                 credits: {type: new GNonNull(GInt)},
-                // qf: {type: new GNonNull(GObject)}
+                qf: {type: new GNonNull(GString)}
             },
             resolve(parent, args) {
                 let scores = JSON.parse(args.scores)
+                let qf = JSON.parse(args.qf)
+                let talents = JSON.parse(args.talents)
+                let special = JSON.parse(args.special)
+
                 db().create.stats([scores.STR, scores.INT, scores.WIS, scores.DEX, scores.CON, scores.CHA, scores.LKS, scores.REP]).then( req => {
-                    console.log()
-                    // db().create.main([user(),args.bp, args.species, args.background, args.hp, args.credits,req[0].id])
+                    scores = req[0].id
+                    db().create.main([user(),args.bp, args.species, args.background, args.hp, args.credits,scores]).then(req => {
+
+                        //Adding things to the DB
+                        qf.forEach( v => db().create.qf([req[0].id, v.id, v.table]) )
+                        talents.forEach( v => db().create.talents([req[0].id, v]) )
+                        special.forEach( v => db().create.specialMain([req[0].id, v.name, v.type]).then(result => {
+                            for (let key in v) {
+                                if (Array.isArray(v[key])) {
+                                    db().create.specialModifier([result[0].id,`${key}`, v[key][0] ? '1' : '0', v[key][1] ? '1' : '0', v[key][2] ? '1' : '0', v[key][3] ? '1' : '0', v[key][4] ? '1' : '0'])
+                                }
+                            }
+                        }))
+                        //Noting which are selected
+                    })
                 })
             } 
         }

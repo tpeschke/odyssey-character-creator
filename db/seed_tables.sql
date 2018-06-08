@@ -169,11 +169,11 @@ create table characters (
     background Int,
     bp Int,
     hp Int,
-    qf Int,
-    skills Int,
-    talents Int,
-    profics Int,
-    special Int,
+    -- qf Int,
+    -- skills Int,
+    -- talents Int,
+    -- profics Int,
+    -- special Int,
     credits Int,
     equipment Int,
     priors Int,
@@ -192,4 +192,35 @@ create table stats (
     cha VARCHAR(6),
     lks VARCHAR(6),
     rep VARCHAR(6)
+)
+
+create table characterqf (
+    id serial primary key,
+    charId int,
+    qfid int,
+    tableid int
+)
+
+create table charactertalents (
+    id serial primary key,
+    charId int,
+    talentId int
+)
+
+create table characterspecial (
+    id serial primary key,
+    charId Int,
+    name VARCHAR(40),
+    type VARCHAR(1)
+)
+
+create table specialtables (
+    id serial primary key,
+    weaponId Int,
+    modified VARCHAR(3),
+    one VARCHAR(1),
+    two VARCHAR(1),
+    three VARCHAR(1),
+    four VARCHAR(1),
+    five VARCHAR(1)
 )

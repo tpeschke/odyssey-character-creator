@@ -16,7 +16,7 @@ class RollQuirk extends Component {
 
     keepQuirk = (quirk) => {
         this.props.hideQuirk()
-        this.props.ADDQUIRK(quirk)
+        this.props.ADDQUIRK(Object.assign({}, quirk, {table: this.props.table}))
     }
 
     render() {

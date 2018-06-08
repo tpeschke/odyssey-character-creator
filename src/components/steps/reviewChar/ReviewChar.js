@@ -7,12 +7,22 @@ import WeaponReview from './WeaponReview'
 
 class ReviewChar extends Component {
     sendCharacterOff = () => {
-        let {AddCharacter, species, background, qf, talents, profics, special, credits, bp, hp} = this.props
+        let {AddCharacter, species, background, profics, special, credits, bp, hp} = this.props
 
         let scores = {}
         this.props.scores.forEach( v => scores = Object.assign({}, scores, {[v.title]: v.score}) )
         scores = JSON.stringify(scores)
         
+        let qf = []
+        this.props.qf.forEach( v => qf.push({id: v.id, table: v.table}))
+        qf = JSON.stringify(qf)
+
+        let talents = []
+        this.props.talents.forEach(v => talents.push(v.id))
+        talents = JSON.stringify(talents)
+
+        special = JSON.stringify(special)
+
         AddCharacter({
             variables: {
                 bp,
@@ -20,7 +30,10 @@ class ReviewChar extends Component {
                 background: +background.id,
                 hp,
                 credits,
-                scores 
+                scores,
+                qf,
+                talents,
+                special 
             }
         })
     }
@@ -87,7 +100,7 @@ class ReviewChar extends Component {
                             </div>
                     )
                 }) : <div></div>}
-                <h2>Proficienies</h2>
+                <h2>Proficiencies</h2>
                 {profics ? profics.map((profic, i) => {
                     return (<div   key={profic.id + i}
                                     className='stpDisplayHolder'
@@ -109,14 +122,17 @@ class ReviewChar extends Component {
 
 
 const CREATE_CHARACTER = gql`
-    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!){
-        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores) {
+    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!, $qf: String!, $talents: String!, $special: String!){
+        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores, qf: $qf, talents: $talents, special: $special) {
             bp,
             species,
             background,
             hp,
             credits,
-            scores
+            scores,
+            qf,
+            talents,
+            special
         }
     }`
 
