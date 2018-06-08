@@ -11,7 +11,7 @@ class LogIn extends Component {
 
     render() {
         return (
-            <div>
+            <div className="stepInner">
                 <button onClick={this.logInUser}>Log In</button>
             </div>
         )

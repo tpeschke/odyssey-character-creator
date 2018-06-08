@@ -1,5 +1,5 @@
 const initialState = {
-    bp: 40,
+    bp: null,
     species: null,
     scores: null,
     rep: null,
@@ -44,8 +44,8 @@ export function SETBACKGROUND (background) {
         return {
             type: SET_BACKGROUND,
             payload: background
-        }
     }
+}
     
 export function SETBP (amount) {
     return {

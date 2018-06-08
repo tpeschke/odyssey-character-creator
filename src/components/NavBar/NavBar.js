@@ -55,7 +55,7 @@ class NavBar extends Component {
                         <div id="menuThird"/>
                     </div>
                     <h1 className="navBarTitle">ODYSSEY</h1>
-                    <BpTracker bp={this.props.bp}/>
+                    {this.props.bp ? <BpTracker bp={this.props.bp}/> : <div className="BPTracker"></div>}
                 </nav>
                 <div id='navOverlay' style={this.state.show ? {width: this.state.width} : {width: 0}} onClick={_=>this.setState({show: !this.state.show})}></div>
                 {navBarRender}                

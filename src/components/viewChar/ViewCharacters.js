@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 
 
-class AdminHome extends Component {
+class ViewCharacters extends Component {
 
     render() {
         return (
             <div className="stepInner">
-                AdminHome
+                View Characters
             </div>
         )
     }
 }
 
-export default AdminHome
+export default ViewCharacters

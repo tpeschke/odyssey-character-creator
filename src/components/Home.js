@@ -11,9 +11,10 @@ class Home extends Component {
 
     render(){
         return (
-            <div>
+            <div className="stepInner">
                 <button onClick={this.setCharacter}>New Character</button>    
                 <Link to="/adminDashboard"><button>Admin Dashboard</button></Link>    
+                <Link to="/viewCharacters"><button>View Characters</button></Link>    
             </div>
         )
     }
