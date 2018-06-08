@@ -65,7 +65,7 @@ class Step7 extends Component {
     }
 
     saveRep = () => {
-        this.props.SETSCORES([...this.props.scores, {id: 8, title: 'REP', score: this.state.total}], 'rep')
+        this.props.SETSCORES([...this.props.scores, {id: 8, title: 'REP', score: `${this.state.total}`}], 'rep')
         this.props.history.push('/step8')
     }
 

@@ -7,15 +7,20 @@ import WeaponReview from './WeaponReview'
 
 class ReviewChar extends Component {
     sendCharacterOff = () => {
-        let {AddCharacter, species, scores, background, qf, talents, profics, special, credits, bp, hp} = this.props
+        let {AddCharacter, species, background, qf, talents, profics, special, credits, bp, hp} = this.props
 
+        let scores = {}
+        this.props.scores.forEach( v => scores = Object.assign({}, scores, {[v.title]: v.score}) )
+        scores = JSON.stringify(scores)
+        
         AddCharacter({
             variables: {
                 bp,
                 species: +species.id,
                 background: +background.id,
                 hp,
-                credits
+                credits,
+                scores 
             }
         })
     }
@@ -101,14 +106,17 @@ class ReviewChar extends Component {
     }
 }
 
+
+
 const CREATE_CHARACTER = gql`
-    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!){
-        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits) {
+    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!){
+        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores) {
             bp,
             species,
             background,
             hp,
-            credits
+            credits,
+            scores
         }
     }`
 

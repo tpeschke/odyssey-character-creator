@@ -137,7 +137,7 @@ const CharacterType = new GObject({
         id: {type: GID},
         bp: {type: GInt},
         species: {type: GInt},
-        // scores: {type: GObject},
+        scores: {type: GString},
         background: {type: GInt},
         // talents: {type: GObject},
         // profics: {type: GObject},
@@ -147,6 +147,7 @@ const CharacterType = new GObject({
         // qf: {type: GObject}
     })
 })
+
 
 const RootQuery = new GObject({
     name: 'RootQueryType',
@@ -205,7 +206,7 @@ const Mutation = new GObject({
             args: {
                 bp: {type: new GNonNull(GInt)},
                 species: {type: new GNonNull(GInt)},
-                // scores: {type: new GNonNull(GObject)},
+                scores: {type: new GNonNull(GString)},
                 background: {type: new GNonNull(GInt)},
                 // talents: {type: new GNonNull(GObject)},
                 // profics: {type: new GNonNull(GObject)},
@@ -215,7 +216,11 @@ const Mutation = new GObject({
                 // qf: {type: new GNonNull(GObject)}
             },
             resolve(parent, args) {
-                db().main([user(),args.bp, args.species, args.background, args.hp, args.credits])
+                let scores = JSON.parse(args.scores)
+                db().create.stats([scores.STR, scores.INT, scores.WIS, scores.DEX, scores.CON, scores.CHA, scores.LKS, scores.REP]).then( req => {
+                    console.log()
+                    // db().create.main([user(),args.bp, args.species, args.background, args.hp, args.credits,req[0].id])
+                })
             } 
         }
     }

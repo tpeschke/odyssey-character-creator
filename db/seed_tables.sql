@@ -178,5 +178,18 @@ create table characters (
     equipment Int,
     priors Int,
     userId Int,
-    FOREIGN KEY (userId) references users(id)
+    FOREIGN KEY (userId) references users(id),
+    FOREIGN KEY (stats) references stats(id)
+)
+
+create table stats (
+    id serial primary key,
+    str VARCHAR(6),
+    int VARCHAR(6),
+    wis VARCHAR(6),
+    dex VARCHAR(6),
+    con VARCHAR(6),
+    cha VARCHAR(6),
+    lks VARCHAR(6),
+    rep VARCHAR(6)
 )
