@@ -224,18 +224,23 @@ const Mutation = new GObject({
                 db().create.stats([scores.STR, scores.INT, scores.WIS, scores.DEX, scores.CON, scores.CHA, scores.LKS, scores.REP]).then( req => {
                     scores = req[0].id
                     db().create.main([user(),args.bp, args.species, args.background, args.hp, args.credits,scores]).then(req => {
-
-                        //Adding things to the DB
-                        qf.forEach( v => db().create.qf([req[0].id, v.id, v.table]) )
+                
+                        qf.forEach( v => {
+                            if (+v.table === 1) {
+                                return db().update.mentalquirks([+v.id])
+                            } else if (+v.table === 3) {
+                                return db().update.physicalquirks([+v.id])
+                            } 
+                                db().create.qf([req[0].id, v.id, v.table])
+                            } )                           
                         talents.forEach( v => db().create.talents([req[0].id, v]) )
-                        special.forEach( v => db().create.specialMain([req[0].id, v.name, v.type]).then(result => {
+                        special ? special.forEach( v => db().create.specialMain([req[0].id, v.name, v.type]).then(result => {
                             for (let key in v) {
                                 if (Array.isArray(v[key])) {
                                     db().create.specialModifier([result[0].id,`${key}`, v[key][0] ? '1' : '0', v[key][1] ? '1' : '0', v[key][2] ? '1' : '0', v[key][3] ? '1' : '0', v[key][4] ? '1' : '0'])
                                 }
                             }
-                        }))
-                        //Noting which are selected
+                        })) : null
                     })
                 })
             } 

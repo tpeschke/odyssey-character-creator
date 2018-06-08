@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {RESETCHARACTER} from '../dux/reducer'
 
@@ -13,6 +13,7 @@ class Home extends Component {
         return (
             <div>
                 <button onClick={this.setCharacter}>New Character</button>    
+                <Link to="/adminDashboard"><button>Admin Dashboard</button></Link>    
             </div>
         )
     }
