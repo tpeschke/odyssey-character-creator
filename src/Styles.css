@@ -20,27 +20,19 @@ a {
   text-decoration: none;
   color: #C4bbaf;
 }
-
-button {
-  margin: 5px;
-  padding: 5px 15px;
-  font-family: 'Exo 2', sans-serif;
-  background: linear-gradient(#a62020, #a62020, #a62020, #2d2d2a);
-  border: 2px outset #a62020;
-  color: #c4bbaf;
-  font-size: 17px;
-  border-radius: 7px;
+h1 {
+  font-size: 30px;
+  margin-bottom: 5px;
 }
-button:hover {
-  color: white;
-  transition: .5s;
-  border: 2px inset #a62020;
+h2 {
+  font-size: 25px;
+  margin-bottom: 5px;
 }
 .navBarDrawer {
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: space-around;
-  left: -175px;
+  left: -200px;
   top: 0;
   width: 0px;
   height: 100%;
@@ -49,7 +41,7 @@ button:hover {
   z-index: 2;
 }
 .navBarDrawerReveal {
-  width: 175px;
+  width: 200px;
   left: 0px;
 }
 .dropDownBoxOutside {
@@ -77,14 +69,7 @@ ul {
 .overlayHide {
   width: 0;
 }
-li {
-  height: 37px;
-  width: 175px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-}
+
 li:hover {
   background: #2d2d2a;
   color: #a62020;
@@ -95,14 +80,7 @@ li:hover {
   color: #a62020;
   transition: 0.6s;
 }
-.navLocked {
-  height: 37px;
-  width: 175px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-}
+
 .item {
   margin: 0 auto;
   width: 250px;

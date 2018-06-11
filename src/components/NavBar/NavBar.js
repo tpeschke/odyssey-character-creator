@@ -16,7 +16,7 @@ class NavBar extends Component {
     }
 
     componentDidMount() {
-        this.setState({width: document.getElementById('root').clientWidth, height: document.getElementById('root').clientHeight})
+        this.setState({width: document.getElementById('root').clientWidth})
     }
 
     render() {
