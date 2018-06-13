@@ -59,7 +59,8 @@ const AlienType = new GObject({
     fields: ()=> ({
         id: {type: GID},
         species: {type: GString},
-        description: {type: GString}
+        description: {type: GString},
+        selected: {type: GString}
     })
 })
 
@@ -70,7 +71,8 @@ const BackgroundType = new GObject({
         category: {type: GString},
         name: {type: GString},
         price: {type: GInt},
-        description: {type: GString}
+        description: {type: GString},
+        selected: {type: GString}
     })
 })
 
@@ -227,9 +229,9 @@ const Mutation = new GObject({
                 
                         qf.forEach( v => {
                             if (+v.table === 1) {
-                                return db().update.mentalquirks([+v.id])
+                                db().update.mentalquirks([+v.id])
                             } else if (+v.table === 3) {
-                                return db().update.physicalquirks([+v.id])
+                                db().update.physicalquirks([+v.id])
                             } 
                                 db().create.qf([req[0].id, v.id, v.table])
                             } )                           
