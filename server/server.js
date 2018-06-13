@@ -137,6 +137,7 @@ const CharacterType = new GObject({
     name: "character",
     fields: () => ({
         id: {type: GID},
+        name: {type: GString},
         bp: {type: GInt},
         species: {type: GInt},
         scores: {type: GString},
@@ -206,6 +207,7 @@ const Mutation = new GObject({
         addCharacter: {
             type: CharacterType,
             args: {
+                name: {type: new GNonNull(GString)},
                 bp: {type: new GNonNull(GInt)},
                 species: {type: new GNonNull(GInt)},
                 scores: {type: new GNonNull(GString)},
@@ -225,7 +227,7 @@ const Mutation = new GObject({
 
                 db().create.stats([scores.STR, scores.INT, scores.WIS, scores.DEX, scores.CON, scores.CHA, scores.LKS, scores.REP]).then( req => {
                     scores = req[0].id
-                    db().create.main([user(),args.bp, args.species, args.background, args.hp, args.credits,scores]).then(req => {
+                    db().create.main([user(), args.bp, args.species, args.background, args.hp, args.credits, scores, args.name]).then(req => {
                 
                         qf.forEach( v => {
                             if (+v.table === 1) {

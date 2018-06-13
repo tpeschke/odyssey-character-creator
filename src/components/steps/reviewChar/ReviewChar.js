@@ -6,6 +6,13 @@ import gql from 'graphql-tag'
 import WeaponReview from './WeaponReview'
 
 class ReviewChar extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            name: null
+        }
+    }
     sendCharacterOff = () => {
         let {AddCharacter, species, background, profics, special, credits, bp, hp} = this.props
 
@@ -33,9 +40,12 @@ class ReviewChar extends Component {
                 scores,
                 qf,
                 talents,
-                special 
+                special,
+                name: this.state.name 
             }
         })
+
+        this.props.history.push('/home')
     }
 
     render() {
@@ -67,7 +77,11 @@ class ReviewChar extends Component {
             </div>
             <div className="stepInner">
 
-                <button onClick={this.sendCharacterOff}>Looks Good to Me!</button>
+                <input  placeholder="Character Name" 
+                        value={this.state.name} 
+                        onChange={e=>this.setState({name: e.target.value})}/>
+
+                <button onClick={_=> this.state.name ? this.sendCharacterOff() : null}>Looks Good to Me!</button>
 
                 <h2>Species:</h2><p>{species.species}</p>
                 <h2>Stats</h2>
@@ -122,8 +136,8 @@ class ReviewChar extends Component {
 
 
 const CREATE_CHARACTER = gql`
-    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!, $qf: String!, $talents: String!, $special: String!){
-        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores, qf: $qf, talents: $talents, special: $special) {
+    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!, $qf: String!, $talents: String!, $special: String!, $name: String!){
+        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores, qf: $qf, talents: $talents, special: $special, name: $name) {
             bp,
             species,
             background,
@@ -132,7 +146,8 @@ const CREATE_CHARACTER = gql`
             scores,
             qf,
             talents,
-            special
+            special,
+            name
         }
     }`
 

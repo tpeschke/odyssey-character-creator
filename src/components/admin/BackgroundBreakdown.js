@@ -64,19 +64,21 @@ class BackgroundBreakdown extends Component {
         const {backgroundList} = this.props
 
         if (backgroundList && backgroundList.loading) {
-            return (<div className="stepInner" id="loading">
-                        <div className="loader">
+            return (<div className='StepOuter'>
+            <div className="stepInner backgroundLoader" id="loading">
+            <div className="loader">
+                <div className="part">
+                    <div className="part">
+                        <div className="part">
                             <div className="part">
-                                <div className="part">
-                                    <div className="part">
-                                        <div className="part">
-                                            <div className="part"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div className="part"></div>
                                 </div>
                             </div>
-                        </div>)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>)
         }
 
         if (backgroundList && backgroundList.error) {
