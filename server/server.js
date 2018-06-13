@@ -195,6 +195,8 @@ const RootQuery = new GObject({
                     return db().getMentalQuirk([+args.roll])
                 } else if (+args.table === 3) {
                     return db().getPhysicalFlaws([+args.roll])
+                } else {
+                    return db().getBehavioralQuirk([+args.roll])
                 }
             }
         }
@@ -234,7 +236,9 @@ const Mutation = new GObject({
                                 db().update.mentalquirks([+v.id])
                             } else if (+v.table === 3) {
                                 db().update.physicalquirks([+v.id])
-                            } 
+                            } else {
+                                db().update.behaviorquirks([+v.id])
+                            }
                                 db().create.qf([req[0].id, v.id, v.table])
                             } )                           
                         talents.forEach( v => db().create.talents([req[0].id, v]) )

@@ -159,7 +159,14 @@ create table behavioralQuirks (
     bp Int
 )
 
-
+insert into behavioralquirks (name, rangestart, rangeend, bp)
+values ('Dialect', 1, 27, 5), ('Bad Sense of Humor', 28, 54, 5), ('Early Riser', 55, 81, 5), ('Foul-Mouthed', 82, 108, 5), ('Justicar', 109, 135, 5), ('Late Sleeper', 136, 162, 5), ('Mean Drunk', 163, 189, 5),
+('Messy', 190, 216, 5), ('Selfish', 217, 243, 6), ('Clean Freak', 244, 268, 8), ('Nosy', 269, 293, 8), ('Abstinent (minor)', 294, 318, 10), ('Voxer', 319, 343, 10), ('Conspiracy Theorist', 344, 368, 10), 
+('Feral Worlder', 369, 392, 10), ('Poseur', 393, 416, 10), ('Glutton', 417, 440, 10), ('Needy', 441, 464, 10), ('Snob', 465, 488, 10), ('Talker', 489, 511, 10), ('Swindler', 512, 534, 10), 
+('Coward (timid)', 535, 557, 10), ('Picker', 558, 578, 12), ('Scratcher', 579, 599, 12), ('Greedy', 600, 620, 15), ('Shambolic', 621, 641, 15), ('Lazy', 642, 662, 15), ('Close Talker', 663, 683, 16), 
+('Obnoxious', 684, 703, 18), ('Reclusive', 704, 723, 18), ('Boor', 724, 743, 20), ('Ostentatious', 744, 763, 20), ('Chisler', 764, 783, 20), ('Braggart', 784, 802, 25), ('Chronic Liar', 803, 821, 25),
+('Socially Awkward', 822, 840, 25), ('Coward (fearful)', 841, 859, 25), ('Animal Phobia', 860, 876, 30), ('Bad Liar', 877, 893, 30), ('Gullible', 894, 910, 30), ('Miserly', 911, 927, 30), 
+('Abstinent (major)', 928, 942, 35), ('Waybacker', 943, 957, 40), ('Truthful', 958, 972, 40), ('Coward (craven)', 973, 987, 40), ('Coward (wuss)', 988, 1000, 5)
 
 create table characters (
     id serial primary key,
