@@ -4,6 +4,7 @@ import {graphql} from 'react-apollo'
 import gql from 'graphql-tag'
 
 import WeaponReview from './WeaponReview'
+import {FINISHCHARACTER} from '../../../dux/reducer'
 
 class ReviewChar extends Component {
     constructor() {
@@ -44,7 +45,7 @@ class ReviewChar extends Component {
                 name: this.state.name 
             }
         })
-
+        this.props.FINISHCHARACTER()
         this.props.history.push('/home')
     }
 
@@ -155,6 +156,6 @@ function mapStateToProps (state) {
     return state
 }
 
-let decoratedReviewChar = connect(mapStateToProps)(ReviewChar) 
+let decoratedReviewChar = connect(mapStateToProps, {FINISHCHARACTER})(ReviewChar) 
 
 export default graphql(CREATE_CHARACTER, {name: "AddCharacter"})(decoratedReviewChar)

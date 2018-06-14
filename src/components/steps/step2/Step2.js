@@ -16,7 +16,11 @@ class Step2 extends Component {
 
     selectSpecies = (obj) => {
         this.props.SETSPECIES(obj)
-        this.props.history.push('/step3')
+        if (obj.species === 'Clone') {
+            this.props.history.push('/step3clone')
+        } else {
+            this.props.history.push('/step3')
+        }
     }
 
     render() {

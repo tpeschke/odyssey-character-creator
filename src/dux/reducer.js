@@ -13,7 +13,7 @@ const initialState = {
     equipment: null,
     priors: null,
     qf: null,
-    record: null,
+    record: null
 }
 
 const RESET_CHARACTER = "RESET_CHARACTER"
@@ -33,6 +33,7 @@ const RESET_CHARACTER = "RESET_CHARACTER"
     , ADD_QUIRK = "ADD_QUIRK"
     , DEDUCT_BP = "DEDUCT_BP"
     , SET_PRIORS = 'SET_PRIORS'
+    , FINISH_CHARACTER = 'FINISH_CHARACTER'
 
 export function RESETCHARACTER () {
     return {
@@ -151,6 +152,12 @@ export function ADDQUIRK (quirk) {
     }
 }
 
+export function FINISHCHARACTER () {
+    return {
+        type: FINISH_CHARACTER
+    }
+}
+
 export default function reducer (state = initialState, action) {
     switch (action.type) {
         case RESET_CHARACTER:
@@ -193,6 +200,24 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {bp: state.bp + +action.payload})
         case ADD_QUIRK:
             return Object.assign({}, state, {qf: [...state.qf, action.payload]})
+        case FINISH_CHARACTER:
+            return Object.assign({}, state, {
+                bp: null,
+                species: null,
+                scores: null,
+                rep: null,
+                background: null,
+                skills: null,
+                talents: null,
+                profics: null,
+                special: null,
+                hp: null,
+                credits: null,
+                equipment: null,
+                priors: null,
+                qf: null,
+                record: null
+            })
         default: return state
     }
 }

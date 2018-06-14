@@ -27,13 +27,15 @@ class NavBar extends Component {
                                 <ul>
                                     <Link to="/home"><li id="navFirstItem" onClick={_=>this.setState({show: !this.state.show})}>Home</li></Link>
                                     <Link to="/step1"><li onClick={_=>this.setState({show: !this.state.show})}>New Character</li></Link>
+                                    <Link to='/adminDashboard'><li onClick={_=>this.setState({show: !this.state.show})}>Admin Home</li></Link>
+                                    <Link to='/viewCharacters'><li onClick={_=>this.setState({show: !this.state.show})}>View Characters</li></Link>
                                 </ul>
                             </div>)
         } else {
 
             navBarRender = (<div className={this.state.show ? 'navBarDrawer navBarDrawerReveal' : 'navBarDrawer'}>
                 <ul>
-                    <Link to="/home"><li id='navFirstItem' onClick={_=>this.setState({show: !this.state.show})}>Home</li></Link>
+                    <Link to="/home"><li id='navFirstItem' onClick={_=>this.setState({show: !this.state.show})}>&lt; Main Menu</li></Link>
                     <Link to="/step1"><li onClick={_=>this.setState({show: !this.state.show})}>Step 1: Recieve BP</li></Link>
                     {this.state.links.map((v, i)=> {
                         if ( this.props[v.props]){ 
