@@ -10,16 +10,17 @@ import _ from 'lodash'
 class Step5 extends Component {
 
     saveBackground = (obj) => {
-        let {selected, DEDUCTBP, SETBACKGROUND, ADDBP, history} = this.props
-        if (selected) ADDBP(selected.price)
+        let {selected, DEDUCTBP, SETBACKGROUND, ADDBP, history, species} = this.props
+
+        if (selected) ADDBP(species.species ? Math.floor(selected.price /2) : selected.price)
     
-        DEDUCTBP(obj.price)
+        DEDUCTBP(species.species ? Math.floor(obj.price /2) : obj.price)
         SETBACKGROUND(obj)
         history.push('/step6')
     }
 
     render() {
-        const { backgroundList, search, filter, price } = this.props
+        const { backgroundList, search, filter, price, species } = this.props
         let list = [];
 
         if (backgroundList && backgroundList.loading) {
@@ -67,7 +68,7 @@ class Step5 extends Component {
                         className='backgroundBoxOutside'
                         onClick={_ => this.saveBackground({id: val.id, price: val.price, name: val.name})}>
                         <h2>{val.name}</h2>
-                        <p className="backgroundPrice">Price: {val.price} BP</p>
+                        <p className="backgroundPrice">Price: {species.species === 'Clone' ? Math.floor(val.price / 2) : val.price} BP</p>
                         <div className='scoreUnderscore'/>
                         {paragraph}
                     </div>)

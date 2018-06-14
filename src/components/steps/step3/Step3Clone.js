@@ -18,7 +18,7 @@ class Step3Clone extends Component {
                     {id: 3, title: 'WIS', num: 3, sides: 6},
                     {id: 4, title: 'DEX', num: 3, sides: 6},
                     {id: 5, title: 'CON', num: 3, sides: 6},
-                    {id: 6, title: 'CHA', num: 3, sides: 6}, 
+                    {id: 6, title: 'CHA', num: 3, sides: 4}, 
                     {id: 7, title: 'LKS', num: 3, sides: 6}],
             increases: 0
         }
