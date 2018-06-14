@@ -1,12 +1,8 @@
 import React, {Component} from 'react'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import _ from 'lodash'
 
-import { connect } from 'react-redux'
-import { SETBP, SETSCORES } from '../../dux/reducer'
-
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-
-class Step4 extends Component{
+export default class Step4Arrange extends Component {
     constructor(){
         super()
 
@@ -60,7 +56,7 @@ class Step4 extends Component{
     saveScores = () => {
         let {scores} = this.state
         this.props.SETSCORES(scores)
-        this.props.history.push('/step5')
+        this.props.pushHistory('/step5')
     }
 
     render() {
@@ -140,14 +136,3 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     // styles we need to apply on draggables
     ...draggableStyle
 });
-
-function mapStateToProps(state) {
-    let {scores} = state
-
-    return {
-        scores
-    }
-}
-
-
-export default connect(mapStateToProps,{SETBP, SETSCORES})(Step4)
