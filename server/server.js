@@ -5,12 +5,14 @@ const express = require('express')
     , dotenv = require('dotenv').config()
     , massive = require('massive')
     , gqlHTTP = require('express-graphql')
-    , { GraphQLServer } = require('graphql-yoga')
     , graphql = require('graphql')
+    , { createServer } = require('http')
+    , { SubscriptionServer } = require('subscriptions-transport-ws')
+    , { PubSub } = require('graphql-subscriptions')
 
-    const { GraphQLObjectType : GObject, GraphQLString : GString, GraphQLSchema : GSchema, GraphQLID : GID, GraphQLInt : GInt, GraphQLList : GList, GraphQLNonNull: GNonNull } = graphql
+    const { GraphQLObjectType : GObject, GraphQLString : GString, GraphQLSchema : GSchema, GraphQLID : GID, GraphQLInt : GInt, GraphQLList : GList, GraphQLNonNull: GNonNull, execute, subscribe } = graphql
     const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env
-
+    const pubsub = new PubSub()
     const app = new express()
 
     app.use(bodyParser.json())
@@ -249,12 +251,31 @@ const Mutation = new GObject({
                                 }
                             }
                         })) : null
+
+                        // SUBSCRIPTION
+                        db().aliens.find().then(req => {
+                            console.log('first')
+                            pubsub.publish("ALIENS_UPDATED", {updateAliens: req})
+                        })
                     })
                 })
             } 
         }
     }
 })
+
+const Subscription = new GObject({
+    name: 'subscription',
+    fields: {
+        updateAliens: {
+            type: new GList(AlienType),
+            subscribe: () => {
+                console.log('second')
+                return pubsub.asyncIterator("ALIEN_UPDATED")}
+        }
+    }
+})
+
 
 // ===========CONECTION THINGS============\\
 
@@ -266,13 +287,28 @@ const user = function() {
     return app.get('user')
 }
 
+const schema = new GSchema({query: RootQuery, mutation: Mutation, subscription: Subscription})
+
+app.use('/graphql', gqlHTTP({
+    schema,
+    graphiql: true
+}))
+
+const server = createServer(app)
+
 massive(CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance)
-    
-    app.use('/graphql', gqlHTTP({
-        schema: new GSchema({query: RootQuery, mutation: Mutation}),
-        graphiql: true
-    }))
-    
-    app.listen(SERVER_PORT, _=> console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`))
+
+    server.listen(SERVER_PORT, _=> {
+        new SubscriptionServer(
+            {
+                execute,
+                subscribe,
+                schema
+            },{
+                server,
+                path: '/subscriptions'
+            }
+        )
+        console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`)})
 })
