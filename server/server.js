@@ -310,5 +310,6 @@ massive(CONNECTION_STRING).then(dbInstance => {
                 path: '/subscriptions'
             }
         )
-        console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`)})
+        console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`)
+    })
 })
