@@ -18,20 +18,20 @@ class ShowTable extends Component {
                     </div>)
         }
 
-        if (QFTable.quirksNFlaws[0].id !== this.props.table) {
-            this.props.setTable(QFTable.quirksNFlaws[0].id)
+        if (QFTable.quirkTables[0].id !== this.props.table) {
+            this.props.setTable(QFTable.quirkTables[0].id)
         }
         return(
             <div className="titleTableDisplay">
-                {QFTable.quirksNFlaws[0].name}
+                {QFTable.quirkTables[0].name}
             </div>
         )
     }
 }
 
 const GET_QF_TABLE_QUERY = gql`
-    query GFTableQuery ($roll: String!){
-        quirksNFlaws (roll: $roll) {
+    query GFTableQuery ($roll: Int!){
+        quirkTables (roll: $roll) {
             id,
             name
         }
@@ -40,7 +40,7 @@ const GET_QF_TABLE_QUERY = gql`
 export default graphql(GET_QF_TABLE_QUERY, {
     name: 'QFTable', options: props => {
         return { 
-            variables: { roll: `${props.roll}` } }
+            variables: { roll: props.roll } }
     }
 }
 )(ShowTable)

@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {rollScore} from './../../../roll'
+import React, { Component } from 'react'
+import { rollScore } from './../../../roll'
 
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -8,47 +8,47 @@ import gql from 'graphql-tag'
 
 class RollQuirk extends Component {
     rerollQuirk = () => {
-        if(this.props.bp > 0){
-        this.props.DEDUCTBP(1)
-        this.props.rollForQuirk()
+        if (this.props.bp > 0) {
+            this.props.DEDUCTBP(1)
+            this.props.rollForQuirk()
         }
     }
 
     keepQuirk = (quirk) => {
         this.props.hideQuirk()
-        this.props.ADDQUIRK(Object.assign({}, quirk, {table: this.props.table}))
+        this.props.ADDQUIRK(Object.assign({}, quirk, { table: this.props.table }))
     }
 
     render() {
-        let {QF, roll} = this.props
+        let { QF, roll } = this.props
         if (QF && QF.loading) {
             return (<div>
-                        <p>Loading</p>
-                    </div>)
+                <p>Loading</p>
+            </div>)
         }
 
         if (QF && QF.error) {
             return (<div>
-                        <p>Error</p>
-                    </div>)
+                <p>Error</p>
+            </div>)
         }
-        return(
+        return (
             <div>
 
                 <div className="quirkDisplay">
-                <div className="quirkTitleCard">
-                    <p className="quirkItem">Roll</p>
-                    <p className="quirkItem">Quirk</p>
-                    <p className="quirkItem">BP Bonus</p>
-                </div>
-                <div className="quirkTitleBottom">
-                    <p className="quirkItem">{roll}</p>
-                    <p className="quirkItem">{QF.getQuirk ? QF.getQuirk[0].name : <div></div>}</p>
-                    <p className="quirkItem">{QF.getQuirk ? QF.getQuirk[0].bp : <div></div>}</p>
-                </div>
+                    <div className="quirkTitleCard">
+                        <p className="quirkItem">Roll</p>
+                        <p className="quirkItem">Quirk</p>
+                        <p className="quirkItem">BP Bonus</p>
+                    </div>
+                    <div className="quirkTitleBottom">
+                        <p className="quirkItem">{roll}</p>
+                        <p className="quirkItem">{QF.getQuirk ? QF.getQuirk[0].name : <div></div>}</p>
+                        <p className="quirkItem">{QF.getQuirk ? QF.getQuirk[0].bp : <div></div>}</p>
+                    </div>
                 </div>
 
-                <button onClick={_=>this.keepQuirk(QF.getQuirk[0])}>Keep Quirk</button>
+                <button onClick={_ => this.keepQuirk(QF.getQuirk[0])}>Keep Quirk</button>
                 <button onClick={this.rerollQuirk}>Reroll</button>
             </div>
         )
@@ -56,7 +56,7 @@ class RollQuirk extends Component {
 }
 
 const GET_QUIRK = gql`
-    query QFQuery ($roll: String!, $table: String!) {
+    query QFQuery ($roll: Int!, $table: Int!) {
         getQuirk (roll: $roll, table: $table) {
             id,
             name,
@@ -66,8 +66,9 @@ const GET_QUIRK = gql`
 
 export default graphql(GET_QUIRK, {
     name: 'QF', options: props => {
-        return { 
-            variables: { roll: `${props.roll}`, table: `${props.table}` } }
+        return {
+            variables: { roll: props.roll, table: props.table }
+        }
     }
 }
 )(RollQuirk)
