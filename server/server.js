@@ -80,7 +80,9 @@ const resolvers = {
             } else if (table === 3) {
                 return db().get.allPhysicalFlaws()
             }
-        }
+        },
+        getMyCharacters: _ => db().get.myCharacters([user()]),
+        getAllCharacters: _ => db().get.allCharacters([1])
     },
     Mutation: {
         addCharacter: (_, args) => {
@@ -139,7 +141,7 @@ const resolvers = {
         description: root => root.description,
         multi: root => root.multi,
     },
-    proficiency: {
+    Proficiency: {
         id: root => root.id,
         name: root => root.name,
         price: root => root.price,
@@ -147,14 +149,20 @@ const resolvers = {
         description: root => root.description,
         preReq: root => db().get.proficPreReqs([root.id]),
     },
-    quirkTable: {
+    QuirkTable: {
         id: root => root.id,
         name: root => root.name,
     },
-    quirk: {
+    Quirk: {
         id: root => root.id,
         name: root => root.name,
         bp: root => root.bp
+    },
+    GetCharacterInfo: {
+        id: root => root.id,
+        name: root => root.name,
+        species: root => db().aliens.findOne({id: root.species}, {fields : ['species']}).then(req => req.species),
+        background: root => db().backgrounds.findOne({id: root.background}, {fields : ['name']}).then(req => req.name),
     }
 }
 

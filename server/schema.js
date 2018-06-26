@@ -4,10 +4,12 @@ module.exports = {
         aliens: [Alien!]
         backgrounds (search: String!): [Background!]
         talents: [Talent!]
-        proficiencies: [proficiency!]
-        quirkTables (roll: Int!): [quirkTable!]
-        getQuirk (roll: Int!, table: Int!): [quirk!]
-        getAllQuirks (table: Int!): [quirk!]
+        proficiencies: [Proficiency!]
+        quirkTables (roll: Int!): [QuirkTable!]
+        getQuirk (roll: Int!, table: Int!): [Quirk!]
+        getAllQuirks (table: Int!): [Quirk!]
+        getMyCharacters: [GetCharacterInfo!]
+        getAllCharacters: [GetCharacterInfo!]
     }
 
     # =========================== #
@@ -24,7 +26,7 @@ module.exports = {
                         hp: Int!,
                         credits: Int!,
                         qf: String!
-                    ): [wholeCharacter!]
+                    ): [WholeCharacter!]
     }
     
     # =========================== #
@@ -53,34 +55,34 @@ module.exports = {
         multi: String!
     }
 
-    type proficiency {
+    type Proficiency {
         id: ID!
         name: String!
         price: Int!
         multi: String!
         description: String!
-        preReq: [proficReq]
+        preReq: [ProficReq]
     }
 
-    type proficReq {
+    type ProficReq {
         id: ID!,
         name: String!,
         score: Int!
         type: String!
     }
 
-    type quirkTable {
+    type QuirkTable {
         id: ID!
         name: String!
     }
 
-    type quirk {
+    type Quirk {
         id: ID!
         name: String!
         bp: Int!
     }
 
-    type wholeCharacter {
+    type WholeCharacter {
         id: ID!
         name: String!
         bp: Int!
@@ -93,6 +95,13 @@ module.exports = {
         hp: Int!
         credits: Int!
         qf: String!
+    }
+
+    type GetCharacterInfo {
+        id: ID!
+        name: String!
+        species: String!
+        background: String!
     }
     `
 }

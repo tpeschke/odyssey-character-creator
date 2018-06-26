@@ -23,6 +23,7 @@ import ReviewChar from './components/steps/reviewChar/ReviewChar'
 import AdminHome from './components/admin/AdminHome'
 
 import ViewCharacters from './components/viewChar/ViewCharacters'
+import SingleCharacter from './components/viewChar/SingleCharacter'
 
 export default class Routes extends Component {
     
@@ -52,7 +53,8 @@ export default class Routes extends Component {
                     <Route component = {AdminHome} path='/adminDashboard'/>
 
                     <Route component = {ViewCharacters} path='/viewCharacters'/>
-                    
+                    <Route component = {SingleCharacter} path='/viewSingle/:id'/>
+
                     <Redirect to='/' />
                 </Switch>
             </div>

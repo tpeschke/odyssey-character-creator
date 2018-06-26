@@ -534,3 +534,16 @@ button:hover {
     align-items: center;
     text-align: center;
   }
+
+  .characterDisplay {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    height: 20px;
+    padding: 0 15px;
+  }
+  
+  .characterTitle {
+    background: #222222;
+    color: whitesmoke
+  }
