@@ -5,6 +5,7 @@ import { DEDUCTBP, ADDQUIRK, SETQF, ADDBP, SETSELECTION } from '../../../dux/red
 
 import RollQuirkTable from './randomRoll/RollQuirkTable'
 import CherryPick from './cherryPick/CherryPick'
+import { buildSchemaFromTypeDefinitions } from 'graphql-tools';
 
 class Step9 extends Component {
     componentDidMount() {
@@ -24,10 +25,10 @@ class Step9 extends Component {
 
     render() {
         let renderQf = <div>No Quirks & Flaws</div>;
-        let choice = (  <div>
+        let choice = (<div>
             <button onClick={_ => this.props.SETSELECTION('roll')}>Randomly Roll</button>
             <button onClick={_ => this.props.SETSELECTION('pick')}>Cherry Pick</button>
-                        </div>)
+        </div>)
 
         let selection = () => (
             <div>
@@ -48,8 +49,6 @@ class Step9 extends Component {
                     bonus = 0
                 } else if (v.bp - (5 * (i + 1)) < 1 && this.props.select === 'pick') {
                     bonus = 0
-                } else if (v.bp - (5 * (i + 1))) {
-                    bonus = v.bp - (5 * (i + 1))
                 }
 
                 return (

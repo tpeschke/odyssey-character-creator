@@ -18,7 +18,7 @@ const initialState = {
     credits: null,
     equipment: null,
     priors: null,
-    select: 'pick',
+    select: null,
     qf: null,
     record: null
 }
