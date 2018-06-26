@@ -114,7 +114,8 @@ create table mentalQuirks (
     rangeEnd Int,
     selected Int DEFAULT 0,
     description Text,
-    bp Int
+    bp Int,
+    tableId Int DEFAULT 1
 )
 
 insert into mentalQuirks (name, rangestart, rangeend, bp)
@@ -137,7 +138,8 @@ create table physicalQuirks (
     rangeEnd Int,
     selected Int DEFAULT 0,
     description Text,
-    bp Int
+    bp Int,
+    tableId Int DEFAULT 3
 )
 
 insert into physicalQuirks (name, rangestart, rangeend, bp)
@@ -156,7 +158,8 @@ create table behavioralQuirks (
     rangeEnd Int,
     selected Int DEFAULT 0,
     description Text,
-    bp Int
+    bp Int,
+    tableId Int DEFAULT 2
 )
 
 insert into behavioralquirks (name, rangestart, rangeend, bp)

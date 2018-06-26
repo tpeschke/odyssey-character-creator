@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import {graphql} from 'react-apollo'
+import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import { connect } from 'react-redux'
 import { SETSPECIES } from '../../../dux/reducer'
 
 class Step2 extends Component {
-    constructor(){
+    constructor() {
         super()
 
         this.state = {
@@ -24,66 +24,67 @@ class Step2 extends Component {
     }
 
     render() {
-        const {alienList} = this.props
+        const { alienList } = this.props
 
         if (alienList && alienList.loading) {
             return (<div className='StepOuter'>
-                        <div className='stepBody'>
-                        <div className="stepTitle">
-                            <h1>Step 2: Choose Species</h1>
-                        </div>
-                        <div className="stepInner" id="loading">
+                <div className='stepBody'>
+                    <div className="stepTitle">
+                        <h1>Step 2: Choose Species</h1>
+                    </div>
+                    <div className="stepInner" id="loading">
                         <div className="loader">
                             <div className="part">
                                 <div className="part">
                                     <div className="part">
                                         <div className="part">
                                             <div className="part"></div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                    </div>)
+                    </div>
+                </div>
+            </div>)
         }
 
         if (alienList && alienList.error) {
             return (<div className='StepOuter'>
-                        <div className='stepBody'>
-                        <div className="stepTitle">
-                            <h1>Step 2: Choose Species</h1>
-                        </div>
-                        <p>Error</p>
-                        </div>
-                    </div>)
+                <div className='stepBody'>
+                    <div className="stepTitle">
+                        <h1>Step 2: Choose Species</h1>
+                    </div>
+                    <p>Error</p>
+                </div>
+            </div>)
         }
-        
+
         return (
             <div className='StepOuter'>
                 <div className='stepBody'>
-                <div className="stepTitle">
-                    <h1>Step 2: Choose Species</h1>
-                </div>
-
-                <div className="stepInner bodySpecies">
-                    <div className="speciesCard">
-                    {alienList.aliens.map(alien => {
-                            return      <div    key={alien.id} 
-                                            className='speciesDropBox'
-                                            onClick={_=>this.selectSpecies({id: alien.id, species: alien.species})}
-                                            onMouseEnter={_=>this.setState({description: alien.description})}>
-                    
-                                            <button className="speciesTitle">{alien.species}</button>
-                                                
-                                        </div>})}
+                    <div className="stepTitle">
+                        <h1>Step 2: Choose Species</h1>
                     </div>
-                    <div className='speciesDesc'>
-                        {this.state.description.split('/').map((para, i)=> <p key={i} className="para">{para}</p>)}
-                    </div> 
+
+                    <div className="stepInner bodySpecies">
+                        <div className="speciesCard">
+                            {alienList.aliens.map(alien => {
+                                return <div key={alien.id}
+                                    className='speciesDropBox'
+                                    onClick={_ => this.selectSpecies({ id: alien.id, species: alien.species })}
+                                    onMouseEnter={_ => this.setState({ description: alien.description })}>
+
+                                    <button className="speciesTitle">{alien.species}</button>
+
+                                </div>
+                            })}
+                        </div>
+                        <div className='speciesDesc'>
+                            {this.state.description.split('/').map((para, i) => <p key={i} className="para">{para}</p>)}
+                        </div>
+                    </div>
                 </div>
-                </div> 
             </div>
         )
     }
@@ -98,6 +99,6 @@ const GET_ALIENS_QUERY = gql`
         }
     }`
 
-const decoratedStep2 = connect(function(){return{}},{SETSPECIES})(Step2)
+const decoratedStep2 = connect(function () { return {} }, { SETSPECIES })(Step2)
 
-export default graphql(GET_ALIENS_QUERY, {name: 'alienList'})(decoratedStep2)
+export default graphql(GET_ALIENS_QUERY, { name: 'alienList' })(decoratedStep2)

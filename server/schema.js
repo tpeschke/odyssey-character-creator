@@ -7,6 +7,7 @@ module.exports = {
         proficiencies: [proficiency!]
         quirkTables (roll: Int!): [quirkTable!]
         getQuirk (roll: Int!, table: Int!): [quirk!]
+        getAllQuirks (table: Int!): [quirk!]
     }
 
     # =========================== #

@@ -1,0 +1,1 @@
+select id, name, bp from physicalquirks

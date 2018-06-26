@@ -62,14 +62,25 @@ const resolvers = {
         backgrounds: (_, { search }) => db().searchBackgrounds([search.toUpperCase()]),
         talents: _ => db().talents.find(),
         proficiencies: _ => db().proficiencies.find(),
-        quirkTables: (_, { roll }) => db().getQuirkTable([+roll]),
+        quirkTables: (_, { roll }) => db().get.quirkTable([+roll]),
         getQuirk: (_, { roll, table }) => {
             if (table === 1) {
-                return db().getMentalQuirk([roll])
+                return db().get.mentalQuirk([roll])
             } else if (table === 3) {
-                return db().getPhysicalFlaws([roll])
+                return db().get.physicalFlaw([roll])
             } else {
-                return db().getBehavioralQuirk([roll])
+                return db().get.behavioralQuirk([roll])
+            }
+        },
+        getAllQuirks: (_, { table }) => {
+            if (table === 1) {
+                return db().get.allMentalQuirks()
+            } else if (table === 3) {
+                return db().get.allPhysicalFlaws()
+            } else if (table === 2){
+                return db().get.allBehavioralQuirks()
+            } else {
+                return {}
             }
         }
     },
@@ -136,7 +147,7 @@ const resolvers = {
         price: root => root.price,
         multi: root => root.multi,
         description: root => root.description,
-        preReq: root => db().getProficPreReqs([root.id]),
+        preReq: root => db().get.proficPreReqs([root.id]),
     },
     quirkTable: {
         id: root => root.id,
