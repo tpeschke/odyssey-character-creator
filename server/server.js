@@ -55,15 +55,6 @@ app.get('/loginDummy', (req, res) => {
 
 
 //============GRAPH QL SCHEMA============\\
-// const AlienType = new GObject({
-//     name: "Alien",
-//     fields: ()=> ({
-//         id: {type: GID},
-//         species: {type: GString},
-//         description: {type: GString},
-//         selected: {type: GString}
-//     })
-// })
 
 // const CharacterType = new GObject({
 //     name: "character",
@@ -82,19 +73,6 @@ app.get('/loginDummy', (req, res) => {
 //         qf: {type: GString}
 //     })
 // })
-
-
-// const RootQuery = new GObject({
-//     name: 'RootQueryType',
-//     fields: {
-//         aliens: {
-//             type: new GList(AlienType),
-//             resolve(parent, args) {
-//                 return db().aliens.find()
-//             }
-//         },
-//     }
-// }) 
 
 // const Mutation = new GObject({
 //     name: "Mutation",

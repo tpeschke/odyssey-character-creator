@@ -8,6 +8,10 @@ module.exports = {
         quirkTables (roll: Int!): [quirkTable!]
         getQuirk (roll: Int!, table: Int!): [quirk!]
     }
+
+    # =========================== #
+
+    
     
     # =========================== #
     
