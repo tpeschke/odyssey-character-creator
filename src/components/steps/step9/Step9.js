@@ -1,39 +1,35 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { DEDUCTBP, ADDQUIRK, SETQF, ADDBP } from '../../../dux/reducer'
+import { DEDUCTBP, ADDQUIRK, SETQF, ADDBP, SETSELECTION } from '../../../dux/reducer'
 
 import RollQuirkTable from './randomRoll/RollQuirkTable'
 import CherryPick from './cherryPick/CherryPick'
 
 class Step9 extends Component {
-    constructor() {
-        super()
-
-        this.state = {
-            selected: 'pick'
-        }
-    }
-
     componentDidMount() {
         this.props.SETQF()
     }
 
     saveQuirks = () => {
         this.props.qf.forEach((v, i) => {
-            this.props.ADDBP(v.bp - (i * 5) >= 0 ? v.bp - (i * 5) : 0)
+            if (this.props.select === 'roll') {
+                this.props.ADDBP(v.bp - (i * 5) >= 0 ? v.bp - (i * 5) : 0)
+            } else {
+                this.props.ADDBP(v.bp - ((i + 1) * 5) >= 0 ? v.bp - ((i + 1) * 5) : 0)
+            }
         })
         this.props.history.push('/step10')
     }
 
     render() {
-        let renderQf = <div></div>;
+        let renderQf = <div>No Quirks & Flaws</div>;
         let choice = (  <div>
-            <button onClick={_ => this.setState({ selected: 'roll' })}>Randomly Roll</button>
-            <button onClick={_ => this.setState({ selected: 'pick' })}>Cherry Pick</button>
+            <button onClick={_ => this.props.SETSELECTION('roll')}>Randomly Roll</button>
+            <button onClick={_ => this.props.SETSELECTION('pick')}>Cherry Pick</button>
                         </div>)
 
-        let selection = (
+        let selection = () => (
             <div>
                 <div className="quirkTitleCard selectedQuirks">
                     <p className="quirkItem quirkName">Name</p>
@@ -45,34 +41,44 @@ class Step9 extends Component {
                 </div>
             </div>)
 
-        if (this.props.qf) {
+        if (this.props.qf && this.props.qf.length > 0) {
             renderQf = this.props.qf.map((v, i) => {
+                let bonus = v.bp - (i * 5)
+                if (v.bp - (i * 5) <= 0 && this.props.select === 'roll') {
+                    bonus = 0
+                } else if (v.bp - (5 * (i + 1)) < 1 && this.props.select === 'pick') {
+                    bonus = 0
+                } else if (v.bp - (5 * (i + 1))) {
+                    bonus = v.bp - (5 * (i + 1))
+                }
+
                 return (
                     <div key={v.id} className="quirkTitleBottom selectedQuirks">
                         <p className="quirkItem quirkName">{v.name}</p>
-                        <p className="quirkItem">{v.bp - (i * 5) >= 0 ? v.bp - (i * 5) : 0}</p>
+                        <p className="quirkItem">{bonus}</p>
                     </div>
                 )
             })
         }
 
-        if (this.state.selected && this.state.selected === 'roll') {
+        if (this.props.select && this.props.select === 'roll') {
             choice = (
                 <div>
-                    {selection}
+                    {selection()}
                     <RollQuirkTable
                         DEDUCTBP={this.props.DEDUCTBP}
                         ADDQUIRK={this.props.ADDQUIRK}
                         bp={this.props.bp} />
                 </div>)
-        } else if (this.state.selected && this.state.selected === 'pick') {
+        } else if (this.props.select && this.props.select === 'pick') {
+            let num = this.props.qf ? this.props.qf.length : 0
             choice = (
                 <div>
-                    {selection}
+                    {selection()}
                     <CherryPick
                         DEDUCTBP={this.props.DEDUCTBP}
                         ADDQUIRK={this.props.ADDQUIRK}
-                        bp={this.props.bp} />
+                        deduction={num} />
                 </div>)
         }
 
@@ -97,10 +103,11 @@ class Step9 extends Component {
 }
 
 function mapStateToProps(state) {
-    let { qf, bp } = state
+    let { qf, bp, select } = state
     return {
         qf,
-        bp
+        bp,
+        select
     }
 }
-export default connect(mapStateToProps, { DEDUCTBP, ADDQUIRK, SETQF, ADDBP })(Step9)
+export default connect(mapStateToProps, { DEDUCTBP, ADDQUIRK, SETQF, ADDBP, SETSELECTION })(Step9)

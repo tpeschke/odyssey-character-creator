@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import _ from 'lodash'
 
 class QuirkList extends Component {
+    componentDidUpdate(next) {
+        if (next.QF.variables.table !== this.props.QF.variables.table) {
+            this.props.QF.refetch()
+        }
+    }
+
+    selectQuirk = (quirk) => {
+        let {DEDUCTBP, ADDQUIRK} = this.props
+        ADDQUIRK(quirk)
+    }
 
     render() {
-        let { QF } = this.props
-        console.log(QF)
+        let { QF, deduction } = this.props
 
         if (QF && QF.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
@@ -31,18 +41,34 @@ class QuirkList extends Component {
             )
         }
 
+        if (QF && !this.props.filter) {
+            return (
+                <div>
+                    {QF.getAllQuirks.map(v => {
+                        return (
+                            <div key={v.id} onClick={_=>this.selectQuirk(v)}>
+                                <p>{v.name}</p>
+                                <p>{v.bp - (5 * (deduction + 1)) > 0 ? v.bp - (5 * (deduction + 1)) : 0}</p>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        }
+
         return (
             <div>
-                {QF.getAllQuirks.map(v => {
+                {QF.getAllQuirks.filter(v => v.bp - (5 * (deduction + 1)) > 0).map(v => {
                     return (
-                        <div key={v.id}>
+                        <div key={v.id} onClick={_=>this.selectQuirk(v)}>
                             <p>{v.name}</p>
-                            <p>{v.bp}</p>
+                            <p>{v.bp - (5 * (deduction + 1)) > 0 ? v.bp - (5 * (deduction + 1)) : 0}</p>
                         </div>
                     )
                 })}
             </div>
         )
+
     }
 }
 

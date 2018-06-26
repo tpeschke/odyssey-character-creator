@@ -66,21 +66,19 @@ const resolvers = {
         getQuirk: (_, { roll, table }) => {
             if (table === 1) {
                 return db().get.mentalQuirk([roll])
+            } else if (table === 2) {
+                return db().get.behavioralQuirk([roll])
             } else if (table === 3) {
                 return db().get.physicalFlaw([roll])
-            } else {
-                return db().get.behavioralQuirk([roll])
             }
         },
         getAllQuirks: (_, { table }) => {
             if (table === 1) {
                 return db().get.allMentalQuirks()
-            } else if (table === 3) {
-                return db().get.allPhysicalFlaws()
             } else if (table === 2){
                 return db().get.allBehavioralQuirks()
-            } else {
-                return {}
+            } else if (table === 3) {
+                return db().get.allPhysicalFlaws()
             }
         }
     },

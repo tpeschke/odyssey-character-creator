@@ -18,6 +18,7 @@ const initialState = {
     credits: null,
     equipment: null,
     priors: null,
+    select: 'pick',
     qf: null,
     record: null
 }
@@ -31,6 +32,7 @@ const RESET_CHARACTER = "RESET_CHARACTER"
     , SET_HP = "SET_HP"
     , SET_QF = "SET_QF"
     , SET_SCORES = 'SET_SCORES'
+    , SET_SELECTION = 'SET_SELECTION'
     , SET_SPECIALS = "SET_SPECIALS"
     , SET_SPECIES = "SET_SPECIES"
     , SET_TALENTS = "SET_TALENTS"
@@ -164,6 +166,13 @@ export function FINISHCHARACTER () {
     }
 }
 
+export function SETSELECTION (choice) {
+    return {
+        type: SET_SELECTION,
+        payload: choice
+    }
+}
+
 export default function reducer (state = initialState, action) {
     switch (action.type) {
         case RESET_CHARACTER:
@@ -184,6 +193,8 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {hp: action.payload})
         case SET_QF:
             return Object.assign({}, state, {qf: []})
+        case SET_SELECTION:
+            return Object.assign({}, state, {select: action.payload})
         case SET_SPECIALS:
             return Object.assign({}, state, {special: action.payload})
         case SET_SPECIES:
@@ -221,6 +232,7 @@ export default function reducer (state = initialState, action) {
                 credits: null,
                 equipment: null,
                 priors: null,
+                select: null,
                 qf: null,
                 record: null
             })

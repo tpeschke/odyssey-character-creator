@@ -6,7 +6,8 @@ class CherryPick extends Component {
         super()
 
         this.state= {
-            table: null
+            table: null,
+            filter: false
         }
     }
 
@@ -15,11 +16,17 @@ class CherryPick extends Component {
 
         if (this.state.table) {
             list = <QuirkList 
-                        table={this.state.table}/>
+                        table={this.state.table}
+                        DEDUCTBP={this.props.DEDUCTBP}
+                        ADDQUIRK={this.props.ADDQUIRK}
+                        deduction={this.props.deduction}
+                        filter={this.state.filter}/>
         }
 
         return (
             <div>
+                <button onClick={_=>this.setState({filter: !this.state.filter})}>Filter Out Zeros</button>
+
                 <button onClick={_=>this.setState({table: 3})}>Physical Flaws</button>
                 <button onClick={_=>this.setState({table: 2})}>Behavioral Quirks</button>
                 <button onClick={_=>this.setState({table: 1})}>Mental Quirks</button>

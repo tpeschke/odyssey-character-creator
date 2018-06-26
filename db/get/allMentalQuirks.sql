@@ -1,1 +1,2 @@
-select id, name, bp from mentalquirks
+select id, name, bp, tableId from mentalquirks
+order by bp ASC
