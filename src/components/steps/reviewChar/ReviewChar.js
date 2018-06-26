@@ -14,8 +14,9 @@ class ReviewChar extends Component {
             name: null
         }
     }
+
     sendCharacterOff = () => {
-        let {AddCharacter, species, background, profics, special, credits, bp, hp} = this.props
+        let {AddCharacter, species, background, special, credits, bp, hp} = this.props
 
         let scores = {}
         this.props.scores.forEach( v => scores = Object.assign({}, scores, {[v.title]: v.score}) )
@@ -28,6 +29,10 @@ class ReviewChar extends Component {
         let talents = []
         this.props.talents.forEach(v => talents.push(v.id))
         talents = JSON.stringify(talents)
+
+        let profics = []
+        this.props.profics.forEach(v => profics.push(v.id))
+        profics = JSON.stringify(profics)
 
         special = JSON.stringify(special)
 
@@ -42,7 +47,8 @@ class ReviewChar extends Component {
                 qf,
                 talents,
                 special,
-                name: this.state.name 
+                name: this.state.name,
+                profics 
             }
         })
         this.props.FINISHCHARACTER()
@@ -137,8 +143,8 @@ class ReviewChar extends Component {
 
 
 const CREATE_CHARACTER = gql`
-    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!, $qf: String!, $talents: String!, $special: String!, $name: String!){
-        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores, qf: $qf, talents: $talents, special: $special, name: $name) {
+    mutation AddCharacter($bp: Int!, $species: Int!, $background: Int!, $hp: Int!, $credits: Int!, $scores: String!, $qf: String!, $talents: String!, $special: String!, $name: String!, $profics: String!){
+        addCharacter(bp: $bp, species: $species, background: $background, hp: $hp, credits: $credits, scores: $scores, qf: $qf, talents: $talents, special: $special, name: $name, profics: $profics) {
             bp,
             species,
             background,
@@ -148,7 +154,8 @@ const CREATE_CHARACTER = gql`
             qf,
             talents,
             special,
-            name
+            name,
+            profics
         }
     }`
 

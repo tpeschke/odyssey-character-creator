@@ -209,6 +209,12 @@ create table charactertalents (
     talentId int
 )
 
+create table characterprofics (
+    id serial primary key,
+    charId int,
+    proficId int
+)
+
 create table characterspecial (
     id serial primary key,
     charId Int,

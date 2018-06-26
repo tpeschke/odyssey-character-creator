@@ -54,84 +54,7 @@ app.get('/loginDummy', (req, res) => {
 // ===========AUTH END POINTS===========\\
 
 
-//============GRAPH QL SCHEMA============\\
-
-// const CharacterType = new GObject({
-//     name: "character",
-//     fields: () => ({
-//         id: {type: GID},
-//         name: {type: GString},
-//         bp: {type: GInt},
-//         species: {type: GInt},
-//         scores: {type: GString},
-//         background: {type: GInt},
-//         talents: {type: GString},
-//         // profics: {type: GObject},
-//         special: {type: GString},
-//         hp: {type: GInt},
-//         credits: {type: GInt},
-//         qf: {type: GString}
-//     })
-// })
-
-// const Mutation = new GObject({
-//     name: "Mutation",
-//     fields : {
-//         addCharacter: {
-//             type: CharacterType,
-//             args: {
-//                 name: {type: new GNonNull(GString)},
-//                 bp: {type: new GNonNull(GInt)},
-//                 species: {type: new GNonNull(GInt)},
-//                 scores: {type: new GNonNull(GString)},
-//                 background: {type: new GNonNull(GInt)},
-//                 talents: {type: new GNonNull(GString)},
-//                 // profics: {type: new GNonNull(GObject)},
-//                 special: {type: new GNonNull(GString)},
-//                 hp: {type: new GNonNull(GInt)},
-//                 credits: {type: new GNonNull(GInt)},
-//                 qf: {type: new GNonNull(GString)}
-//             },
-//             resolve(parent, args) {
-//                 let scores = JSON.parse(args.scores)
-//                 let qf = JSON.parse(args.qf)
-//                 let talents = JSON.parse(args.talents)
-//                 let special = JSON.parse(args.special)
-
-//                 db().create.stats([scores.STR, scores.INT, scores.WIS, scores.DEX, scores.CON, scores.CHA, scores.LKS, scores.REP]).then( req => {
-//                     scores = req[0].id
-//                     db().create.main([user(), args.bp, args.species, args.background, args.hp, args.credits, scores, args.name]).then(req => {
-
-//                         qf.forEach( v => {
-//                             if (+v.table === 1) {
-//                                 db().update.mentalquirks([+v.id])
-//                             } else if (+v.table === 3) {
-//                                 db().update.physicalquirks([+v.id])
-//                             } else {
-//                                 db().update.behaviorquirks([+v.id])
-//                             }
-//                                 db().create.qf([req[0].id, v.id, v.table])
-//                             } )                           
-//                         talents.forEach( v => db().create.talents([req[0].id, v]) )
-//                         special ? special.forEach( v => db().create.specialMain([req[0].id, v.name, v.type]).then(result => {
-//                             for (let key in v) {
-//                                 if (Array.isArray(v[key])) {
-//                                     db().create.specialModifier([result[0].id,`${key}`, v[key][0] ? '1' : '0', v[key][1] ? '1' : '0', v[key][2] ? '1' : '0', v[key][3] ? '1' : '0', v[key][4] ? '1' : '0'])
-//                                 }
-//                             }
-//                         })) : null
-
-//                         // SUBSCRIPTION
-//                         db().aliens.find().then(req => {
-//                             console.log('first')
-//                             pubsub.publish("ALIENS_UPDATED", {updateAliens: req})
-//                         })
-//                     })
-//                 })
-//             } 
-//         }
-//     }
-// })
+//============GRAPH QL RESOLVERS============\\
 
 const resolvers = {
     Query: {
@@ -150,6 +73,42 @@ const resolvers = {
             }
         }
     },
+    Mutation: {
+        addCharacter: (_, args) => {
+            let scores = JSON.parse(args.scores)
+            let qf = JSON.parse(args.qf)
+            let talents = JSON.parse(args.talents)
+            let special = JSON.parse(args.special)
+            let profics = JSON.parse(args.profics)
+
+            db().create.stats([scores.STR, scores.INT, scores.WIS, scores.DEX, scores.CON, scores.CHA, scores.LKS, scores.REP]).then(req => {
+                scores = req[0].id
+                db().create.main([user(), args.bp, args.species, args.background, args.hp, args.credits, scores, args.name]).then(req => {
+
+                    qf.forEach(v => {
+                        if (+v.table === 1) {
+                            db().update.mentalquirks([+v.id])
+                        } else if (+v.table === 3) {
+                            db().update.physicalquirks([+v.id])
+                        } else {
+                            db().update.behaviorquirks([+v.id])
+                        }
+                        db().create.qf([req[0].id, v.id, v.table])
+                    })
+                    talents.forEach(v => db().create.talents([req[0].id, v]))
+                    profics.forEach(v => db().create.profics([req[0].id, v]))
+                    special ? special.forEach(v => db().create.specialMain([req[0].id, v.name, v.type]).then(result => {
+                        for (let key in v) {
+                            if (Array.isArray(v[key])) {
+                                db().create.specialModifier([result[0].id, `${key}`, v[key][0] ? '1' : '0', v[key][1] ? '1' : '0', v[key][2] ? '1' : '0', v[key][3] ? '1' : '0', v[key][4] ? '1' : '0'])
+                            }
+                        }
+                    })) : null
+                })
+            })
+        }
+    },
+
     Alien: {
         id: root => root.id,
         species: root => root.species,

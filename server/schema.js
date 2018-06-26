@@ -11,7 +11,20 @@ module.exports = {
 
     # =========================== #
 
-    
+    type Mutation {
+        addCharacter (  name: String!,
+                        bp: Int!,
+                        species: Int!,
+                        scores: String!,
+                        background: Int!,
+                        talents: String!,
+                        profics: String!,
+                        special: String!,
+                        hp: Int!,
+                        credits: Int!,
+                        qf: String!
+                    ): [wholeCharacter!]
+    }
     
     # =========================== #
     
@@ -64,6 +77,21 @@ module.exports = {
         id: ID!
         name: String!
         bp: Int!
+    }
+
+    type wholeCharacter {
+        id: ID!
+        name: String!
+        bp: Int!
+        species: Int!
+        scores: String!
+        background: Int!
+        talents: String!
+        profics: String!
+        special: String!
+        hp: Int!
+        credits: Int!
+        qf: String!
     }
     `
 }
