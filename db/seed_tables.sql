@@ -182,7 +182,6 @@ create table characters (
     credits Int,
     equipment Int,
     userId Int,
-    FOREIGN KEY (userId) references users(id),
     FOREIGN KEY (stats) references stats(id)
 )
 

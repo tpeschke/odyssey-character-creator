@@ -82,7 +82,7 @@ const resolvers = {
             }
         },
         getMyCharacters: _ => db().get.myCharacters([user()]),
-        getAllCharacters: _ => db().get.allCharacters([1])
+        getAllCharacters: _ => db().get.allCharacters([user()])
     },
     Mutation: {
         addCharacter: (_, args) => {
