@@ -30,6 +30,12 @@ module.exports = {
     }
     
     # =========================== #
+
+    type Subscription {
+        newCharacter: Alien
+    }
+
+    # =========================== #
     
     type Alien {
         id: ID!

@@ -8,6 +8,10 @@ const express = require('express')
     , { typeDefs } = require('./schema')
     , { makeExecutableSchema } = require('graphql-tools')
     , { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
+    , { PubSub, withFilter } = require('graphql-subscriptions')
+    , { execute, subscribe } = require('graphql')
+    , { createServer } = require('http')
+    , { SubscriptionServer } = require('subscriptions-transport-ws')
 
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env
 
@@ -55,6 +59,7 @@ app.get('/loginDummy', (req, res) => {
 
 
 //============GRAPH QL RESOLVERS============\\
+const pubsub = new PubSub();
 
 const resolvers = {
     Query: {
@@ -115,9 +120,17 @@ const resolvers = {
                             }
                         }
                     })) : null
+
+                // SUBSCRIPTIONS
+                }).then(_=> {
+                    pubsub.publish('newCharacter')
                 })
             })
         }
+    },
+    Subscription: {
+        newCharacter:{
+            subscribe: _ => pubsub.asyncIterator('newCharacter')}
     },
 
     Alien: {
@@ -173,7 +186,10 @@ const schema = makeExecutableSchema({
 })
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
-app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+app.get('/graphiql', graphiqlExpress({ 
+    endpointURL: '/graphql',
+    subscriptionsEndpoint: 'ws://localhost:4141/subscriptions' 
+}))
 
 const db = function () {
     return app.get('db')
@@ -186,5 +202,17 @@ const user = function () {
 massive(CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance)
 
-    app.listen(SERVER_PORT, _ => console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`))
+    const ws = createServer(app)
+
+    ws.listen(SERVER_PORT, _ => console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`))
+
+    new SubscriptionServer({
+        execute,
+        subscribe,
+        schema
+    }, {
+        server: ws,
+        path: '/subscriptions'
+    })
+    // app.listen(SERVER_PORT, _ => console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`))
 })
