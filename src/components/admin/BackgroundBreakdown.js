@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {graphql} from 'react-apollo'
+import {graphql, Subscription} from 'react-apollo'
 import gql from 'graphql-tag'
 import {Bar} from 'react-chartjs-2'
 

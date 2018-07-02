@@ -8,7 +8,7 @@ class AdminHome extends Component {
         super()
 
         this.state = {
-            route: 3
+            route: 2
         }
     }
 

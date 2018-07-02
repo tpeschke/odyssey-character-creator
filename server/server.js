@@ -111,8 +111,8 @@ const resolvers = {
                         }
                         db().create.qf([req[0].id, v.id, v.table])
                     })
-                    talents.forEach(v => db().create.talents([req[0].id, v]))
-                    profics.forEach(v => db().create.profics([req[0].id, v]))
+                    talents ? talents.forEach(v => db().create.talents([req[0].id, v])) : null
+                    profics ? profics.forEach(v => db().create.profics([req[0].id, v])) : null
                     special ? special.forEach(v => db().create.specialMain([req[0].id, v.name, v.type]).then(result => {
                         for (let key in v) {
                             if (Array.isArray(v[key])) {
@@ -123,7 +123,7 @@ const resolvers = {
 
                 // SUBSCRIPTIONS
                 }).then(_=> {
-                    pubsub.publish('newCharacter')
+                    pubsub.publish('newCharacter', {newCharacter: {id: args.species}})
                 })
             })
         }

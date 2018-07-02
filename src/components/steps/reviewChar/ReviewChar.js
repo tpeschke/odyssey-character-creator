@@ -27,11 +27,11 @@ class ReviewChar extends Component {
         qf = JSON.stringify(qf)
 
         let talents = []
-        this.props.talents.forEach(v => talents.push(v.id))
+        this.props.talents ? this.props.talents.forEach(v => talents.push(v.id)) : null
         talents = JSON.stringify(talents)
 
         let profics = []
-        this.props.profics.forEach(v => profics.push(v.id))
+        this.props.profics ? this.props.profics.forEach(v => profics.push(v.id)) : null
         profics = JSON.stringify(profics)
 
         special = JSON.stringify(special)
@@ -51,8 +51,8 @@ class ReviewChar extends Component {
                 profics 
             }
         })
-        this.props.FINISHCHARACTER()
-        this.props.history.push('/home')
+        // this.props.FINISHCHARACTER()
+        // this.props.history.push('/home')
     }
 
     render() {
