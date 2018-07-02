@@ -73,7 +73,7 @@ class Proficiencies extends Component {
 
         this.props.ADDBP(tempArr[i].price)
 
-        if (tempArr[i].name !== 'Etiquette/Manners [Specific Culture]') {
+        if (tempArr[i].multi === "false") {
             let hold = tempArr.splice(i, 1)
             let tempDeselected = _.cloneDeep(this.state.list)
             tempDeselected.push(...hold)
@@ -111,6 +111,7 @@ class Proficiencies extends Component {
 
     render() {
         const { proficList } = this.props
+
         if (proficList && proficList.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
                 <div className="loader">

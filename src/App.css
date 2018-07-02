@@ -415,6 +415,12 @@ button:hover {
     background: #2d2d2a;
     color: whitesmoke;
     box-shadow: 2px 2px 2px #2d2d2a;
+    transition: .6s;
+}
+
+.proficDisplayHolder:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #2d2d2a
 }
 
 .stpCostDisplay {
@@ -424,6 +430,7 @@ button:hover {
 
 .stpDisplayHolder:hover {
     transform: scale(1.05);
+    box-shadow: 5px 5px 5px #2d2d2a
 }
 
 .stpChoiceHeader {

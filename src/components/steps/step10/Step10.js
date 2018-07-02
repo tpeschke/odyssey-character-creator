@@ -10,7 +10,7 @@ class Step10 extends Component {
         super()
 
         this.state = {
-            page: 3
+            page: 4
         }
     }
 
