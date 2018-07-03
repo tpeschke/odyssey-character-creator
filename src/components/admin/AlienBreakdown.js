@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Bar } from 'react-chartjs-2'
+import _ from 'lodash'
 
 class AlienBreakdown extends Component {
     constructor() {
@@ -15,41 +16,46 @@ class AlienBreakdown extends Component {
 
     componentWillMount() {
         let { subscribeToMore } = this.props.alienList
-        
+
         subscribeToMore({
             document: ALIEN_BREAK_SUB,
-            updateQuery: (prev, {subscriptionData}) => {
-                console.log(prev, subscriptionData)
+            updateQuery: _ => {
+                this.props.alienList.refetch()
+                this.formatList()
             }
         })
-        console.log('hello')
     }
 
     componentDidMount() {
         let { aliens } = this.props.alienList
 
         if (aliens) {
-            let tempArr = []
-            let tempData = {
-                labels: [],
-                datasets: [{
-                    label: 'Aliens',
-                    data: [],
-                    backgroundColor: '#a62020'
-                }]
-            }
-
-            for (let i = 0; i < aliens.length; i++) {
-                if (aliens[i].selected > 0) {
-                    tempData.labels.push(aliens[i].species)
-                    tempData.datasets[0].data.push(aliens[i].selected)
-                } else {
-                    tempArr.push(aliens[i])
-                }
-            }
-
-            this.setState({ aliens: tempData, rejects: tempArr })
+            this.formatList()
         }
+    }
+
+    formatList = () => {
+        let { aliens } = this.props.alienList
+        let tempArr = []
+        let tempData = {
+            labels: [],
+            datasets: [{
+                label: 'Aliens',
+                data: [],
+                backgroundColor: '#a62020'
+            }]
+        }
+
+        for (let i = 0; i < aliens.length; i++) {
+            if (aliens[i].selected > 0) {
+                tempData.labels.push(aliens[i].species)
+                tempData.datasets[0].data.push(aliens[i].selected)
+            } else {
+                tempArr.push(aliens[i])
+            }
+        }
+
+        this.setState({ aliens: tempData, rejects: tempArr })
     }
 
     componentWillReceiveProps(next) {
@@ -127,8 +133,10 @@ const ALIEN_BREAK_QUERY = gql`
     }`
 
 const ALIEN_BREAK_SUB = gql`
-    subscription newCharacter{
-        id
-    }`
+    subscription {
+        alienUpdate{
+            id
+    }
+}`
 
 export default graphql(ALIEN_BREAK_QUERY, { name: 'alienList' })(AlienBreakdown)

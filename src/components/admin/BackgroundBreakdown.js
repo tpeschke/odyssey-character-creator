@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {graphql, Subscription} from 'react-apollo'
+import { graphql, Subscription } from 'react-apollo'
 import gql from 'graphql-tag'
-import {Bar} from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 
 class BackgroundBreakdown extends Component {
     constructor() {
@@ -12,41 +12,37 @@ class BackgroundBreakdown extends Component {
             rejects: []
         }
     }
-    
-    componentDidMount () {
-        let {backgrounds} = this.props.backgroundList
+
+    componentWillMount() {
+        let { subscribeToMore } = this.props.backgroundList
+
+        subscribeToMore({
+            document: BACKGROUND_BREAK_SUB,
+            updateQuery: _ => {
+                this.props.backgroundList.refetch()
+                this.formatList()
+            }
+        })
+    }
+
+    componentDidMount() {
+        let { backgrounds } = this.props.backgroundList
 
         if (backgrounds) {
-            let tempArr = []
-                , tempData = { labels: [],
-                    datasets: [{
-                        label: 'Backgrounds',
-                        data: [],
-                        backgroundColor: '#a62020'
-                    }]}
-
-            for (let i = 0; i < backgrounds.length; i++) {
-                if (backgrounds[i].selected > 0) {
-                    tempData.labels.push(backgrounds[i].name)
-                    tempData.datasets[0].data.push(backgrounds[i].selected)
-                } else {
-                    tempArr.push(backgrounds[i])
-                }
-            }
-
-            this.setState({backgrounds: tempData, rejects: tempArr})
+            this.formatList()
         }
     }
 
     componentWillReceiveProps(next) {
         let tempArr = []
-        let tempData = {  labels: [],
-                                datasets: [{
-                                    label: 'Backgrounds',
-                                    data: [],
-                                    backgroundColor: '#a62020'
-                                        }]
-                        }
+        let tempData = {
+            labels: [],
+            datasets: [{
+                label: 'Backgrounds',
+                data: [],
+                backgroundColor: '#a62020'
+            }]
+        }
 
         for (let i = 0; i < next.backgroundList.backgrounds.length; i++) {
             if (next.backgroundList.backgrounds[i].selected > 0) {
@@ -57,28 +53,52 @@ class BackgroundBreakdown extends Component {
             }
         }
 
-        this.setState({backgrounds: tempData, rejects: tempArr})
+        this.setState({ backgrounds: tempData, rejects: tempArr })
+    }
+
+    formatList = () => {
+        let { backgrounds } = this.props.backgroundList
+        let tempArr = []
+            , tempData = {
+                labels: [],
+                datasets: [{
+                    label: 'Backgrounds',
+                    data: [],
+                    backgroundColor: '#a62020'
+                }]
+            }
+
+        for (let i = 0; i < backgrounds.length; i++) {
+            if (backgrounds[i].selected > 0) {
+                tempData.labels.push(backgrounds[i].name)
+                tempData.datasets[0].data.push(backgrounds[i].selected)
+            } else {
+                tempArr.push(backgrounds[i])
+            }
+        }
+
+        this.setState({ backgrounds: tempData, rejects: tempArr })
     }
 
     render() {
-        const {backgroundList} = this.props
+        const { backgroundList } = this.props
 
         if (backgroundList && backgroundList.loading) {
             return (<div className='StepOuter'>
-            <div className="stepInner backgroundLoader" id="loading">
-            <div className="loader">
-                <div className="part">
-                    <div className="part">
+                <div className="stepInner backgroundLoader" id="loading">
+                    <div className="loader">
                         <div className="part">
                             <div className="part">
-                                <div className="part"></div>
+                                <div className="part">
+                                    <div className="part">
+                                        <div className="part"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>)
+            </div>)
         }
 
         if (backgroundList && backgroundList.error) {
@@ -92,8 +112,8 @@ class BackgroundBreakdown extends Component {
                 <h1>Unchosen:</h1>
                 {this.state.rejects.map(val => {
                     return (<div key={val.id}>
-                                <p>{val.name}</p>
-                            </div>)
+                        <p>{val.name}</p>
+                    </div>)
                 })}
             </div>
         )
@@ -107,6 +127,13 @@ const BACKGROUND_BREAK_QUERY = gql`
             category,
             name,
             selected
+        }
+    }`
+
+const BACKGROUND_BREAK_SUB = gql`
+    subscription {
+        backgroundUpdate {
+            id
         }
     }`
 

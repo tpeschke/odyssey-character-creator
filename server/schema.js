@@ -32,7 +32,8 @@ module.exports = {
     # =========================== #
 
     type Subscription {
-        newCharacter: Alien
+        alienUpdate: Alien,
+        backgroundUpdate: Background
     }
 
     # =========================== #

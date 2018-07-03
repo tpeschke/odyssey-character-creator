@@ -80,7 +80,7 @@ const resolvers = {
         getAllQuirks: (_, { table }) => {
             if (table === 1) {
                 return db().get.allMentalQuirks()
-            } else if (table === 2){
+            } else if (table === 2) {
                 return db().get.allBehavioralQuirks()
             } else if (table === 3) {
                 return db().get.allPhysicalFlaws()
@@ -121,16 +121,24 @@ const resolvers = {
                         }
                     })) : null
 
-                // SUBSCRIPTIONS
-                }).then(_=> {
-                    pubsub.publish('newCharacter', {newCharacter: {id: args.species}})
+                    // SUBSCRIPTIONS
+                }).then(_ => db().aliens.find().then(req => {
+                    let alienUpdate = req.filter(val => val.id === +args.species)[0]
+                    let backgroundUpdate = req.filter(val => val.id === +args.background)[0]
+                    pubsub.publish('alienUpdate', {alienUpdate})
+                    pubsub.publish('backgroundUpdate', {backgroundUpdate})
                 })
+                )
             })
         }
     },
     Subscription: {
-        newCharacter:{
-            subscribe: _ => pubsub.asyncIterator('newCharacter')}
+        alienUpdate: {
+            subscribe: _ => pubsub.asyncIterator('alienUpdate')
+        },
+        backgroundUpdate: {
+            subscribe: _ => pubsub.asyncIterator('backgroundUpdate')
+        }
     },
 
     Alien: {
@@ -174,8 +182,8 @@ const resolvers = {
     GetCharacterInfo: {
         id: root => root.id,
         name: root => root.name,
-        species: root => db().aliens.findOne({id: root.species}, {fields : ['species']}).then(req => req.species),
-        background: root => db().backgrounds.findOne({id: root.background}, {fields : ['name']}).then(req => req.name),
+        species: root => db().aliens.findOne({ id: root.species }, { fields: ['species'] }).then(req => req.species),
+        background: root => db().backgrounds.findOne({ id: root.background }, { fields: ['name'] }).then(req => req.name),
     }
 }
 
@@ -186,9 +194,9 @@ const schema = makeExecutableSchema({
 })
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
-app.get('/graphiql', graphiqlExpress({ 
+app.get('/graphiql', graphiqlExpress({
     endpointURL: '/graphql',
-    subscriptionsEndpoint: 'ws://localhost:4141/subscriptions' 
+    subscriptionsEndpoint: 'ws://localhost:4141/subscriptions'
 }))
 
 const db = function () {
@@ -211,8 +219,8 @@ massive(CONNECTION_STRING).then(dbInstance => {
         subscribe,
         schema
     }, {
-        server: ws,
-        path: '/subscriptions'
-    })
+            server: ws,
+            path: '/subscriptions'
+        })
     // app.listen(SERVER_PORT, _ => console.log(`Sing the song of your heart and read the mourning engraved there ${SERVER_PORT}`))
 })
