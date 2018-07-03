@@ -1,5 +1,5 @@
 const initialState = {
-    bp: 100,
+    bp: null,
     species: null,
     scores: null,
     // [   {id: 1, title: 'STR', score: "15.04"}, 

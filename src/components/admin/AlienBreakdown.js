@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql} from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Bar } from 'react-chartjs-2'
 
@@ -14,19 +14,16 @@ class AlienBreakdown extends Component {
     }
 
     componentWillMount() {
-        // console.log(this.props.alienList)
-        this.props.alienList.subscribeToMore({
+        let { subscribeToMore } = this.props.alienList
+        
+        subscribeToMore({
             document: ALIEN_BREAK_SUB,
-            updateQuery: (prev, { subscriptionData }) => {
-                if (!subscriptionData.newCharacter) {
-                    console.log('none')
-                    return prev
-                } 
+            updateQuery: (prev, {subscriptionData}) => {
                 console.log(prev, subscriptionData)
             }
         })
+        console.log('hello')
     }
-
 
     componentDidMount() {
         let { aliens } = this.props.alienList
