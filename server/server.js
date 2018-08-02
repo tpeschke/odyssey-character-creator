@@ -57,6 +57,11 @@ app.get('/loginDummy', (req, res) => {
 
 // ===========AUTH END POINTS===========\\
 
+app.delete('/deleteCharacter/:id', ({app, params}, res) => {
+    //Add logic to check if character owner matches user id
+    const db = app.get('db')
+    db.deleteCharacter([params.id]).then( _ => res.sendStatus(200) )
+})
 
 //============GRAPH QL RESOLVERS============\\
 const pubsub = new PubSub();
