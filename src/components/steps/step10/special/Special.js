@@ -7,6 +7,8 @@ import { SETSPECIALS, DEDUCTBP, ADDBP } from '../../../../dux/reducer'
 
 import _ from 'lodash'
 
+// Akehlarian discount needs to be done
+
 class Specializations extends Component {
     constructor() {
         super()

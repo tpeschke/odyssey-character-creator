@@ -43,12 +43,13 @@ class Talents extends Component {
     }
 
     selectTalent = (id) => {
+        let { species } = this.props.species
         let tempArr = _.cloneDeep(this.state.list)
         let i = tempArr.map(v => v.id).indexOf(id)
 
 
         if (this.props.bp - tempArr[i].price >= 0) {
-            this.props.DEDUCTBP(tempArr[i].price)
+            this.props.DEDUCTBP(species === 'Akehlarian' ? Math.floor(tempArr[i].price / 2) : tempArr[i].price)
             if (tempArr[i].multi === 'false') {
                 let hold = tempArr.splice(i, 1)
                 let tempSelected = _.cloneDeep(this.state.selected)
@@ -65,9 +66,11 @@ class Talents extends Component {
     }
 
     deselectTalent = (id) => {
+        let { species } = this.props.species
         let tempArr = _.cloneDeep(this.state.selected)
         let i = tempArr.map(v => v.id).indexOf(id)
-        this.props.ADDBP(tempArr[i].price)
+
+        this.props.ADDBP(species === 'Akehlarian' ? Math.floor(tempArr[i].price / 2) : tempArr[i].price)
 
         if (tempArr[i].multi === 'false') {
             let hold = tempArr.splice(i, 1)
@@ -82,7 +85,7 @@ class Talents extends Component {
     }
 
     render() {
-        const { talentList } = this.props
+        const { talentList, species } = this.props
 
         if (talentList && talentList.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
@@ -115,7 +118,7 @@ class Talents extends Component {
                     onClick={_ => this.selectTalent(talent.id)}>
                     <p>{talent.name}</p>
                     <div className="stpCostDisplay">
-                        <p>{talent.price}</p>
+                        <p>{species.species === 'Akehlarian' ? Math.floor(talent.price / 2) : talent.price}</p>
                         <p>BP</p>
                     </div>
                 </div>
@@ -135,7 +138,7 @@ class Talents extends Component {
                             onClick={_ => this.deselectTalent(talent.id)}>
                             <p>{talent.name}</p>
                             <div className="stpCostDisplay">
-                                <p>{talent.price}</p>
+                                <p>{species.species === 'Akehlarian' ? Math.floor(talent.price / 2) : talent.price}</p>
                                 <p>BP</p>
                             </div>
                         </div>)
@@ -162,10 +165,11 @@ const GET_TALENT_QUERY = gql`
     }`
 
 function mapStateToProps(state) {
-    var { talents, bp } = state
+    var { talents, bp, species } = state
     return {
         talents,
-        bp
+        bp,
+        species
     }
 }
 

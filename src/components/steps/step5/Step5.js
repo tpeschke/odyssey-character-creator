@@ -8,13 +8,18 @@ import { SETBACKGROUND, DEDUCTBP, ADDBP } from '../../../dux/reducer'
 import _ from 'lodash'
 
 class Step5 extends Component {
+    componentDidMount() {
+        if (this.props.species.species === 'Akehlarian') {
+            this.props.history.push('/step5Akehlar')
+        }
+    }
 
     saveBackground = (obj) => {
         let {selected, DEDUCTBP, SETBACKGROUND, ADDBP, history, species} = this.props
 
-        if (selected) ADDBP(species.species ? Math.floor(selected.price /2) : selected.price)
+        if (selected) ADDBP(species.species === "Clone" ? Math.floor(selected.price /2) : selected.price)
     
-        DEDUCTBP(species.species ? Math.floor(obj.price /2) : obj.price)
+        DEDUCTBP(species.species === "Clone" ? Math.floor(obj.price /2) : obj.price)
         SETBACKGROUND(obj)
         history.push('/step6')
     }

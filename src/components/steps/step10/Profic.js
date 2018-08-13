@@ -46,11 +46,12 @@ class Proficiencies extends Component {
     }
 
     selectProfic = (id) => {
+        let { species } = this.props.species
         let tempArr = _.cloneDeep(this.state.list)
         let i = tempArr.map(v => v.id).indexOf(id)
 
         if (this.checkReq(tempArr, i) && this.props.bp - tempArr[i].price >= 0) {
-            this.props.DEDUCTBP(tempArr[i].price)
+            this.props.DEDUCTBP(species === 'Akehlarian' ? Math.floor(tempArr[i].price / 2) : tempArr[i].price)
 
             if (tempArr[i].multi === 'false') {
                 let hold = tempArr.splice(i, 1)
@@ -68,10 +69,11 @@ class Proficiencies extends Component {
     }
 
     deselectProfic = (id) => {
+        let { species } = this.props.species
         let tempArr = _.cloneDeep(this.state.selected)
         let i = tempArr.map(v => v.id).indexOf(id)
 
-        this.props.ADDBP(tempArr[i].price)
+        this.props.ADDBP(species === 'Akehlarian' ? Math.floor(tempArr[i].price / 2) : tempArr[i].price)
 
         if (tempArr[i].multi === "false") {
             let hold = tempArr.splice(i, 1)
@@ -110,7 +112,7 @@ class Proficiencies extends Component {
     }
 
     render() {
-        const { proficList } = this.props
+        const { proficList, species } = this.props
 
         if (proficList && proficList.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
@@ -145,34 +147,14 @@ class Proficiencies extends Component {
                         <div className='proficInnerDisplayHolder'>
                             <p>{profic.name}</p>
                             <div className="stpCostDisplay">
-                                <p>{profic.price}</p>
+                                <p>{species.species === 'Akehlarian' ? Math.floor(profic.price / 2) : profic.price}</p>
                                 <p>BP</p>
                             </div>
                         </div>
 
                         <div>
-                            {/* {profic.preReq.map((req, i) => {
-                                return (
-                                    <div
-                                        key={`${req.id} + ${i}`} >
-
-                                        {i > 1 ? <div className="preReqUnderscore" /> : <div />}
-
-                                        <div className="preReqInner">
-                                            <p>{req.name}</p>
-                                            <p>{req.score > 0 ? `>${req.score}` : null}</p>
-                                        </div>
-                                    </div>)
-                            })} */}
                         </div>
                     </div>)
-
-                // <div key={profic.id + i}
-                //     className='stpDisplayHolder proficDisplayHolder'
-                //     onClick={_ => this.selectProfic(profic.id)}>
-                //     <p className="stpChoiceHeader">{profic.name}</p>
-                //     <p>Price: {profic.price} BP</p>
-                // </div>)
             })
         }
 
@@ -188,7 +170,7 @@ class Proficiencies extends Component {
                     <div className='proficInnerDisplayHolder'>
                         <p>{profic.name}</p>
                         <div className="stpCostDisplay">
-                            <p>{profic.price}</p>
+                            <p>{species.species === 'Akehlarian' ? Math.floor(profic.price / 2) : profic.price}</p>
                             <p>BP</p>
                         </div>
                     </div>
@@ -222,12 +204,13 @@ const GET_PROFICIENCIES_QUERY = gql`
     }`
 
 function mapStateToProps(state) {
-    let { scores, profics, bp } = state
+    let { scores, profics, bp, species } = state
 
     return {
         scores,
         profics,
-        bp
+        bp,
+        species
     }
 }
 
