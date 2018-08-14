@@ -25,7 +25,7 @@ import ReviewChar from './components/steps/reviewChar/ReviewChar'
 import AdminHome from './components/admin/AdminHome'
 
 import ViewCharacters from './components/viewChar/ViewCharacters'
-import SingleCharacter from './components/viewChar/SingleCharacter'
+import SingleCharacter from './components/viewChar/singleCharacter/SingleCharacter'
 
 export default class Routes extends Component {
     

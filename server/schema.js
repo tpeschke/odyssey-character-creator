@@ -10,6 +10,7 @@ module.exports = {
         getAllQuirks (table: Int!): [Quirk!]
         getMyCharacters: [GetCharacterInfo!]
         getAllCharacters: [GetCharacterInfo!]
+        getSingleCharacter (id: Int!): [GetCharacterInfo!] 
     }
 
     # =========================== #
