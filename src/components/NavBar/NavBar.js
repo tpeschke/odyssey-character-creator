@@ -73,7 +73,7 @@ class NavBar extends Component {
 const decoratedNavBar = withRouter(NavBar)
 
 function mapStateToProps(state) {
-    return {bp: state.bp}
+    return state
 }
 
 export default connect(mapStateToProps)(decoratedNavBar)
