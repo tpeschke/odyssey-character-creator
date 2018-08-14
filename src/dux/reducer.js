@@ -29,6 +29,7 @@ const initialState = {
     // null,
     [{id: "2", name: "Bilingual", price: 5, multi: "true", preReq: []}
     ,{id: "5", name: "Hiking/Road Marching", price: 4, multi: "false", preReq: []}
+    ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}
     ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}],
     special:
         // null,
@@ -39,6 +40,38 @@ const initialState = {
         atk: [true, true, false, false, false],
         dam: [false, false, false, false, false],
         def: [false, false, false, false, false],
+        spd: [false, false, false, false, false]
+    }, {
+        id: "hghnnn",
+        name: "Another stick, I guess",
+        type: "r",
+        atk: [true, true, false, false, false],
+        dam: [false, false, false, false, false],
+        def: [true, false, false, false, false],
+        spd: [false, false, false, false, false]
+    }, {
+        id: "hgfkop",
+        name: "Gunsword",
+        type: "m",
+        atk: [true, true, false, false, false],
+        dam: [false, false, false, false, false],
+        def: [true, false, false, false, false],
+        spd: [false, false, false, false, false]
+    }, {
+        id: "hgfkop",
+        name: "Gunsword",
+        type: "m",
+        atk: [true, true, false, false, false],
+        dam: [false, false, false, false, false],
+        def: [true, false, false, false, false],
+        spd: [false, false, false, false, false]
+    }, {
+        id: "hgfgg",
+        name: "Gun",
+        type: "r",
+        atk: [true, true, false, false, false],
+        dam: [false, false, false, false, false],
+        def: [true, false, false, false, false],
         spd: [false, false, false, false, false]
     }, {
         id: "hgfkop",
@@ -61,6 +94,11 @@ const initialState = {
     qf: 
     // null,
     [{id: "115", name: "Pocking", bp: 20, __typename: "Quirk", table: "3"}
+    ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
+    ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}
+    ,{id: "115", name: "Pocking", bp: 20, __typename: "Quirk", table: "3"}
+    ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
+    ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}
     ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
     ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}],
     record: null

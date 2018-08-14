@@ -73,7 +73,7 @@ class Step11 extends Component {
 
 function mapStateToProps(state) {
     let { species, scores, hp } = state
-    console.log(state)
+    
     return {
         species,
         scores,

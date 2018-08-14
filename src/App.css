@@ -43,7 +43,7 @@ body {
 
 .stepInner {
     margin: 5% auto 5% auto;
-    width: 74%;
+    width: 100%;
     background: #c4bbaf;
     padding: 17px;
     border-radius: 35px;
@@ -585,4 +585,111 @@ button:hover {
   .characterTitle {
     background: #222222;
     color: whitesmoke
+  }
+
+  .reviewLower {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .reviewLowerLeft {
+    margin-top: 25px;
+    margin-left: 25px;
+    width: 25%;
+  }
+
+  .reviewLowerRight {
+    margin-top: 25px;
+    margin-right: 25px;
+    width: 55%;
+  }
+
+  .reviewStats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      width: 100%;
+  }
+
+  .reviewNameShell {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 25px;
+  }
+
+  .reviewNameTitle {
+    font-size: 20px;
+    font-weight: 700
+  }
+
+  .reviewQF {
+    text-align: left;
+  }
+
+  .reviewQFList {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      text-align: left;
+  }
+
+  .reviewQFitem {
+      width: 33%;
+      padding-top: 2px;
+      padding-bottom: 4px;
+  }
+
+  .reviewSTPshell {
+      display: flex;
+      margin: 25px 25px 25px 25px;
+      justify-content: space-between;
+      text-align: left
+  }
+
+  .reviewSTPbox {
+    width: 30%;
+  }
+
+  .reviewSTPitem {
+      padding-bottom: 7px;
+  }
+
+  .reviewTitle {
+      text-align: left;
+  }
+
+  .reviewSpecial {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+  }
+
+  .reviewSpecialShell {
+      width: 100%;
+      padding: 0 25px;
+  }
+
+  .reviewSpecialBox {
+      width: 25%;
+      padding-bottom: 7px;
+      text-align: left;
+  }
+
+  .reviewSpecialRow {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      padding-bottom: 7px;
+  }
+
+  .reviewGoodsCredit {
+      display: flex;
+      margin-bottom: 25px;
+  }
+
+  .reviewGoodsCreditBox {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    width: 150px;
   }
