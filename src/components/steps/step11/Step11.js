@@ -20,9 +20,9 @@ class Step11 extends Component {
         } else {
             let i = scores.map(val => val.title).indexOf('CON')
             let conScore = +scores[i].score.split('.')[0]
-
+            
             switch (species.species) {
-                case "Akhelarian":
+                case "Akehlarian":
                     this.props.history.push('/step11Akehlar')
                     break
                 case "Clone":
@@ -40,6 +40,8 @@ class Step11 extends Component {
                 case "Hiven":
                     this.setState({ hp: "I'll GET AROUND TO IT" })
                     break
+                default:
+                    console.log(species.species)
             }
         }
     }

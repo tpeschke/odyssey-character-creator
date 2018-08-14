@@ -1,7 +1,7 @@
 const initialState = {
     bp: 
     // null,
-    40,
+    140,
     species: 
     // null,
     {species: "Akehlarian"},
@@ -15,11 +15,21 @@ const initialState = {
     {id: 6, title: 'CHA', score: "15.04"}, 
     {id: 7, title: 'LKS', score: "15.04"}],
     rep: null,
-    background: null,
+    background: 
+    // null,
+    {name: "Akehlarian"},
     skills: null,
     talents: null,
     profics: null,
-    special: null,
+    special: 
+    // null,
+    [{id: "hg1wu",
+        name: "",
+        type:"m",
+        atk: [true, true, false, false, false],
+        dam: [false, false, false, false, false],
+        def: [false, false, false, false, false],
+        spd: [false, false, false, false, false]}],
     hp: null,
     credits: null,
     equipment: null,

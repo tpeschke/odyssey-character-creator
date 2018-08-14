@@ -102,7 +102,7 @@ class ReviewChar extends Component {
                         )
                     }) : <div></div>} 
                 <h2>Background</h2><p>{background.name}</p>
-                <h2>HP</h2><p>{hp}</p>
+                <h2>{species.species === "Akehlarian" ? 'Spores' : 'HP'}</h2><p>{hp}</p>
                 <h2>Quirks & Flaws</h2> 
                 {qf ? qf.map((v, i)=> {
                     return (<div    key={v.id} 

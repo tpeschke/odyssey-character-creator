@@ -16,7 +16,7 @@ class Step5Akehlar extends Component {
 
                     <div className='stepBody'>
                         <div className="stepTitle">
-                            <h1>Step 4: Arrange Ability Scores</h1>
+                            <h1>Step 5: Choose Background</h1>
                         </div>
 
                         <div className="stepInner">
@@ -30,4 +30,4 @@ class Step5Akehlar extends Component {
     }
 }
 
-export default connect(_=>{{}},{SETBACKGROUND})(Step5Akehlar)
+export default connect(_=>{},{SETBACKGROUND})(Step5Akehlar)
