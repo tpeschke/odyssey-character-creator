@@ -1,4 +1,5 @@
 const initialState = {
+    logged: false,
     bp:
         null,
         // 140,
@@ -104,7 +105,8 @@ const initialState = {
     record: null
 }
 
-const RESET_CHARACTER = "RESET_CHARACTER"
+const LOG_IN = "LOG_IN"
+    , RESET_CHARACTER = "RESET_CHARACTER"
     , SET_BACKGROUND = 'SET_BACKGROUND'
     , SET_BP = "SET_BP"
     , SET_CREDIT = "SET_CREDIT"
@@ -123,6 +125,12 @@ const RESET_CHARACTER = "RESET_CHARACTER"
     , DEDUCT_BP = "DEDUCT_BP"
     , SET_PRIORS = 'SET_PRIORS'
     , FINISH_CHARACTER = 'FINISH_CHARACTER'
+
+export function LOGIN () {
+    return {
+        type: LOG_IN
+    }
+}
 
 export function RESETCHARACTER() {
     return {
@@ -256,8 +264,10 @@ export function SETSELECTION(choice) {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case LOG_IN:
+            return Object.assign({}, state, {logged: !state.logged})
         case RESET_CHARACTER:
-            return Object.assign({}, initialState)
+            return Object.assign({}, initialState, {logged: true})
         case SET_BACKGROUND:
             return Object.assign({}, state, { background: action.payload })
         case SET_BP:

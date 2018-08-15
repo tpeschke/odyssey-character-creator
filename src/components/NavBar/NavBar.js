@@ -17,6 +17,7 @@ class NavBar extends Component {
     }
 
     componentDidMount() {
+        if (!this.props.logged) this.props.history.push('/')
         this.setState({width: document.getElementById('root').clientWidth})
     }
 
@@ -33,7 +34,7 @@ class NavBar extends Component {
                                     <Link to="/home"><li id="navFirstItem" onClick={_=>this.closeNav()}>Home</li></Link>
                                     <Link to="/step1"><li onClick={_=>this.closeNav()}>New Character</li></Link>
                                     <Link to='/adminDashboard'><li onClick={_=>this.closeNav()}>Admin Home</li></Link>
-                                    <Link to='/viewCharacters'><li onClick={_=>this.closeNav()}>View Characters</li></Link>
+                                    <Link to='/viewCharacters'><li onClick={_=>this.closeNav()}>Character Vault</li></Link>
                                 </ul>
                             </div>)
         } else {
