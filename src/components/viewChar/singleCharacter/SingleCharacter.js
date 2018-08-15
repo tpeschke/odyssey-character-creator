@@ -4,13 +4,10 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 class SingleCharacter extends Component {
-    componentDidMount() {
 
-    }
-    
     render() {
-        let { species, scores, background, qf, talents, profics, special, credits, hp } = this.props
-
+        // let { species, scores, background, qf, talents, profics, special, credits, hp } = this.props
+        console.log(this.props.character)
         return (
             <div className='StepOuter'>
                 <div className='stepBody'>
@@ -45,13 +42,19 @@ const GET_SINGLE_CHARACTER_QUERY = gql`
             species,
             scores,
             background,
-            talents,
-            profics,
-            special,
+            # talents,
+            # profics,
+            # special,
             hp,
             credits,
-            qf
+            # qf
         }
     }`
 
-export default graphql(GET_SINGLE_CHARACTER_QUERY, { name: 'character' })(SingleCharacter)
+export default graphql(GET_SINGLE_CHARACTER_QUERY, {
+    name: 'character', options: props => {
+        return {
+            variables: {id: +props.match.params.id }
+        }
+    }
+})(SingleCharacter)

@@ -93,7 +93,7 @@ const resolvers = {
         },
         getMyCharacters: _ => db().get.myCharacters([user()]),
         getAllCharacters: _ => db().get.allCharacters([user()]),
-        getSingleCharacter: (_, { id }) => id ? db().get.singleCharacter(id) :  db().get.singleCharacter(0)
+        getSingleCharacter: (_, { id }) => db().get.singleCharacter(id)
     },
     Mutation: {
         addCharacter: (_, args) => {
@@ -191,6 +191,20 @@ const resolvers = {
         species: root => db().aliens.findOne({ id: root.species }, { fields: ['species'] }).then(req => req.species),
         background: root => db().backgrounds.findOne({ id: root.background }, { fields: ['name'] }).then(req => req.name),
     },
+    WholeCharacter: {
+        id: root => root.id,
+        name: root => root.name,
+        bp: root => root.bp,
+        species: root => db().aliens.findOne({ id: root.species }, { fields: ['species'] }).then(req => req.species),
+        scores: root => db().get.sCscores(root.id),
+        background: root => db().backgrounds.findOne({ id: root.background }, { fields: ['name'] }).then(req => req.name), 
+        // talents: root => db().get.sCtalents(root.id),
+        // profics: 
+        // special: 
+        hp: root => root.hp,
+        credits: root => root.credits,
+        // qf: 
+    }
 }
 
 // ===========CONECTION THINGS============\\

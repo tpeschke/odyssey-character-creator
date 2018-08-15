@@ -11,7 +11,7 @@ class QuirkList extends Component {
     }
 
     selectQuirk = (quirk) => {
-        let {DEDUCTBP, ADDQUIRK} = this.props
+        let {ADDQUIRK} = this.props
         ADDQUIRK(quirk)
     }
 

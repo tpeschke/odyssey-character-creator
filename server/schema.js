@@ -10,7 +10,7 @@ module.exports = {
         getAllQuirks (table: Int!): [Quirk!]
         getMyCharacters: [GetCharacterInfo!]
         getAllCharacters: [GetCharacterInfo!]
-        getSingleCharacter (id: Int!): [GetCharacterInfo!] 
+        getSingleCharacter (id: Int!): [WholeCharacter!] 
     }
 
     # =========================== #
@@ -73,8 +73,8 @@ module.exports = {
     }
 
     type ProficReq {
-        id: ID!,
-        name: String!,
+        id: ID!
+        name: String!
         score: Int!
         type: String!
     }
@@ -94,15 +94,27 @@ module.exports = {
         id: ID!
         name: String!
         bp: Int!
-        species: Int!
-        scores: String!
-        background: Int!
-        talents: String!
+        species: String!
+        scores: [Scores!]
+        background: String!
+        talents: [Talent!]
         profics: String!
         special: String!
         hp: Int!
         credits: Int!
         qf: String!
+    }
+
+    type Scores {
+        id: Int!
+        str: String!
+        int: String!
+        wis: String!
+        dex: String!
+        con: String!
+        cha: String!
+        lks: String!
+        rep: String!
     }
 
     type GetCharacterInfo {
