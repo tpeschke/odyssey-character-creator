@@ -16,7 +16,8 @@ class ViewCharacters extends Component {
                             changePage={this.props.history.push}/>
 
         if (this.state.view === 'vault') {
-            showView = <VaultBase />
+            showView = <VaultBase 
+                            changePage={this.props.history.push}/>
         }
 
         return (

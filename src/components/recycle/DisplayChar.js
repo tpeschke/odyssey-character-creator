@@ -3,7 +3,7 @@ import WeaponReview from './WeaponReview'
 
 export default function DisplayChar(props) {
     let { single, species, scores, background, qf, talents, profics, special, credits, hp } = props
-
+    
     if ( single ) {
         scores = JSON.parse(scores)[0]
         let tempArr = []

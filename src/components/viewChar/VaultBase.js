@@ -39,6 +39,7 @@ class VaultBase extends Component {
                 </div>
 
                 {charList.getAllCharacters.map(v => {
+                    console.log(v)
                     return (<div key={v.id} 
                                 onClick={_=>this.props.changePage(`/viewSingle/${v.id}`)}  
                                 className="characterDisplay">
