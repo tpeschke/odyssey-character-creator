@@ -2,7 +2,26 @@ import React from 'react'
 import WeaponReview from './WeaponReview'
 
 export default function DisplayChar(props) {
-    let { species, scores, background, qf, talents, profics, special, credits, hp } = props
+    let { single, species, scores, background, qf, talents, profics, special, credits, hp } = props
+
+    if ( single ) {
+        scores = JSON.parse(scores)[0]
+        let tempArr = []
+        let i = 0
+        for (let key in scores) {
+            i++
+            tempArr.push({
+                id: i,
+                title: key,
+                score: scores[key]
+            })
+        }
+        scores = tempArr
+        qf = JSON.parse(qf)
+        talents = JSON.parse(talents)
+        profics = JSON.parse(profics)
+        special = JSON.parse(special)
+    }
 
     return (
         <div>
@@ -27,17 +46,17 @@ export default function DisplayChar(props) {
                         <div className='reviewNameBox'>
                             <p className='reviewNameTitle'>Species</p>
                             <div className="scoreUnderscore" />
-                            <p>{species.species}</p>
+                            <p>{single ? species : species.species}</p>
                         </div>
 
                         <div className='reviewNameBox'>
                             <p className='reviewNameTitle'>Background</p>
                             <div className="scoreUnderscore" />
-                            <p>{background.name}</p>
+                            <p>{single ? background : background.name}</p>
                         </div>
 
                         <div className='reviewNameBox'>
-                            <p className='reviewNameTitle'>{species.species === "Akehlarian" ? 'Spores' : 'HP'}</p>
+                            <p className='reviewNameTitle'>{species.species === "Akehlarian" || species === "Akehlarian" ? 'Spores' : 'HP'}</p>
                             <div className="scoreUnderscore" />
                             <p>{hp}</p>
                         </div>
