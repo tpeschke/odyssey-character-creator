@@ -200,7 +200,21 @@ const resolvers = {
         background: root => db().backgrounds.findOne({ id: root.background }, { fields: ['name'] }).then(req => req.name), 
         talents: root => db().get.sCtalents([root.id]).then(req => JSON.stringify(req)),
         profics: root => db().get.sCprofics([root.id]).then(req => JSON.stringify(req)), 
-        // special: 
+        special: root => db().get.sCspecials([root.id]).then(req => {
+            let tempArr = req.map(val => db().get.sCspecialMod( val.id ).then(result => {
+                    let {charid, ...special} = val
+                    result.forEach(v => Object.assign(special, {[v.modified]: [
+                        v.one === '1' ? true : false,
+                        v.two === '1' ? true : false,
+                        v.three === '1' ? true : false,
+                        v.four === '1' ? true : false,
+                        v.five === '1' ? true : false, 
+                    ]}))
+                    return special
+                })
+            )
+            return Promise.all(tempArr).then(final => JSON.stringify(final))
+        }),
         hp: root => root.hp,
         credits: root => root.credits,
         qf: root => db().get.sCqf([root.id]).then(req => {

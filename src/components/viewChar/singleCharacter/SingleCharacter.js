@@ -44,7 +44,7 @@ const GET_SINGLE_CHARACTER_QUERY = gql`
             background,
             talents,
             profics,
-            # special,
+            special,
             hp,
             credits,
             qf

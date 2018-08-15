@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+//THERES'S A BUG HERE THAT"S THE BEST I CAN SAY FOR NOW BECAUSE I"M WORKING ON SOMETHING ELSE
+
 export default class WeaponDisplay extends Component {
     render() {
         let {val, alterLevel} = this.props

@@ -32,56 +32,56 @@ const initialState = {
     ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}
     ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}],
     special:
-        // null,
-    [{
-        id: "hg1wu",
-        name: "Stick",
-        type: "m",
-        atk: [true, true, false, false, false],
-        dam: [false, false, false, false, false],
-        def: [false, false, false, false, false],
-        spd: [false, false, false, false, false]
-    }, {
-        id: "hghnnn",
-        name: "Another stick, I guess",
-        type: "r",
-        atk: [true, true, false, false, false],
-        dam: [false, false, false, false, false],
-        def: [true, false, false, false, false],
-        spd: [false, false, false, false, false]
-    }, {
-        id: "hgfkop",
-        name: "Gunsword",
-        type: "m",
-        atk: [true, true, false, false, false],
-        dam: [false, false, false, false, false],
-        def: [true, false, false, false, false],
-        spd: [false, false, false, false, false]
-    }, {
-        id: "hgfkop",
-        name: "Gunsword",
-        type: "m",
-        atk: [true, true, false, false, false],
-        dam: [false, false, false, false, false],
-        def: [true, false, false, false, false],
-        spd: [false, false, false, false, false]
-    }, {
-        id: "hgfgg",
-        name: "Gun",
-        type: "r",
-        atk: [true, true, false, false, false],
-        dam: [false, false, false, false, false],
-        def: [true, false, false, false, false],
-        spd: [false, false, false, false, false]
-    }, {
-        id: "hgfkop",
-        name: "Gunsword",
-        type: "m",
-        atk: [true, true, false, false, false],
-        dam: [false, false, false, false, false],
-        def: [true, false, false, false, false],
-        spd: [false, false, false, false, false]
-    }],
+        null,
+    // [{
+    //     id: "hg1wu",
+    //     name: "Stick",
+    //     type: "m",
+    //     atk: [true, true, false, false, false],
+    //     dam: [false, false, false, false, false],
+    //     def: [false, false, false, false, false],
+    //     spd: [false, false, false, false, false]
+    // }, {
+    //     id: "hghnnn",
+    //     name: "Another stick, I guess",
+    //     type: "r",
+    //     atk: [true, true, false, false, false],
+    //     dam: [false, false, false, false, false],
+    //     def: [true, false, false, false, false],
+    //     spd: [false, false, false, false, false]
+    // }, {
+    //     id: "hgfkop",
+    //     name: "Gunsword",
+    //     type: "m",
+    //     atk: [true, true, false, false, false],
+    //     dam: [false, false, false, false, false],
+    //     def: [true, false, false, false, false],
+    //     spd: [false, false, false, false, false]
+    // }, {
+    //     id: "hgfkop",
+    //     name: "Gunsword",
+    //     type: "m",
+    //     atk: [true, true, false, false, false],
+    //     dam: [false, false, false, false, false],
+    //     def: [true, false, false, false, false],
+    //     spd: [false, false, false, false, false]
+    // }, {
+    //     id: "hgfgg",
+    //     name: "Gun",
+    //     type: "r",
+    //     atk: [true, true, false, false, false],
+    //     dam: [false, false, false, false, false],
+    //     def: [true, false, false, false, false],
+    //     spd: [false, false, false, false, false]
+    // }, {
+    //     id: "hgfkop",
+    //     name: "Gunsword",
+    //     type: "m",
+    //     atk: [true, true, false, false, false],
+    //     dam: [false, false, false, false, false],
+    //     def: [true, false, false, false, false],
+    //     spd: [false, false, false, false, false]
+    // }],
     hp:
         // null,
         15,
