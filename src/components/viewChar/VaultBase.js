@@ -1,23 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import Loading from '../recycle/Loading'
 
 class VaultBase extends Component {
     render() {
         const { charList } = this.props
         if (charList && charList.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
-                <div className="loader">
-                    <div className="part">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Loading />
             </div>)
         }
 
@@ -29,9 +20,8 @@ class VaultBase extends Component {
             )
         }
 
-        return(
+        return (
             <div>
-                Character Vault
                 <div className="characterDisplay characterTitle">
                     <p>Name</p>
                     <p>Species</p>
@@ -39,14 +29,13 @@ class VaultBase extends Component {
                 </div>
 
                 {charList.getAllCharacters.map(v => {
-                    console.log(v)
-                    return (<div key={v.id} 
-                                onClick={_=>this.props.changePage(`/viewSingle/${v.id}`)}  
-                                className="characterDisplay">
-                                <p>{v.name}</p>
-                                <p>{v.species}</p>
-                                <p>{v.background}</p>
-                            </div>)
+                    return (<div key={v.id}
+                        onClick={_ => this.props.changePage(`/viewSingle/${v.id}`)}
+                        className="characterDisplay">
+                        <p>{v.name}</p>
+                        <p>{v.species}</p>
+                        <p>{v.background}</p>
+                    </div>)
                 })}
             </div>
         )

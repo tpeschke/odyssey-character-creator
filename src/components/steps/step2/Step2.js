@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 
 import { connect } from 'react-redux'
 import { SETSPECIES } from '../../../dux/reducer'
+import Loading from '../../recycle/Loading'
 
 class Step2 extends Component {
     constructor() {
@@ -33,17 +34,7 @@ class Step2 extends Component {
                         <h1>Step 2: Choose Species</h1>
                     </div>
                     <div className="stepInner" id="loading">
-                        <div className="loader">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part">
-                                        <div className="part">
-                                            <div className="part"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Loading />
                     </div>
                 </div>
             </div>)

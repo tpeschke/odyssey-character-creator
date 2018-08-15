@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { SETSCORES } from '../../../dux/reducer'
 
-import {rollScore, rollPercent} from './../../roll'
+import {rollScore, rollPercent} from './../../recycle/roll'
 import SetDice from './cloneComp/SetDice'
 import ShowRolls from './cloneComp/ShowRolls'
 

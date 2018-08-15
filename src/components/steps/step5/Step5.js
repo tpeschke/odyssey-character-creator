@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 
 import { connect } from 'react-redux'
 import { SETBACKGROUND, DEDUCTBP, ADDBP } from '../../../dux/reducer'
+import Loading from '../../recycle/Loading'
 
 import _ from 'lodash'
 
@@ -15,11 +16,11 @@ class Step5 extends Component {
     }
 
     saveBackground = (obj) => {
-        let {selected, DEDUCTBP, SETBACKGROUND, ADDBP, history, species} = this.props
+        let { selected, DEDUCTBP, SETBACKGROUND, ADDBP, history, species } = this.props
 
-        if (selected) ADDBP(species.species === "Clone" ? Math.floor(selected.price /2) : selected.price)
-    
-        DEDUCTBP(species.species === "Clone" ? Math.floor(obj.price /2) : obj.price)
+        if (selected) ADDBP(species.species === "Clone" ? Math.floor(selected.price / 2) : selected.price)
+
+        DEDUCTBP(species.species === "Clone" ? Math.floor(obj.price / 2) : obj.price)
         SETBACKGROUND(obj)
         history.push('/step6')
     }
@@ -30,20 +31,10 @@ class Step5 extends Component {
 
         if (backgroundList && backgroundList.loading) {
             return (<div className='StepOuter'>
-            <div className="stepInner backgroundLoader" id="loading">
-            <div className="loader">
-                <div className="part">
-                    <div className="part">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="stepInner backgroundLoader" id="loading">
+                    <Loading />
                 </div>
-            </div>
-        </div>)
+            </div>)
         }
 
         if (backgroundList && backgroundList.error) {
@@ -55,12 +46,12 @@ class Step5 extends Component {
 
         if (filter && price) {
             list = _.cloneDeep(backgroundList.backgrounds.filter(val => val.category === filter))
-            list.sort((a,b)=>a.price-b.price)
+            list.sort((a, b) => a.price - b.price)
         } else if (filter) {
             list = backgroundList.backgrounds.filter(val => val.category === filter)
-        } else if (price){
+        } else if (price) {
             list = _.cloneDeep(backgroundList.backgrounds)
-            list.sort((a,b)=>a.price-b.price)
+            list.sort((a, b) => a.price - b.price)
         } else {
             list = backgroundList.backgrounds
         }
@@ -71,10 +62,10 @@ class Step5 extends Component {
                     let paragraph = val.description.split('/').map((para, i) => <p key={i}>{para}</p>)
                     return (<div key={val.id}
                         className='backgroundBoxOutside'
-                        onClick={_ => this.saveBackground({id: val.id, price: val.price, name: val.name})}>
+                        onClick={_ => this.saveBackground({ id: val.id, price: val.price, name: val.name })}>
                         <h2>{val.name}</h2>
                         <p className="backgroundPrice">Price: {species.species === 'Clone' ? Math.floor(val.price / 2) : val.price} BP</p>
-                        <div className='scoreUnderscore'/>
+                        <div className='scoreUnderscore' />
                         {paragraph}
                     </div>)
                 })}
@@ -101,7 +92,7 @@ function mapStateToMap(state) {
     }
 }
 
-const decoratedStep5 = connect(mapStateToMap, {SETBACKGROUND, DEDUCTBP, ADDBP})(Step5)
+const decoratedStep5 = connect(mapStateToMap, { SETBACKGROUND, DEDUCTBP, ADDBP })(Step5)
 
 export default graphql(GET_BACKGROUNDS_QUERY, {
     name: 'backgroundList', options: props => {

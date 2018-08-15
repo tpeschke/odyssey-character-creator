@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import _ from 'lodash'
+import Loading from '../../recycle/Loading'
 
 import { connect } from 'react-redux'
 import { ADDBP, DEDUCTBP, SETPROFICS } from '../../../dux/reducer'
@@ -116,17 +117,7 @@ class Proficiencies extends Component {
 
         if (proficList && proficList.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
-                <div className="loader">
-                    <div className="part">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Loading />
             </div>)
         }
 

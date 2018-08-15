@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql, Subscription } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Bar } from 'react-chartjs-2'
+import Loading from '../recycle/Loading'
 
 class BackgroundBreakdown extends Component {
     constructor() {
@@ -86,17 +87,7 @@ class BackgroundBreakdown extends Component {
         if (backgroundList && backgroundList.loading) {
             return (<div className='StepOuter'>
                 <div className="stepInner backgroundLoader" id="loading">
-                    <div className="loader">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part">
-                                        <div className="part"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Loading />
                 </div>
             </div>)
         }

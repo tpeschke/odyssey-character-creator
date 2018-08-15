@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 
-import {rollScore} from './../../../roll'
+import {rollScore} from '../../../recycle/roll'
 import RollQuirk from './RollQuirk'
 import ShowTable from './ShowTable'
 

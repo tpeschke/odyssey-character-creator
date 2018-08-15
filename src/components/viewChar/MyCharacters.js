@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import axios from 'axios'
+import Loading from '../recycle/Loading'
 
 class MyCharacters extends Component {
     deleteCharacter = (id,e) => {
@@ -15,17 +16,7 @@ class MyCharacters extends Component {
         const { charList } = this.props
         if (charList && charList.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
-                <div className="loader">
-                    <div className="part">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Loading />
             </div>)
         }
 

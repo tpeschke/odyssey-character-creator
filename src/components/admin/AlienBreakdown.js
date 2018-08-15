@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Bar } from 'react-chartjs-2'
+import Loading from '../recycle/Loading'
 
 class AlienBreakdown extends Component {
     constructor() {
@@ -88,17 +89,7 @@ class AlienBreakdown extends Component {
         if (alienList && alienList.loading) {
             return (<div className='StepOuter'>
                 <div className="stepInner backgroundLoader" id="loading">
-                    <div className="loader">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part">
-                                        <div className="part"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Loading />
                 </div>
             </div>)
         }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import { SETHP } from '../../../dux/reducer'
-import { rollScore } from './../../roll'
+import { rollScore } from '../../recycle/roll'
 
 class Step11 extends Component {
     constructor() {

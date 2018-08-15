@@ -23,7 +23,7 @@ class ViewCharacters extends Component {
         return (
             <div className="stepInner">
                 <button onClick={_=>this.setState({view: 'my'})}>My Characters</button>
-                <button onClick={_=>this.setState({view: 'vault'})}>Character Vault</button>
+                <button onClick={_=>this.setState({view: 'vault'})}>Character Database</button>
                 
                 {showView}
             </div>

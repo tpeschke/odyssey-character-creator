@@ -14,7 +14,7 @@ class Home extends Component {
             <div className="stepInner">
                 <button onClick={this.setCharacter}>New Character</button>    
                 <Link to="/adminDashboard"><button>Admin Dashboard</button></Link>    
-                <Link to="/viewCharacters"><button>View Characters</button></Link>    
+                <Link to="/viewCharacters"><button>Character Vault</button></Link>    
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import _ from 'lodash'
+import Loading from '../../../recycle/Loading'
 
 class QuirkList extends Component {
     componentDidUpdate(next) {
@@ -20,17 +20,7 @@ class QuirkList extends Component {
 
         if (QF && QF.loading) {
             return (<div className="stepInner backgroundLoader" id="loading">
-                <div className="loader">
-                    <div className="part">
-                        <div className="part">
-                            <div className="part">
-                                <div className="part">
-                                    <div className="part"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Loading />
             </div>
             )
         }
