@@ -1,36 +1,36 @@
 const initialState = {
     bp:
-        // null,
-        140,
+        null,
+        // 140,
     species:
-        // null,
-        { species: "Human" },
+        null,
+        // { species: "Human" },
     scores:
-        // null,
-        [{ id: 1, title: 'STR', score: "15.04" },
-        { id: 2, title: 'INT', score: "15.04" },
-        { id: 3, title: 'WIS', score: "15.04" },
-        { id: 4, title: 'DEX', score: "15.04" },
-        { id: 5, title: 'CON', score: "15.04" },
-        { id: 6, title: 'CHA', score: "15.04" },
-        { id: 7, title: 'LKS', score: "15.04" },
-        { id: 8, title: 'REP', score: "15" }],
+        null,
+        // [{ id: 1, title: 'STR', score: "15.04" },
+        // { id: 2, title: 'INT', score: "15.04" },
+        // { id: 3, title: 'WIS', score: "15.04" },
+        // { id: 4, title: 'DEX', score: "15.04" },
+        // { id: 5, title: 'CON', score: "15.04" },
+        // { id: 6, title: 'CHA', score: "15.04" },
+        // { id: 7, title: 'LKS', score: "15.04" },
+        // { id: 8, title: 'REP', score: "15" }],
     rep: null,
     background:
-        // null,
-        { name: "Sniper" },
+        null,
+        // { name: "Sniper" },
     skills: null,
     talents: 
-    // null,
-    [{id: "1", name: "Ambidextrous", price: 15, multi: "false", __typename: "Talent"}
-    ,{id: "3", name: "Astute Observation", price: 20, multi: "false", __typename: "Talent"}
-    ,{id: "6", name: "Blind-Shooting", price: 40, multi: "false", __typename: "Talent"}],
+    null,
+    // [{id: "1", name: "Ambidextrous", price: 15, multi: "false", __typename: "Talent"}
+    // ,{id: "3", name: "Astute Observation", price: 20, multi: "false", __typename: "Talent"}
+    // ,{id: "6", name: "Blind-Shooting", price: 40, multi: "false", __typename: "Talent"}],
     profics: 
-    // null,
-    [{id: "2", name: "Bilingual", price: 5, multi: "true", preReq: []}
-    ,{id: "5", name: "Hiking/Road Marching", price: 4, multi: "false", preReq: []}
-    ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}
-    ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}],
+    null,
+    // [{id: "2", name: "Bilingual", price: 5, multi: "true", preReq: []}
+    // ,{id: "5", name: "Hiking/Road Marching", price: 4, multi: "false", preReq: []}
+    // ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}
+    // ,{id: "6", name: "Labourer", price: 1, multi: "false", preReq: []}],
     special:
         null,
     // [{
@@ -83,24 +83,24 @@ const initialState = {
     //     spd: [false, false, false, false, false]
     // }],
     hp:
-        // null,
-        15,
+        null,
+        // 15,
     credits:
-        // null,
-        15000,
+        null,
+        // 15000,
     equipment: null,
     priors: null,
     select: null,
     qf: 
-    // null,
-    [{id: "115", name: "Pocking", bp: 20, __typename: "Quirk", table: "3"}
-    ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
-    ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}
-    ,{id: "115", name: "Pocking", bp: 20, __typename: "Quirk", table: "3"}
-    ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
-    ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}
-    ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
-    ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}],
+    null,
+    // [{id: "115", name: "Pocking", bp: 20, __typename: "Quirk", table: "3"}
+    // ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
+    // ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}
+    // ,{id: "115", name: "Pocking", bp: 20, __typename: "Quirk", table: "3"}
+    // ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
+    // ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}
+    // ,{id: "25", name: "Greedy", bp: 15, __typename: "Quirk", table: "2"}
+    // ,{id: "134", name: "Hemophilic", bp: 35, __typename: "Quirk", table: "3"}],
     record: null
 }
 

@@ -22,7 +22,7 @@ export default function DisplayChar(props) {
         profics = JSON.parse(profics)
         special = JSON.parse(special)
     }
-
+    
     return (
         <div>
             <div className="reviewLower">
@@ -125,7 +125,7 @@ export default function DisplayChar(props) {
                         <div></div> :
                         <div className="reviewGoodsCreditBox">
                             <p>Scrap</p>
-                            <p>{Math.floor(credits / 20000)}</p>
+                            <p>{Math.floor(credits / 4000)}</p>
                         </div>}
                     <div className="reviewGoodsCreditBox">
                         <p>Credits</p>

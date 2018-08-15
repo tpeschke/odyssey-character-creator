@@ -17,7 +17,7 @@ class SingleCharacter extends Component {
         // let { species, scores, background, qf, talents, profics, special, credits, hp } = this.props
         let singleCharacter = character.getSingleCharacter[0] || {}
         let { species, scores, background, qf, talents, profics, special, credits, hp, name } = singleCharacter
-        console.log(species)
+
         return (
             <div className='StepOuter'>
                 <div className='stepBody'>
