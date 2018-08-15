@@ -60,7 +60,7 @@ app.get('/loginDummy', (req, res) => {
 app.delete('/deleteCharacter/:id', ({app, params}, res) => {
     //Add logic to check if character owner matches user id
     const db = app.get('db')
-    db.deleteCharacter([params.id]).then( _ => res.sendStatus(200) )
+    db.delete.character([params.id]).then( _ => res.sendStatus(200) )
 })
 
 //============GRAPH QL RESOLVERS============\\
