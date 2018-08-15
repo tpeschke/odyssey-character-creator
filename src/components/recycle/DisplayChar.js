@@ -14,7 +14,7 @@ export default function DisplayChar(props) {
                     {scores ? scores.map(val => {
                         return (
                             <div key={val.id} className="reviewStats">
-                                <p className="scoreScore">{val.title}</p>
+                                <p className="scoreScore">{val.title.toUpperCase()}</p>
                                 <p className="scoreScore">{val.score}</p>
                             </div>
                         )

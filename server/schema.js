@@ -73,8 +73,8 @@ module.exports = {
     }
 
     type ProficReq {
-        id: ID!
-        name: String!
+        id: ID!,
+        name: String!,
         score: Int!
         type: String!
     }
@@ -95,9 +95,9 @@ module.exports = {
         name: String!
         bp: Int!
         species: String!
-        scores: [Scores!]
+        scores: String!
         background: String!
-        talents: [Talent!]
+        talents: String!
         profics: String!
         special: String!
         hp: Int!

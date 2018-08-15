@@ -42,12 +42,12 @@ const GET_SINGLE_CHARACTER_QUERY = gql`
             species,
             scores,
             background,
-            # talents,
-            # profics,
+            talents,
+            profics,
             # special,
             hp,
             credits,
-            # qf
+            qf
         }
     }`
 

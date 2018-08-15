@@ -196,14 +196,26 @@ const resolvers = {
         name: root => root.name,
         bp: root => root.bp,
         species: root => db().aliens.findOne({ id: root.species }, { fields: ['species'] }).then(req => req.species),
-        scores: root => db().get.sCscores(root.id),
+        scores: root => db().get.sCscores([root.id]).then(req => JSON.stringify(req)),
         background: root => db().backgrounds.findOne({ id: root.background }, { fields: ['name'] }).then(req => req.name), 
-        // talents: root => db().get.sCtalents(root.id),
-        // profics: 
+        talents: root => db().get.sCtalents([root.id]).then(req => JSON.stringify(req)),
+        profics: root => db().get.sCprofics([root.id]).then(req => JSON.stringify(req)), 
         // special: 
         hp: root => root.hp,
         credits: root => root.credits,
-        // qf: 
+        qf: root => db().get.sCqf([root.id]).then(req => {
+            let tempArray = []
+            req.forEach(({qfid, tableid})=> {
+                if (+tableid === 1) {
+                    tempArray.push( db().mentalquirks.findOne({id : +qfid}, {fields: ['id', 'name']}) )
+                } else if (+tableid === 3) {
+                    tempArray.push( db().physicalquirks.findOne({id : +qfid}, {fields: ['id', 'name']}) )
+                } else {
+                    tempArray.push( db().behavioralquirks.findOne({id : +qfid}, {fields: ['id', 'name']}) )
+                }
+            })
+            return Promise.all(tempArray).then( val => JSON.stringify(val) )
+        })
     }
 }
 
